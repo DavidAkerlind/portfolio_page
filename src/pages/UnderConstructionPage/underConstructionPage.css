@@ -1,0 +1,241 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400&display=swap');
+
+:root {
+	--uc-lavender: #bfb5ce;
+	--uc-navy: #15263b;
+	--uc-blue: #375a88;
+	--uc-slate: #334b6d;
+	--uc-muted: #908faa;
+	--uc-bg: #0f1e30;
+	--uc-text: #e8e2f0;
+}
+
+html,
+body,
+#root {
+	height: 100%;
+	background: var(--uc-bg);
+	font-family: 'DM Mono', monospace;
+	overflow: hidden;
+}
+
+body::before {
+	content: '';
+	position: fixed;
+	inset: 0;
+	background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+	background-size: 200px 200px;
+	pointer-events: none;
+	z-index: 0;
+}
+
+@keyframes uc-drift {
+	from {
+		transform: translate(0, 0) scale(1);
+	}
+	to {
+		transform: translate(30px, 20px) scale(1.05);
+	}
+}
+
+@keyframes uc-pulse {
+	0%,
+	100% {
+		opacity: 1;
+		transform: scale(1);
+	}
+	50% {
+		opacity: 0.4;
+		transform: scale(0.7);
+	}
+}
+
+.uc-orb {
+	position: fixed;
+	border-radius: 50%;
+	filter: blur(70px);
+	opacity: 0.28;
+	pointer-events: none;
+	z-index: 0;
+	animation: uc-drift 8s ease-in-out infinite alternate;
+}
+
+.uc-top-accent {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 2px;
+	background: linear-gradient(
+		90deg,
+		transparent,
+		var(--uc-blue),
+		var(--uc-lavender),
+		transparent
+	);
+	opacity: 0.6;
+	z-index: 10;
+}
+
+.uc-layout {
+	position: relative;
+	z-index: 1;
+	height: 100vh;
+	display: grid;
+	grid-template-rows: 1fr auto;
+	padding: clamp(2rem, 6vw, 5rem);
+}
+
+.uc-main {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.uc-card {
+	background: rgba(255, 255, 255, 0.04);
+	backdrop-filter: blur(24px);
+	-webkit-backdrop-filter: blur(24px);
+	border: 1px solid rgba(191, 181, 206, 0.12);
+	border-radius: 24px;
+	padding: clamp(2rem, 5vw, 3.5rem);
+	max-width: 580px;
+	box-shadow:
+		0 8px 48px rgba(0, 0, 0, 0.35),
+		inset 0 1px 0 rgba(255, 255, 255, 0.06);
+	display: flex;
+	flex-direction: column;
+	gap: 1.8rem;
+}
+
+.uc-tag {
+	font-size: 0.68rem;
+	letter-spacing: 0.22em;
+	text-transform: uppercase;
+	color: var(--uc-muted);
+}
+
+.uc-title {
+	font-family: 'DM Serif Display', serif;
+	font-size: clamp(3rem, 8vw, 6rem);
+	line-height: 0.95;
+	color: var(--uc-text);
+	letter-spacing: -0.02em;
+	word-spacing: normal;
+	font-weight: 100;
+}
+
+.uc-title em {
+	font-family: 'DM Serif Display', serif;
+	font-style: italic;
+	color: var(--uc-lavender);
+	word-spacing: normal;
+}
+
+.uc-divider {
+	width: 48px;
+	height: 1px;
+	background: rgba(191, 181, 206, 0.3);
+}
+
+.uc-description {
+	font-size: clamp(0.78rem, 1.4vw, 0.88rem);
+	line-height: 1.75;
+	color: var(--uc-muted);
+	max-width: 380px;
+}
+
+.uc-bottom-row {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	gap: 1rem;
+}
+
+.uc-status {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.55rem;
+	font-size: 0.7rem;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: var(--uc-muted);
+}
+
+.uc-status-dot {
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	background: var(--uc-blue);
+	animation: uc-pulse 2.4s ease-in-out infinite;
+}
+
+.uc-links {
+	display: flex;
+	gap: 0.75rem;
+	flex-wrap: wrap;
+}
+
+.uc-link-pill {
+	font-size: 0.68rem;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	color: var(--uc-muted);
+	text-decoration: none;
+	transition: all 0.3s ease;
+	padding: 0.4rem 0.9rem;
+	border-radius: 999px;
+	background: rgba(255, 255, 255, 0.04);
+	border: 1px solid rgba(191, 181, 206, 0.08);
+	backdrop-filter: blur(8px);
+	-webkit-backdrop-filter: blur(8px);
+	word-spacing: normal;
+}
+
+.uc-link-pill:hover {
+	color: var(--uc-text);
+	background: rgba(191, 181, 206, 0.12);
+	border: 1px solid rgba(191, 181, 206, 0.3);
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.uc-footer {
+	display: flex;
+	justify-content: flex-end;
+	align-items: flex-end;
+}
+
+.uc-footer span {
+	font-size: 0.65rem;
+	letter-spacing: 0.08em;
+	color: var(--uc-slate);
+	word-spacing: normal;
+}
+
+@media (max-width: 760px) {
+	html,
+	body,
+	#root {
+		overflow-y: auto;
+	}
+
+	.uc-layout {
+		height: auto;
+		min-height: 100vh;
+		padding: 1.2rem;
+		gap: 1.6rem;
+	}
+
+	.uc-card {
+		max-width: 100%;
+	}
+
+	.uc-title {
+		font-size: clamp(2.2rem, 14vw, 3.6rem);
+	}
+
+	.uc-footer {
+		justify-content: flex-start;
+	}
+}
