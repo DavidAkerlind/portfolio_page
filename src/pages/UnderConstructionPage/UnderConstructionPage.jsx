@@ -4,7 +4,10 @@ import './underConstructionPage.css';
 const links = [
 	{ label: 'Email', href: 'mailto:david.akerlind@icloud.com' },
 	{ label: 'GitHub', href: 'https://github.com/DavidAkerlind' },
-	{ label: 'LinkedIn', href: 'www.linkedin.com/in/david-åkerlind-a01a61211' },
+	{
+		label: 'LinkedIn',
+		href: 'https://www.linkedin.com/in/david-%C3%A5kerlind-a01a61211',
+	},
 ];
 
 const orbs = [
