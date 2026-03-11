@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400&display=swap');
+
+:root {
+	/* COLORS */
+	--color-bg: #0f1e30;
+	--color-navy: #15263b;
+	--color-blue: #375a88;
+	--color-slate: #334b6d;
+	--color-muted: #908faa;
+	--color-lavender: #bfb5ce;
+	--color-white: #ffffff;
+	--color-text: #e8e2f0;
+
+	/* FONTS */
+	--font-display: 'DM Serif Display', serif;
+	--font-base: 'DM Mono', monospace;
+	--font-size-base: 16px;
+}
+
+/*  ==== RESET ==== */
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	font-family: var(--font-base);
+	word-spacing: 0.4ch;
+}
+
+a {
+	color: var(--color-blue-dark);
+	text-decoration: none;
+}
+
+button {
+	border: none;
+}
+
+ul {
+	list-style-type: none;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+html,
+body {
+	overflow-x: hidden;
+}
