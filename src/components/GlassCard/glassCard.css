@@ -1,0 +1,30 @@
+.glass-card {
+	background: var(--glass-bg);
+	-webkit-backdrop-filter: blur(var(--glass-blur));
+	backdrop-filter: blur(var(--glass-blur));
+	border: 1px solid var(--glass-border);
+	border-radius: var(--radius-lg);
+	box-shadow: var(--glass-shadow);
+}
+
+/* Browsers without backdrop-filter get a more opaque fill so text stays readable. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+	.glass-card {
+		background: rgba(21, 38, 59, 0.88);
+	}
+}
+
+.glass-card-padded {
+	padding: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.glass-card-interactive {
+	transition:
+		background var(--duration) var(--ease),
+		border-color var(--duration) var(--ease);
+}
+
+.glass-card-interactive:hover {
+	background: var(--glass-bg-hover);
+	border-color: var(--glass-border-hover);
+}
