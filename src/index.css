@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400&display=swap');
+/* Fonts are loaded once, in index.html. */
 
 :root {
 	/* COLORS */
@@ -10,40 +10,164 @@
 	--color-lavender: #bfb5ce;
 	--color-white: #ffffff;
 	--color-text: #e8e2f0;
+	--color-timer: #ff4d4d;
+
+	/* GLASS */
+	--glass-bg: rgba(255, 255, 255, 0.04);
+	--glass-bg-hover: rgba(191, 181, 206, 0.12);
+	--glass-border: rgba(191, 181, 206, 0.12);
+	--glass-border-hover: rgba(191, 181, 206, 0.3);
+	--glass-blur: 24px;
+	--glass-shadow:
+		0 8px 48px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.06);
 
 	/* FONTS */
 	--font-display: 'DM Serif Display', serif;
-	--font-base: 'DM Mono', monospace;
-	--font-size-base: 16px;
+	--font-base: 'DM Sans', sans-serif;
+	--font-mono: 'DM Mono', monospace;
+
+	/* TYPE SCALE */
+	--text-xs: 0.75rem;
+	--text-sm: 0.875rem;
+	--text-base: 1rem;
+	--text-lg: 1.25rem;
+	--text-xl: 1.5rem;
+	--text-2xl: clamp(2rem, 4.5vw, 2.75rem);
+	--text-hero: clamp(3rem, 8vw, 6rem);
+	--leading-tight: 1.05;
+	--leading-body: 1.7;
+	--tracking-label: 0.22em;
+	--tracking-pill: 0.12em;
+
+	/* SPACING */
+	--space-1: 0.25rem;
+	--space-2: 0.5rem;
+	--space-3: 0.75rem;
+	--space-4: 1rem;
+	--space-6: 1.5rem;
+	--space-8: 2rem;
+	--space-12: 3rem;
+	--space-16: 4rem;
+	--space-24: 6rem;
+
+	/* SHAPE */
+	--radius-md: 16px;
+	--radius-lg: 24px;
+	--radius-pill: 999px;
+
+	/* LAYOUT */
+	--container-width: 64rem;
+	--gutter: clamp(1.2rem, 5vw, 3rem);
+
+	/* MOTION */
+	--duration: 0.3s;
+	--ease: ease;
 }
 
 /*  ==== RESET ==== */
-* {
+*,
+*::before,
+*::after {
 	box-sizing: border-box;
+}
+
+* {
 	margin: 0;
 	padding: 0;
+}
+
+html {
+	scroll-behavior: smooth;
+	-webkit-text-size-adjust: 100%;
+}
+
+html,
+body {
+	overflow-x: hidden;
+}
+
+body {
+	min-height: 100vh;
+	background: var(--color-bg);
+	color: var(--color-text);
 	font-family: var(--font-base);
-	word-spacing: 0.4ch;
+	font-size: var(--text-base);
+	line-height: var(--leading-body);
+	-webkit-font-smoothing: antialiased;
+}
+
+/* The backdrop sits behind the page content (z-index: -1), inside #root. */
+#root {
+	isolation: isolate;
+	min-height: 100vh;
+}
+
+/*  ==== BASE ==== */
+h1,
+h2,
+h3 {
+	font-family: var(--font-display);
+	font-weight: 400;
+	line-height: var(--leading-tight);
+	letter-spacing: -0.02em;
+}
+
+em {
+	font-style: italic;
 }
 
 a {
-	color: var(--color-blue-dark);
+	color: var(--color-lavender);
 	text-decoration: none;
+	transition: color var(--duration) var(--ease);
+}
+
+a:hover {
+	color: var(--color-text);
+}
+
+img {
+	display: block;
+	max-width: 100%;
 }
 
 button {
 	border: none;
+	background: none;
+	font: inherit;
+	color: inherit;
+	cursor: pointer;
 }
 
 ul {
 	list-style-type: none;
 }
 
-html {
-	scroll-behavior: smooth;
+:focus-visible {
+	outline: 2px solid var(--color-lavender);
+	outline-offset: 3px;
 }
 
-html,
-body {
-	overflow-x: hidden;
+::selection {
+	background: var(--color-blue);
+	color: var(--color-white);
+}
+
+/*  ==== LAYOUT ==== */
+.container {
+	width: 100%;
+	max-width: calc(var(--container-width) + 2 * var(--gutter));
+	margin-inline: auto;
+	padding-inline: var(--gutter);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
 }
