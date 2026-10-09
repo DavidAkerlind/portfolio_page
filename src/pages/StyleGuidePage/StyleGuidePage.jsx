@@ -264,15 +264,22 @@ export default function StyleGuidePage() {
 
 				<section className="sg-section" aria-labelledby="timer">
 					<SectionHeading id="timer" eyebrow="08" title="Timer">
-						Glowing red digits on glass, used for the marathon time. Pass the
-						time as text, so seconds can be added later ('04:09:12').
+						Seven-segment digits in red liquid glass: bright rims on the edges,
+						a soft bevel, and no glow. Used for the marathon time. The time is
+						passed as text, so seconds can be added later.
 					</SectionHeading>
-					<div>
+					<div className="sg-row">
 						<TimerDisplay
 							label="Stockholm Marathon · 2026"
 							time="04:09"
 							caption="hours : minutes"
 							ariaLabel="Finish time: 4 hours 9 minutes"
+						/>
+						<TimerDisplay
+							label="With seconds"
+							time="03:59:58"
+							caption="hours : minutes : seconds"
+							ariaLabel="3 hours 59 minutes 58 seconds"
 						/>
 					</div>
 				</section>

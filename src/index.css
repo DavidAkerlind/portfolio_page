@@ -11,6 +11,8 @@
 	--color-white: #ffffff;
 	--color-text: #e8e2f0;
 	--color-timer: #ff4d4d;
+	--color-timer-light: #ff5e54;
+	--color-timer-deep: #a8161f;
 
 	/* GLASS */
 	--glass-bg: rgba(255, 255, 255, 0.04);
