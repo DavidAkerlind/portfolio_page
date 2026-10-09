@@ -1,20 +1,22 @@
 import './photoFrame.css';
 
 /* A framed picture with a fixed aspect ratio, for personal photos and project
-   screenshots. Without `src` it shows a placeholder, so layouts can be built first. */
+   screenshots. Without `src` it shows a placeholder, so layouts can be built first.
+   Images load lazily; pass loading="eager" for the ones visible on first load. */
 export default function PhotoFrame({
 	src,
 	alt = '',
 	caption,
 	ratio = '4 / 3',
 	placeholder = 'Photo coming soon',
+	loading = 'lazy',
 	className = '',
 }) {
 	return (
 		<figure className={`photo-frame ${className}`.trim()}>
 			<div className="photo-frame-media" style={{ aspectRatio: ratio }}>
 				{src ? (
-					<img src={src} alt={alt} loading="lazy" />
+					<img src={src} alt={alt} loading={loading} />
 				) : (
 					<div
 						className="photo-frame-placeholder"

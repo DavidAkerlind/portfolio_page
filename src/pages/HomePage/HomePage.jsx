@@ -3,6 +3,7 @@ import Header from '../../components/Header/Header';
 import Button from '../../components/Button/Button';
 import PhotoFrame from '../../components/PhotoFrame/PhotoFrame';
 import SectionHeading from '../../components/SectionHeading/SectionHeading';
+import portrait from '../../assets/photos/david-portrait.webp';
 import './homePage.css';
 
 // Placeholder sections so the header navigation has somewhere to scroll to.
@@ -71,8 +72,10 @@ function Hero() {
 
 				<PhotoFrame
 					className="hero-photo"
+					src={portrait}
 					ratio="4 / 5"
-					alt="Portrait of David Åkerlind"
+					loading="eager"
+					alt="David Åkerlind smiling on the deck of a boat, with a lake and forest behind"
 				/>
 			</div>
 		</section>
