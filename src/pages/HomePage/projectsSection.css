@@ -1,0 +1,26 @@
+.projects {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-12);
+	padding-block: var(--space-16);
+	scroll-margin-top: 5rem;
+}
+
+.projects-list {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-16);
+}
+
+.projects-item {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-6);
+}
+
+.projects-gallery {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+	gap: var(--space-6);
+	align-items: start;
+}

@@ -4,12 +4,12 @@ import Button from '../../components/Button/Button';
 import PhotoFrame from '../../components/PhotoFrame/PhotoFrame';
 import SectionHeading from '../../components/SectionHeading/SectionHeading';
 import portrait from '../../assets/photos/david-portrait.webp';
+import ProjectsSection from './ProjectsSection';
 import './homePage.css';
 
 // Placeholder sections so the header navigation has somewhere to scroll to.
 // Each one is replaced by the real section in its own branch.
 const upcoming = [
-	{ id: 'projects', eyebrow: '01', title: 'Projects' },
 	{ id: 'about', eyebrow: '02', title: 'About' },
 	{ id: 'interests', eyebrow: '03', title: 'Outside the code' },
 	{ id: 'contact', eyebrow: '04', title: 'Contact' },
@@ -23,6 +23,7 @@ export default function HomePage() {
 
 			<main>
 				<Hero />
+				<ProjectsSection />
 
 				{upcoming.map(({ id, eyebrow, title }) => (
 					<section
