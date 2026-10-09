@@ -36,6 +36,7 @@ The new site is built at `/#home` while the under-construction page stays the de
 - The site is in English only.
 - Do not publish the phone number from the CV. Contact is email, GitHub and LinkedIn.
 - Personal photos and project screenshots come from the owner, or are taken from the live project sites.
+- Interests for the "Outside the code" section, as the owner listed them: golf, skating (wants to get back into it), vibe-coding small tools for personal use, piano (simple chords), running (first marathon: Stockholm 2026, 4 h 09 min; signed up for the next Stockholm Marathon), rock climbing, travelling, family, and Claude Code.
 
 ## Hosting
 
