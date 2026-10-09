@@ -83,9 +83,10 @@ html {
 	-webkit-text-size-adjust: 100%;
 }
 
+/* clip, not hidden: hidden would turn body into a scroll container and break sticky. */
 html,
 body {
-	overflow-x: hidden;
+	overflow-x: clip;
 }
 
 body {

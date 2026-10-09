@@ -22,10 +22,12 @@ Match the surrounding code. The hand-written files use tabs, single quotes and s
 
 Glassmorphism on a dark navy backdrop, kept simple. Open `/#styleguide` (run `npm run dev`, or use a Cloudflare preview URL) to see every token and component. Update that page when adding or changing a component.
 
+The new site is built at `/#home` while the under-construction page stays the default at `/`. When the new site is ready, make `HomePage` the default in `src/App.jsx`.
+
 - All tokens are CSS variables in `:root` in `src/index.css`: colors, glass, fonts, type scale, spacing, radii, layout, motion. Use them instead of hard-coded values.
 - Fonts: DM Serif Display for headings, DM Sans for body text, DM Mono for small labels (eyebrows, tags, buttons). They are loaded once in `index.html`. Do not `@import` fonts in CSS.
 - Every page renders `<Backdrop />` once. Glass surfaces blur what is behind them, so they need it.
-- Components in `src/components`: `Backdrop`, `GlassCard`, `Button`, `Tag`, `SectionHeading`, `PhotoFrame`, `ProjectCard`, `TimerDisplay`. Reuse these before writing new ones.
+- Components in `src/components`: `Backdrop`, `GlassCard`, `Button`, `Tag`, `SectionHeading`, `PhotoFrame`, `ProjectCard`, `TimerDisplay`, `Header`. Reuse these before writing new ones.
 - Red (`--color-timer`) is only for the marathon timer. Blue and slate are too dark for text.
 - Images go in `src/assets/`, resized before committing (about 1600px wide at most, JPG or WebP), and always get `alt` text.
 
