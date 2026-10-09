@@ -6,6 +6,7 @@ import Tag from '../../components/Tag/Tag';
 import SectionHeading from '../../components/SectionHeading/SectionHeading';
 import PhotoFrame from '../../components/PhotoFrame/PhotoFrame';
 import ProjectCard from '../../components/ProjectCard/ProjectCard';
+import Timeline from '../../components/Timeline/Timeline';
 import TimerDisplay from '../../components/TimerDisplay/TimerDisplay';
 import './styleGuidePage.css';
 
@@ -71,6 +72,7 @@ const sections = [
 	['buttons', 'Buttons and tags'],
 	['projects', 'Project cards'],
 	['photos', 'Photos'],
+	['timeline', 'Timeline'],
 	['timer', 'Timer'],
 ];
 
@@ -262,8 +264,38 @@ export default function StyleGuidePage() {
 					</div>
 				</section>
 
+				<section className="sg-section" aria-labelledby="timeline">
+					<SectionHeading id="timeline" eyebrow="08" title="Timeline">
+						Dated entries on a thin line, for education and work. Each entry
+						has a period, title and place, and can add a description and a few
+						bullet points. Sample content.
+					</SectionHeading>
+					<GlassCard className="sg-timeline">
+						<Timeline
+							items={[
+								{
+									id: 'sample-one',
+									title: 'Title of the latest entry',
+									place: 'Place or company',
+									period: 'Year – Year',
+									description:
+										'One or two sentences on what it was and what you did.',
+								},
+								{
+									id: 'sample-two',
+									title: 'An earlier entry',
+									place: 'Linked place',
+									placeHref: 'https://example.com',
+									period: 'Month – Month Year',
+									points: ['A short bullet point', 'Another bullet point'],
+								},
+							]}
+						/>
+					</GlassCard>
+				</section>
+
 				<section className="sg-section" aria-labelledby="timer">
-					<SectionHeading id="timer" eyebrow="08" title="Timer">
+					<SectionHeading id="timer" eyebrow="09" title="Timer">
 						Seven-segment digits in red liquid glass: bright rims on the edges,
 						a soft bevel, and no glow. Used for the marathon time. The time is
 						passed as text, so seconds can be added later.
