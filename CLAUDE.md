@@ -27,7 +27,7 @@ The new site is built at `/#home` while the under-construction page stays the de
 - All tokens are CSS variables in `:root` in `src/index.css`: colors, glass, fonts, type scale, spacing, radii, layout, motion. Use them instead of hard-coded values.
 - Fonts: DM Serif Display for headings, DM Sans for body text, DM Mono for small labels (eyebrows, tags, buttons). They are loaded once in `index.html`. Do not `@import` fonts in CSS.
 - Every page renders `<Backdrop />` once. Glass surfaces blur what is behind them, so they need it.
-- Components in `src/components`: `Backdrop`, `GlassCard`, `Button`, `Tag`, `SectionHeading`, `PhotoFrame`, `ProjectCard`, `TimerDisplay`, `Header`. Reuse these before writing new ones.
+- Components in `src/components`: `Backdrop`, `GlassCard`, `Button`, `Tag`, `SectionHeading`, `PhotoFrame`, `ProjectCard`, `Timeline`, `TimerDisplay`, `Header`. Reuse these before writing new ones.
 - Red (`--color-timer`) is only for the marathon timer. Blue and slate are too dark for text.
 - Images go in `src/assets/`, resized before committing (about 1600px wide at most, JPG or WebP), and always get `alt` text.
 
@@ -37,6 +37,7 @@ The new site is built at `/#home` while the under-construction page stays the de
 - Do not publish the phone number from the CV. Contact is email, GitHub and LinkedIn.
 - Personal photos and project screenshots come from the owner, or are taken from the live project sites.
 - Projects live in `src/data/projects.js` (text, tags, links, screenshots from `src/assets/projects/`). To add a project, add an entry there; `ProjectsSection` renders them in order.
+- The About section reads `src/data/about.js` (intro, education, experience, earlier work, skills, languages), translated from the CV. Update that file when the CV changes.
 - Interests for the "Outside the code" section, as the owner listed them: golf, skating (wants to get back into it), vibe-coding small tools for personal use, piano (simple chords), running (first marathon: Stockholm 2026, 4 h 09 min; signed up for the next Stockholm Marathon), rock climbing, travelling, family, and Claude Code.
 
 ## Hosting
