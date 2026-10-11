@@ -47,6 +47,13 @@ Routing uses real paths, no router library and no hashes: `/` is the site, `/sty
 - Organisation logos are shown as colourless liquid glass by `GlassLogo` (only the shape is used, never the brand colours). Add a silhouette to `src/assets/logos/`: a white shape on a transparent square canvas (about 512px, WebP or SVG, artwork filling roughly 85%), made by thresholding the logo or by filling an SVG white. Then set it as `logo` on the entry in `about.js`.
 - The "My interests" section reads `src/data/outside.js`: running (started in early 2026) and the marathon (official time 4:09:34 at Stockholm 2026; signed up for Stockholm Marathon 29 May 2027, 12:00 Stockholm time, which drives the live countdown), golf (photo), skateboarding (tre flip clip), rock climbing, travelling, family, and the two Lovable study tools (ML Playground, Stats Lab). Update the race date there after the race. Left out for now: piano and Strava stats.
 
+## SEO and speed
+
+- The title, description, canonical link and social tags for the home page are in `index.html`. The structured data (a `WebSite` and a `Person`, built from `src/data/links.js`) is added by `scripts/prerender.mjs`. Keep the facts in them in line with the site and the CV. Never put the email address or phone number in structured data.
+- The share image is `public/og-image.jpg` (1200x630, no metadata). Remake it if the name, title or portrait changes.
+- `public/robots.txt` and `public/sitemap.xml` list only `/`. A new public page must be added to the sitemap. Pages that must stay out of search results (`/styleguide`, the 404) get `noindex` from the prerender script and `public/_headers`.
+- `public/_headers` sets the security headers and the long cache for the hashed files in `/assets/`.
+
 ## Hosting
 
 The site is hosted on Cloudflare, not GitHub Pages.
