@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useSyncExternalStore } from 'react';
 import SectionHeading from '../../components/SectionHeading/SectionHeading';
 import GlassCard from '../../components/GlassCard/GlassCard';
 import Button from '../../components/Button/Button';
@@ -10,19 +10,26 @@ import TimerDisplay from '../../components/TimerDisplay/TimerDisplay';
 import { marathon, activities, alsoInto, studyTools } from '../../data/outside';
 import './outsideSection.css';
 
-// Milliseconds left until `target`, updated every second. Stops at zero.
+// The current time in whole seconds, ticking every second. `null` on the server and
+// while hydrating, so the built page never holds a stale clock.
+const subscribeToClock = (onChange) => {
+	const id = setInterval(onChange, 1000);
+	return () => clearInterval(id);
+};
+const readClock = () => Math.floor(Date.now() / 1000) * 1000;
+
+// Milliseconds left until `target`, or null before the clock is known. Stops at zero.
 function useTimeLeft(target) {
-	const [now, setNow] = useState(() => Date.now());
-
-	useEffect(() => {
-		const id = setInterval(() => setNow(Date.now()), 1000);
-		return () => clearInterval(id);
-	}, []);
-
-	return Math.max(0, new Date(target).getTime() - now);
+	const now = useSyncExternalStore(subscribeToClock, readClock, () => null);
+	return now === null ? null : Math.max(0, new Date(target).getTime() - now);
 }
 
 function formatTimeLeft(ms) {
+	// Before the clock is known every digit shows as an unlit cell.
+	if (ms === null) {
+		return { days: null, text: '---:--:--:--' };
+	}
+
 	const total = Math.floor(ms / 1000);
 	const days = Math.floor(total / 86400);
 	const hours = Math.floor((total % 86400) / 3600);
@@ -97,7 +104,11 @@ function Marathon() {
 					label={`Next · ${next.label}`}
 					time={text}
 					caption="days : hours : minutes : seconds"
-					ariaLabel={`${days} ${days === 1 ? 'day' : 'days'} left until the ${next.name} on ${next.startLabel}`}
+					ariaLabel={
+							days === null
+								? `Countdown to the ${next.name} on ${next.startLabel}`
+								: `${days} ${days === 1 ? 'day' : 'days'} left until the ${next.name} on ${next.startLabel}`
+						}
 				/>
 			</div>
 		</div>

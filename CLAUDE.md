@@ -8,10 +8,13 @@ React 19 + Vite 7, plain CSS, no router, no test suite.
 
 - `npm run dev` – local dev server
 - `npm run lint` – ESLint
-- `npm run build` – production build into `dist/`
+- `npm run build` – production build into `dist/`: a client build, a server build, then `scripts/prerender.mjs` renders each page to static HTML (`dist/index.html`, `dist/styleguide/index.html`, `dist/404.html`) so the pages are readable without JavaScript and React only hydrates them
 - `npm run preview` – serve the production build locally
 
 ## Code conventions
+
+- Pages are rendered on the server at build time, so never read `window`, `document`, `Date.now()` or `matchMedia` while rendering. Do it in an effect, or with `useSyncExternalStore` and a server snapshot (see `VideoFrame` and the countdown in `OutsideSection`). Otherwise hydration fails.
+- Add a new page to `PAGES` in `src/App.jsx` and to `pages` in `scripts/prerender.mjs`.
 
 Match the surrounding code. The hand-written files use tabs, single quotes and semicolons.
 
