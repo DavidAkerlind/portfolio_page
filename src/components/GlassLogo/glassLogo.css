@@ -1,0 +1,8 @@
+/* The shadow and rim reach past the artwork, so the svg must not clip them. */
+.glass-logo {
+	display: block;
+	flex: none;
+	width: var(--glass-logo-size, 4rem);
+	aspect-ratio: 1;
+	overflow: visible;
+}
