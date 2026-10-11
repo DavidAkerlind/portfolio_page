@@ -58,3 +58,11 @@
 	color: var(--color-text);
 	transform: translate(2px, -2px);
 }
+
+/* The arrow's nudge is movement, so it stays still when reduced motion is on. Its
+   colour still fades. */
+@media (prefers-reduced-motion: reduce) {
+	.contact-link:hover .contact-link-arrow {
+		transform: none;
+	}
+}
