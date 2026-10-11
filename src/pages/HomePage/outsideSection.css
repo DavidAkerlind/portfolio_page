@@ -126,10 +126,11 @@
 	}
 }
 
-/* The portrait photo and the wide clip are sized so both cards are equally tall. */
+/* The portrait photo (4:5) and the near-square clip (8:7) are sized so both cards
+   are equally tall: the column widths follow the ratio of the two aspect ratios. */
 @media (min-width: 52rem) {
 	.outside-activities {
-		grid-template-columns: minmax(0, 1fr) minmax(0, 2.22fr);
+		grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
 	}
 }
 
