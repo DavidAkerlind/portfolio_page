@@ -190,13 +190,16 @@ ul {
 	padding-inline: var(--gutter);
 }
 
+/* Reduced motion switches off what moves: the looping and entrance animations and
+   the smooth scrolling. Hover transitions stay, because a colour fade moves
+   nothing; a component whose hover does move something (see ContactLink) stops
+   that movement in its own reduced-motion rule. */
 @media (prefers-reduced-motion: reduce) {
 	*,
 	*::before,
 	*::after {
 		animation-duration: 0.01ms !important;
 		animation-iteration-count: 1 !important;
-		transition-duration: 0.01ms !important;
 		scroll-behavior: auto !important;
 	}
 }
