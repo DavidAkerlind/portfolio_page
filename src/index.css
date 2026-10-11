@@ -62,8 +62,10 @@
 	--container-width: 64rem;
 	--gutter: clamp(1.2rem, 5vw, 3rem);
 
-	/* MOTION */
-	--duration: 0.2s;
+	/* MOTION: --duration is for cards, buttons and whole segments, --duration-link
+	   for text links, which feel better a little quicker. */
+	--duration: 0.3s;
+	--duration-link: 0.2s;
 	--ease: ease-in-out;
 }
 
@@ -128,9 +130,18 @@ a {
 	text-decoration: none;
 }
 
-/* Every hover effect eases in and out. A component that sets its own
-   `transition` must list the properties its hover changes. */
-a,
+/* Every hover effect eases in and out: text links over --duration-link, buttons
+   over --duration. A component that sets its own `transition` (cards, the Button
+   component) must list the properties its hover changes. */
+a {
+	transition:
+		color var(--duration-link) var(--ease),
+		background-color var(--duration-link) var(--ease),
+		border-color var(--duration-link) var(--ease),
+		box-shadow var(--duration-link) var(--ease),
+		text-decoration-color var(--duration-link) var(--ease);
+}
+
 button {
 	transition:
 		color var(--duration) var(--ease),
