@@ -28,6 +28,7 @@ The new site is built at `/#home` while the under-construction page stays the de
 - Fonts: DM Serif Display for headings, DM Sans for body text, DM Mono for small labels (eyebrows, tags, buttons). They are loaded once in `index.html`. Do not `@import` fonts in CSS.
 - Every page renders `<Backdrop />` once. Glass surfaces blur what is behind them, so they need it.
 - Components in `src/components`: `Backdrop`, `GlassCard`, `Button`, `Tag`, `SectionHeading`, `PhotoFrame`, `VideoFrame`, `ProjectCard`, `Timeline`, `GlassLogo`, `TimerDisplay`, `Header`. Reuse these before writing new ones.
+- The favicon is a bold glass "D" in `public/favicon.svg`, the same glass recipe as `GlassLogo`. `favicon-32.png` and `apple-touch-icon.png` (for Safari and iOS, which do not use SVG icons) are screenshots of it, so re-render them when the SVG changes.
 - Red (`--color-timer`) is only for the marathon timer, and green (`--color-success`) only for the check on "signed up". Blue and slate are too dark for text.
 - Images go in `src/assets/`, resized before committing (about 1600px wide at most, JPG or WebP), and always get `alt` text.
 - Photos and videos from a phone carry GPS location, device and date metadata. Always strip it: re-encode photos (no EXIF) and encode video with `-map_metadata -1`, then check the output with `ffprobe`. Videos are short, silent loops (MP4 plus WebM, 720p, well under 1 MB each) in `src/assets/video/` with a poster image, shown with `VideoFrame`.
