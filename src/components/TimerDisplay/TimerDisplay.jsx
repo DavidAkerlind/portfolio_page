@@ -84,6 +84,16 @@ function buildDots(time) {
 	return { lit, unlit, width: x - GAP + (ROWS - 1) * SLANT };
 }
 
+// One path made of a small circle for every dot.
+const round = (value) => Math.round(value * 1000) / 1000;
+const dotsPath = (dots) =>
+	dots
+		.map(
+			({ x, y }) =>
+				`M${round(x - RADIUS)} ${round(y)}a${RADIUS} ${RADIUS} 0 1 0 ${2 * RADIUS} 0a${RADIUS} ${RADIUS} 0 1 0 ${-2 * RADIUS} 0`,
+		)
+		.join('');
+
 export default function TimerDisplay({ time, label, caption, ariaLabel }) {
 	const uid = useId().replace(/[^a-zA-Z0-9_-]/g, '');
 	const { lit, unlit, width } = buildDots(time);
@@ -139,12 +149,10 @@ export default function TimerDisplay({ time, label, caption, ariaLabel }) {
 							/>
 						</g>
 
-						<circle id={`${uid}-off`} className="timer-off" r={RADIUS} />
 					</defs>
 
-					{unlit.map(({ key, x, y }) => (
-						<use key={key} href={`#${uid}-off`} x={x} y={y} />
-					))}
+					{/* All the dots that are off are one path, which keeps the page light. */}
+					<path className="timer-off" d={dotsPath(unlit)} />
 					{lit.map(({ key, x, y }) => (
 						<use key={key} href={`#${uid}-on`} x={x} y={y} />
 					))}

@@ -74,7 +74,7 @@ export default function VideoFrame({
 					muted
 					loop
 					playsInline
-					preload="metadata"
+					preload="none"
 					onPlay={() => setPlaying(true)}
 					onPause={() => setPlaying(false)}>
 					{sources.map(({ src, type }) => (

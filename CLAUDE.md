@@ -29,12 +29,12 @@ Routing uses real paths, no router library and no hashes: `/` is the site, `/sty
 
 - All tokens are CSS variables in `:root` in `src/index.css`: colors, glass, fonts, type scale, spacing, radii, layout, motion. Use them instead of hard-coded values.
 - Every hover effect eases in and out over `--duration` (0.2s, `--ease`). Links and buttons get this from the base rule in `src/index.css`; a component that sets its own `transition` must list the properties its hover changes.
-- Fonts: DM Serif Display for headings, DM Sans for body text, DM Mono for small labels (eyebrows, tags, buttons). They are loaded once in `index.html`. Do not `@import` fonts in CSS.
+- Fonts: DM Serif Display for headings, DM Sans for body text, DM Mono for small labels (eyebrows, tags, buttons). They are self-hosted with the `@fontsource` packages, imported once in `src/main.jsx` (Latin sets, only the weights the design uses), and `scripts/prerender.mjs` preloads the main ones. Do not load fonts from Google or any other third party.
 - Every page renders `<Backdrop />` once. Glass surfaces blur what is behind them, so they need it. It is as tall as the page and scrolls with it: the soft glows are placed in the `orbs` list in `Backdrop.jsx` (`top` is a share of the page height) and stay where they are put.
 - Components in `src/components`: `Backdrop`, `GlassCard`, `Button`, `Tag`, `SectionHeading`, `PhotoFrame`, `VideoFrame`, `ProjectCard`, `Timeline`, `GlassLogo`, `TimerDisplay`, `Header`. Reuse these before writing new ones.
 - The favicon is a bold glass "D" in `public/favicon.svg`, the same glass recipe as `GlassLogo`. `favicon-32.png` and `apple-touch-icon.png` (for Safari and iOS, which do not use SVG icons) are screenshots of it, so re-render them when the SVG changes.
 - Red (`--color-timer`) is only for the marathon timer, and green (`--color-success`) only for the check on "signed up". Blue and slate are too dark for text.
-- Images go in `src/assets/`, resized before committing (about 1600px wide at most, JPG or WebP), and always get `alt` text.
+- Images go in `src/assets/`, as WebP, resized before committing to about twice the width they are shown at (screenshots 1120px wide at most, photos 800 to 900px), and always get `alt` text.
 - Photos and videos from a phone carry GPS location, device and date metadata. Always strip it: re-encode photos (no EXIF) and encode video with `-map_metadata -1`, then check the output with `ffprobe`. Videos are short, silent loops (MP4 plus WebM, 720p, well under 1 MB each) in `src/assets/video/` with a poster image, shown with `VideoFrame`.
 
 ## Content
@@ -44,7 +44,7 @@ Routing uses real paths, no router library and no hashes: `/` is the site, `/sty
 - Personal photos and project screenshots come from the owner, or are taken from the live project sites.
 - Projects live in `src/data/projects.js` (text, tags, links, screenshots from `src/assets/projects/`). To add a project, add an entry there; `ProjectsSection` renders them in order.
 - The About section reads `src/data/about.js` (intro, education, experience, earlier work, skills, languages), translated from the CV. Update that file when the CV changes.
-- Organisation logos are shown as colourless liquid glass by `GlassLogo` (only the shape is used, never the brand colours). Add a silhouette to `src/assets/logos/`: a white shape on a transparent square canvas (about 512px, WebP or SVG, artwork filling roughly 85%), made by thresholding the logo or by filling an SVG white. Then set it as `logo` on the entry in `about.js`.
+- Organisation logos are shown as colourless liquid glass by `GlassLogo` (only the shape is used, never the brand colours). Add a silhouette to `src/assets/logos/`: a white shape on a transparent square canvas (about 256px, WebP or SVG, artwork filling roughly 85%), made by thresholding the logo or by filling an SVG white. Then set it as `logo` on the entry in `about.js`.
 - The "My interests" section reads `src/data/outside.js`: running (started in early 2026) and the marathon (official time 4:09:34 at Stockholm 2026; signed up for Stockholm Marathon 29 May 2027, 12:00 Stockholm time, which drives the live countdown), golf (photo), skateboarding (tre flip clip), rock climbing, travelling, family, and the two Lovable study tools (ML Playground, Stats Lab). Update the race date there after the race. Left out for now: piano and Strava stats.
 
 ## SEO and speed
@@ -53,6 +53,7 @@ Routing uses real paths, no router library and no hashes: `/` is the site, `/sty
 - The share image is `public/og-image.jpg` (1200x630, no metadata). Remake it if the name, title or portrait changes.
 - `public/robots.txt` and `public/sitemap.xml` list only `/`. A new public page must be added to the sitemap. Pages that must stay out of search results (`/styleguide`, the 404) get `noindex` from the prerender script and `public/_headers`.
 - `public/_headers` sets the security headers and the long cache for the hashed files in `/assets/`.
+- Keep the page free of third-party requests, and keep the first load small: the prerender inlines the page's CSS, React is its own cached chunk, below-the-fold images load lazily, the video loads only when it is on screen (`preload="none"`) and the hero photo has `fetchPriority="high"`. Check with Lighthouse (mobile) after bigger changes; it scored 94 for performance and 100 for accessibility, best practices and SEO when this was set up.
 
 ## Hosting
 
