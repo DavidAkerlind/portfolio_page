@@ -5,9 +5,13 @@ import Button from '../../components/Button/Button';
 import Tag from '../../components/Tag/Tag';
 import SectionHeading from '../../components/SectionHeading/SectionHeading';
 import PhotoFrame from '../../components/PhotoFrame/PhotoFrame';
+import VideoFrame from '../../components/VideoFrame/VideoFrame';
 import ProjectCard from '../../components/ProjectCard/ProjectCard';
 import Timeline from '../../components/Timeline/Timeline';
 import TimerDisplay from '../../components/TimerDisplay/TimerDisplay';
+import skateTrickMp4 from '../../assets/video/skate-trick.mp4';
+import skateTrickWebm from '../../assets/video/skate-trick.webm';
+import skateTrickPoster from '../../assets/video/skate-trick-poster.webp';
 import './styleGuidePage.css';
 
 const colors = [
@@ -20,6 +24,7 @@ const colors = [
 	{ token: '--color-text', role: 'Primary text' },
 	{ token: '--color-white', role: 'Text on blue fills' },
 	{ token: '--color-timer', role: 'The marathon timer only' },
+	{ token: '--color-success', role: 'The green check on "signed up" only' },
 ];
 
 const typeScale = [
@@ -71,7 +76,7 @@ const sections = [
 	['glass', 'Glass'],
 	['buttons', 'Buttons and tags'],
 	['projects', 'Project cards'],
-	['photos', 'Photos'],
+	['photos', 'Photos and video'],
 	['timeline', 'Timeline'],
 	['timer', 'Timer'],
 ];
@@ -253,14 +258,28 @@ export default function StyleGuidePage() {
 				</section>
 
 				<section className="sg-section" aria-labelledby="photos">
-					<SectionHeading id="photos" eyebrow="07" title="Photos">
+					<SectionHeading id="photos" eyebrow="07" title="Photos and video">
 						A frame for your own pictures, in any ratio, with an optional
-						caption. Placeholders stand in until the real photos arrive.
+						caption. Placeholders stand in until the real photos arrive. The
+						video frame holds a short silent loop: it plays only while on
+						screen, starts paused for visitors who prefer reduced motion, and
+						always has a pause button.
 					</SectionHeading>
 					<div className="sg-photos">
 						<PhotoFrame ratio="4 / 3" caption="Landscape, 4:3" />
 						<PhotoFrame ratio="3 / 4" caption="Portrait, 3:4" />
 						<PhotoFrame ratio="1 / 1" caption="Square, 1:1" />
+					</div>
+					<div className="sg-video">
+						<VideoFrame
+							sources={[
+								{ src: skateTrickMp4, type: 'video/mp4' },
+								{ src: skateTrickWebm, type: 'video/webm' },
+							]}
+							poster={skateTrickPoster}
+							alt="Short looping clip of a tre flip at a skatepark"
+							caption="Video, 16:9"
+						/>
 					</div>
 				</section>
 

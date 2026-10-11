@@ -5,7 +5,8 @@ import Button from '../Button/Button';
 import './projectCard.css';
 
 /* A project: screenshot, title, short description, technologies and links.
-   `featured` lays the card out wide (image beside text) on larger screens. */
+   `featured` lays the card out wide (image beside text) on larger screens.
+   `headingLevel` sets the title's heading level (3 by default). */
 export default function ProjectCard({
 	title,
 	period,
@@ -15,7 +16,10 @@ export default function ProjectCard({
 	image,
 	imageAlt = '',
 	featured = false,
+	headingLevel = 3,
 }) {
+	const Heading = `h${headingLevel}`;
+
 	return (
 		<GlassCard
 			as="article"
@@ -32,7 +36,7 @@ export default function ProjectCard({
 
 			<div className="project-card-body">
 				{period && <span className="project-card-period">{period}</span>}
-				<h3 className="project-card-title">{title}</h3>
+				<Heading className="project-card-title">{title}</Heading>
 				<p className="project-card-description">{description}</p>
 
 				{tags.length > 0 && (
