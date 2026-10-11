@@ -278,7 +278,8 @@ export default function StyleGuidePage() {
 							]}
 							poster={skateTrickPoster}
 							alt="Short looping clip of a tre flip at a skatepark"
-							caption="Video, 16:9"
+							ratio="8 / 7"
+							caption="Video, 8:7"
 						/>
 					</div>
 				</section>

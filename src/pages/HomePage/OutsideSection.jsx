@@ -123,7 +123,7 @@ function Activity({ title, text, photo, video }) {
 					sources={video.sources}
 					poster={video.poster}
 					alt={video.alt}
-					ratio="16 / 9"
+					ratio="8 / 7"
 				/>
 			)}
 

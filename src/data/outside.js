@@ -40,7 +40,7 @@ export const activities = [
 				{ src: skateTrickWebm, type: 'video/webm' },
 			],
 			poster: skateTrickPoster,
-			alt: 'Short looping clip of a tre flip at a skatepark: the skateboard spins under the skater in the air and lands under their feet',
+			alt: 'Short looping clip of a tre flip at a skatepark: the skater rolls in, pops the board, it spins under their feet in the air, and they land and roll away',
 		},
 	},
 ];
