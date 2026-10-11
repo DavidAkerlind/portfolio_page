@@ -31,7 +31,7 @@ Routing uses real paths, no router library and no hashes: `/` is the site, `/sty
 - Every hover effect eases in and out over `--duration` (0.2s, `--ease`). Links and buttons get this from the base rule in `src/index.css`; a component that sets its own `transition` must list the properties its hover changes.
 - Fonts: DM Serif Display for headings, DM Sans for body text, DM Mono for small labels (eyebrows, tags, buttons). They are self-hosted with the `@fontsource` packages, imported once in `src/main.jsx` (Latin sets, only the weights the design uses), and `scripts/prerender.mjs` preloads the main ones. Do not load fonts from Google or any other third party.
 - Every page renders `<Backdrop />` once. Glass surfaces blur what is behind them, so they need it. It is as tall as the page and scrolls with it: the soft glows are placed in the `orbs` list in `Backdrop.jsx` (`top` is a share of the page height) and stay where they are put.
-- Components in `src/components`: `Backdrop`, `GlassCard`, `Button`, `Tag`, `SectionHeading`, `PhotoFrame`, `VideoFrame`, `ProjectCard`, `Timeline`, `GlassLogo`, `TimerDisplay`, `Header`. Reuse these before writing new ones.
+- Components in `src/components`: `Backdrop`, `GlassCard`, `Button`, `Tag`, `SectionHeading`, `PhotoFrame`, `VideoFrame`, `ProjectCard`, `Timeline`, `GlassLogo`, `TimerDisplay`, `ContactLink`, `Header`, `Footer`. Reuse these before writing new ones.
 - The favicon is a bold glass "D" in `public/favicon.svg`, the same glass recipe as `GlassLogo`. `favicon-32.png` and `apple-touch-icon.png` (for Safari and iOS, which do not use SVG icons) are screenshots of it, so re-render them when the SVG changes.
 - Red (`--color-timer`) is only for the marathon timer, and green (`--color-success`) only for the check on "signed up". Blue and slate are too dark for text.
 - Images go in `src/assets/`, as WebP, resized before committing to about twice the width they are shown at (screenshots 1120px wide at most, photos 800 to 900px), and always get `alt` text.
@@ -40,7 +40,7 @@ Routing uses real paths, no router library and no hashes: `/` is the site, `/sty
 ## Content
 
 - The site is in English only.
-- Do not publish the phone number from the CV. Contact is email, GitHub and LinkedIn.
+- Do not publish the phone number from the CV. Contact is email, GitHub and LinkedIn. The Contact section (`ContactSection.jsx`) and the footer both read the addresses from `src/data/links.js`; there is no contact form, because the site is static and has no backend.
 - Personal photos and project screenshots come from the owner, or are taken from the live project sites.
 - Projects live in `src/data/projects.js` (text, tags, links, screenshots from `src/assets/projects/`). To add a project, add an entry there; `ProjectsSection` renders them in order.
 - The About section reads `src/data/about.js` (intro, education, experience, earlier work, skills, languages), translated from the CV. Update that file when the CV changes.

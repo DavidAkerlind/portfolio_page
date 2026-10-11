@@ -9,6 +9,8 @@ import VideoFrame from '../../components/VideoFrame/VideoFrame';
 import ProjectCard from '../../components/ProjectCard/ProjectCard';
 import Timeline from '../../components/Timeline/Timeline';
 import TimerDisplay from '../../components/TimerDisplay/TimerDisplay';
+import ContactLink from '../../components/ContactLink/ContactLink';
+import Footer from '../../components/Footer/Footer';
 import sampleLogo from '../../assets/logos/cota-robotics.svg';
 import skateTrickMp4 from '../../assets/video/skate-trick.mp4';
 import skateTrickWebm from '../../assets/video/skate-trick.webm';
@@ -80,6 +82,7 @@ const sections = [
 	['photos', 'Photos and video'],
 	['timeline', 'Timeline'],
 	['timer', 'Timer'],
+	['contact', 'Contact and footer'],
 ];
 
 export default function StyleGuidePage() {
@@ -340,6 +343,36 @@ export default function StyleGuidePage() {
 							ariaLabel="3 hours 59 minutes 58 seconds"
 						/>
 					</div>
+				</section>
+
+				<section className="sg-section" aria-labelledby="contact">
+					<SectionHeading id="contact" eyebrow="10" title="Contact and footer">
+						A contact link is a whole glass card: a round icon, a small label
+						and the address or handle, with an arrow that nudges on hover.
+						Links to other sites open in a new tab. The footer closes the page
+						with the name, the same three links and a way back to the top.
+					</SectionHeading>
+					<div className="sg-contact">
+						<ContactLink
+							icon="mail"
+							label="Email"
+							value="name@example.com"
+							href="mailto:name@example.com"
+						/>
+						<ContactLink
+							icon="github"
+							label="GitHub"
+							value="username"
+							href="https://github.com"
+						/>
+						<ContactLink
+							icon="linkedin"
+							label="LinkedIn"
+							value="Full Name"
+							href="https://www.linkedin.com"
+						/>
+					</div>
+					<Footer />
 				</section>
 			</main>
 		</>

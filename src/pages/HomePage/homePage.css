@@ -93,12 +93,6 @@
 	animation-delay: 0.15s;
 }
 
-.home-upcoming {
-	min-height: 40vh;
-	padding-block: var(--space-16);
-	scroll-margin-top: 5rem;
-}
-
 @media (max-width: 52rem) {
 	.hero {
 		min-height: auto;
