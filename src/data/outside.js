@@ -5,15 +5,20 @@ import skateTrickPoster from '../assets/video/skate-trick-poster.webp';
 import mlPlayground from '../assets/tools/ml-playground.webp';
 import statsLab from '../assets/tools/stats-lab.webp';
 
-// Content for the "Outside the code" section, in display order.
+// Content for the "My interests" section, in display order.
 
 export const marathon = {
+	// How running started and what David likes about it.
+	story:
+		'I picked up running in early 2026. I am not the fastest, but I really like going out for a run from time to time. My favourite runs are the chill long ones, where you get to see a lot and explore new places.',
 	// First marathon, Stockholm 2026: the official finish time.
 	finishTime: '04:09:34',
+	finishLabel: 'Stockholm 2026',
 	finishAriaLabel: 'Official finish time: 4 hours 9 minutes 34 seconds',
 	// The next one. The start time is Stockholm time (CEST, UTC+2).
 	next: {
 		name: 'Stockholm Marathon 2027',
+		label: 'Stockholm 2027',
 		start: '2027-05-29T12:00:00+02:00',
 		startLabel: '29 May 2027',
 		href: 'https://www.stockholmmarathon.se',

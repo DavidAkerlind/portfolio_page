@@ -74,11 +74,11 @@ function Marathon() {
 			<div className="marathon-text">
 				<span className="outside-label">Running</span>
 				<h3 className="outside-title">Stockholm Marathon</h3>
+				<p className="outside-lead">{marathon.story}</p>
 				<p className="outside-lead">
 					My first marathon was the Stockholm Marathon in 2026, finished in an
 					official 4 hours, 9 minutes and 34 seconds. I am already signed up for
-					the next one on {next.startLabel}, and the clock below is counting
-					down.
+					the next one on {next.startLabel}.
 				</p>
 				<Button href={next.href} variant="secondary">
 					<CheckIcon />
@@ -88,13 +88,13 @@ function Marathon() {
 
 			<div className="marathon-timers">
 				<TimerDisplay
-					label="My time · Stockholm Marathon 2026"
+					label={`My time · ${marathon.finishLabel}`}
 					time={marathon.finishTime}
 					caption="hours : minutes : seconds"
 					ariaLabel={marathon.finishAriaLabel}
 				/>
 				<TimerDisplay
-					label={`Next · ${next.name}`}
+					label={`Next · ${next.label}`}
 					time={text}
 					caption="days : hours : minutes : seconds"
 					ariaLabel={`${days} ${days === 1 ? 'day' : 'days'} left until the ${next.name} on ${next.startLabel}`}
@@ -146,7 +146,7 @@ export default function OutsideSection() {
 				eyebrow="03"
 				title={
 					<>
-						Outside the <em>code</em>
+						My <em>interests</em>
 					</>
 				}>
 				What I do away from the keyboard: running, golf and skateboarding, plus

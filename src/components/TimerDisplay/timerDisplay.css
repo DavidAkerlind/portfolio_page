@@ -3,8 +3,9 @@
 	max-width: 100%;
 	flex-direction: column;
 	align-items: center;
-	gap: var(--space-4);
+	gap: var(--space-3);
 	margin: 0;
+	padding: var(--space-4);
 }
 
 .timer-label,
@@ -19,7 +20,7 @@
 /* The display window: dark glass, with a diagonal reflection laid over the digits. */
 .timer-screen {
 	position: relative;
-	padding: var(--space-6) var(--space-8);
+	padding: var(--space-3) var(--space-4);
 	border: 1px solid var(--glass-border);
 	border-radius: var(--radius-md);
 	background: linear-gradient(
@@ -47,7 +48,7 @@
 }
 
 .timer-svg {
-	--timer-height: clamp(5rem, 16vw, 8rem);
+	--timer-height: clamp(3.5rem, 11vw, 5.5rem);
 	display: block;
 	width: calc(var(--timer-ratio) * var(--timer-height));
 	max-width: 100%;
@@ -61,10 +62,4 @@
 	fill-opacity: 0.07;
 	stroke: var(--glass-border);
 	stroke-width: 0.05;
-}
-
-@media (max-width: 40rem) {
-	.timer-screen {
-		padding: var(--space-4);
-	}
 }

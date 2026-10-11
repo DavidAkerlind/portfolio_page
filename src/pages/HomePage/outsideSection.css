@@ -49,7 +49,8 @@
 	color: var(--color-success);
 }
 
-/* Text on the left, the two timers stacked on the right while there is room. */
+/* Text on the left and the two timers stacked on the right while there is room.
+   The digits fill the width of their screen, so there is no empty space inside it. */
 .marathon {
 	display: grid;
 	grid-template-columns: minmax(0, 1fr);
@@ -60,21 +61,22 @@
 .marathon-timers {
 	display: flex;
 	flex-direction: column;
-	gap: var(--space-6);
+	gap: var(--space-4);
+	width: 100%;
+	max-width: 30rem;
 }
 
 .marathon-timers .timer {
 	width: 100%;
+	justify-content: space-between;
 }
 
 .marathon-timers .timer-screen {
 	align-self: stretch;
-	display: flex;
-	justify-content: center;
 }
 
 .marathon-timers .timer-svg {
-	--timer-height: clamp(3.2rem, 8vw, 6rem);
+	width: 100%;
 }
 
 .outside-activities {
@@ -119,10 +121,24 @@
 	gap: var(--space-6);
 }
 
+/* Side by side while the text sits above them, then stacked beside the text. */
+@media (min-width: 44rem) {
+	.marathon-timers {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		max-width: none;
+	}
+}
+
 @media (min-width: 64rem) {
 	.marathon {
-		grid-template-columns: minmax(0, 1fr) minmax(0, 1.7fr);
+		grid-template-columns: minmax(0, 1fr) 24rem;
 		gap: var(--space-12);
+	}
+
+	.marathon-timers {
+		display: flex;
+		flex-direction: column;
 	}
 }
 
