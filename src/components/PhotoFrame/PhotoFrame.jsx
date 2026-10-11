@@ -2,7 +2,8 @@ import './photoFrame.css';
 
 /* A framed picture with a fixed aspect ratio, for personal photos and project
    screenshots. Without `src` it shows a placeholder, so layouts can be built first.
-   Images load lazily; pass loading="eager" for the ones visible on first load.
+   Images load lazily; pass loading="eager" (and fetchPriority="high" for the main
+   one) for the ones visible on first load.
    `position` is the CSS object-position used when the image is cropped to the ratio. */
 export default function PhotoFrame({
 	src,
@@ -11,6 +12,7 @@ export default function PhotoFrame({
 	ratio = '4 / 3',
 	placeholder = 'Photo coming soon',
 	loading = 'lazy',
+	fetchPriority,
 	position = 'center',
 	className = '',
 }) {
@@ -22,6 +24,8 @@ export default function PhotoFrame({
 						src={src}
 						alt={alt}
 						loading={loading}
+						fetchPriority={fetchPriority}
+						decoding="async"
 						style={{ objectPosition: position }}
 					/>
 				) : (

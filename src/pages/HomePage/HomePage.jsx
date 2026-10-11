@@ -79,6 +79,7 @@ function Hero() {
 					src={portrait}
 					ratio="4 / 5"
 					loading="eager"
+					fetchPriority="high"
 					alt="David Åkerlind smiling on the deck of a boat, with a lake and forest behind"
 				/>
 			</div>
