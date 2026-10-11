@@ -62,3 +62,9 @@
 	stroke: var(--glass-border);
 	stroke-width: 0.05;
 }
+
+@media (max-width: 40rem) {
+	.timer-screen {
+		padding: var(--space-4);
+	}
+}
