@@ -62,7 +62,7 @@ The site is hosted on Cloudflare, not GitHub Pages.
 - Cloudflare builds from this GitHub repo. The production branch is `main`; the build command is `npm run build` and the output directory is `dist`.
 - A push to `main` deploys to production automatically. Other branches get their own preview URLs.
 - DNS is on Cloudflare. The domain is registered at Spaceship. `www` redirects to the bare domain through a Cloudflare redirect rule.
-- The `gh-pages` dependency, the `predeploy`/`deploy` scripts and the `CNAME` file are leftovers from GitHub Pages. Do not run `npm run deploy`.
+- `.node-version` pins Node 22 for the Cloudflare build (Vite 7 needs at least 20.19). There is no deploy script: the old GitHub Pages leftovers (`gh-pages`, `predeploy`/`deploy` and `CNAME`) are gone, so never add a way to deploy from a laptop.
 
 ## Git workflow
 
