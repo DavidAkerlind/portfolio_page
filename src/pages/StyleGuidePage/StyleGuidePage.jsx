@@ -9,6 +9,7 @@ import VideoFrame from '../../components/VideoFrame/VideoFrame';
 import ProjectCard from '../../components/ProjectCard/ProjectCard';
 import Timeline from '../../components/Timeline/Timeline';
 import TimerDisplay from '../../components/TimerDisplay/TimerDisplay';
+import sampleLogo from '../../assets/logos/cota-robotics.svg';
 import skateTrickMp4 from '../../assets/video/skate-trick.mp4';
 import skateTrickWebm from '../../assets/video/skate-trick.webm';
 import skateTrickPoster from '../../assets/video/skate-trick-poster.webp';
@@ -287,8 +288,11 @@ export default function StyleGuidePage() {
 				<section className="sg-section" aria-labelledby="timeline">
 					<SectionHeading id="timeline" eyebrow="08" title="Timeline">
 						Dated entries on a thin line, for education and work. Each entry
-						has a period, title and place, and can add a description and a few
-						bullet points. Sample content.
+						has a period, title and place, and can add a description, a few
+						bullet points and a logo. A logo is a silhouette (a white shape on
+						transparent) that the glass logo turns into colourless liquid
+						glass: a faint body, a bright rim and a soft shadow. Sample
+						content.
 					</SectionHeading>
 					<GlassCard className="sg-timeline">
 						<Timeline
@@ -298,6 +302,7 @@ export default function StyleGuidePage() {
 									title: 'Title of the latest entry',
 									place: 'Place or company',
 									period: 'Year – Year',
+									logo: sampleLogo,
 									description:
 										'One or two sentences on what it was and what you did.',
 								},

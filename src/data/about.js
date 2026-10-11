@@ -1,4 +1,9 @@
+import karlstadLogo from '../assets/logos/karlstad-university.webp';
+import folkuniversitetetLogo from '../assets/logos/folkuniversitetet.webp';
+import cotaLogo from '../assets/logos/cota-robotics.svg';
+
 // Content for the About section, in display order. Translated from the CV.
+// `logo` is a silhouette, shown as a glass logo beside the entry.
 export const intro =
 	'I started in front-end development and moved on to artificial intelligence. I am curious, a quick learner and motivated by solving problems and working with modern technology, and I work well in a team.';
 
@@ -8,6 +13,7 @@ export const education = [
 		title: 'Computer Science, Artificial Intelligence',
 		place: 'Karlstad University',
 		period: '2025 – 2028',
+		logo: karlstadLogo,
 		description:
 			"Bachelor's degree (BSc). I have built a foundation in programming, data structures, computer systems and artificial intelligence, and I am going deeper into systems development, machine learning and AI with Python and scikit-learn.",
 	},
@@ -16,6 +22,7 @@ export const education = [
 		title: 'Front-end Developer',
 		place: 'Folkuniversitetet Karlstad',
 		period: '2024 – 2025',
+		logo: folkuniversitetetLogo,
 		description:
 			'A two-year higher vocational programme: UI/UX, HTML and CSS, JavaScript, React and agile methods. I left after one year to start my current degree in AI.',
 	},
@@ -28,6 +35,7 @@ export const experience = [
 		place: 'Cota Robotics',
 		placeHref: 'https://www.cotarobotics.com',
 		period: 'June – August 2026',
+		logo: cotaLogo,
 		description:
 			'Internship at a robotics startup that works to automate retail.',
 		points: [
