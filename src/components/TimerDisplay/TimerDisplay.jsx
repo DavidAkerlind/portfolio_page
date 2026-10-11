@@ -87,7 +87,7 @@ export default function TimerDisplay({ time, label, caption, ariaLabel }) {
 	const viewHeight = ROWS - 1 + pad * 2;
 
 	return (
-		<GlassCard as="figure" className="timer">
+		<GlassCard as="figure" padded={false} className="timer">
 			{label && <figcaption className="timer-label">{label}</figcaption>}
 
 			<div className="timer-screen">

@@ -41,7 +41,7 @@ The new site is built at `/#home` while the under-construction page stays the de
 - Projects live in `src/data/projects.js` (text, tags, links, screenshots from `src/assets/projects/`). To add a project, add an entry there; `ProjectsSection` renders them in order.
 - The About section reads `src/data/about.js` (intro, education, experience, earlier work, skills, languages), translated from the CV. Update that file when the CV changes.
 - Organisation logos are shown as colourless liquid glass by `GlassLogo` (only the shape is used, never the brand colours). Add a silhouette to `src/assets/logos/`: a white shape on a transparent square canvas (about 512px, WebP or SVG, artwork filling roughly 85%), made by thresholding the logo or by filling an SVG white. Then set it as `logo` on the entry in `about.js`.
-- The "Outside the code" section reads `src/data/outside.js`: the marathon (official time 4:09:34 at Stockholm 2026; signed up for Stockholm Marathon 29 May 2027, 12:00 Stockholm time, which drives the live countdown), golf (photo), skateboarding (tre flip clip), rock climbing, travelling, family, and the two Lovable study tools (ML Playground, Stats Lab). Update the race date there after the race. Left out for now: piano and Strava stats.
+- The "My interests" section reads `src/data/outside.js`: running (started in early 2026) and the marathon (official time 4:09:34 at Stockholm 2026; signed up for Stockholm Marathon 29 May 2027, 12:00 Stockholm time, which drives the live countdown), golf (photo), skateboarding (tre flip clip), rock climbing, travelling, family, and the two Lovable study tools (ML Playground, Stats Lab). Update the race date there after the race. Left out for now: piano and Strava stats.
 
 ## Hosting
 
