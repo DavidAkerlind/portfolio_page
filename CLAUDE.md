@@ -20,9 +20,9 @@ Match the surrounding code. The hand-written files use tabs, single quotes and s
 
 ## Design system
 
-Glassmorphism on a dark navy backdrop, kept simple. Open `/#styleguide` (run `npm run dev`, or use a Cloudflare preview URL) to see every token and component. Update that page when adding or changing a component.
+Glassmorphism on a dark navy backdrop, kept simple. Open `/styleguide` (run `npm run dev`, or use a Cloudflare preview URL) to see every token and component. Update that page when adding or changing a component.
 
-The new site is built at `/#home` while the under-construction page stays the default at `/`. When the new site is ready, make `HomePage` the default in `src/App.jsx`.
+Routing uses real paths, no router library and no hashes: `/` is the site, `/styleguide` is the design system (preview only) and any other path is the not-found page. All of it is in `src/App.jsx`. Anchors such as `/#about` only scroll within a page.
 
 - All tokens are CSS variables in `:root` in `src/index.css`: colors, glass, fonts, type scale, spacing, radii, layout, motion. Use them instead of hard-coded values.
 - Every hover effect eases in and out over `--duration` (0.2s, `--ease`). Links and buttons get this from the base rule in `src/index.css`; a component that sets its own `transition` must list the properties its hover changes.

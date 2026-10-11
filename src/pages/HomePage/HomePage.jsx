@@ -4,6 +4,7 @@ import Button from '../../components/Button/Button';
 import PhotoFrame from '../../components/PhotoFrame/PhotoFrame';
 import SectionHeading from '../../components/SectionHeading/SectionHeading';
 import portrait from '../../assets/photos/david-portrait.webp';
+import { links } from '../../data/links';
 import ProjectsSection from './ProjectsSection';
 import AboutSection from './AboutSection';
 import OutsideSection from './OutsideSection';
@@ -67,7 +68,7 @@ function Hero() {
 
 					<div className="hero-actions">
 						<Button href="#projects">See my projects</Button>
-						<Button href="mailto:david.akerlind@icloud.com" variant="secondary">
+						<Button href={`mailto:${links.email}`} variant="secondary">
 							Get in touch
 						</Button>
 					</div>
