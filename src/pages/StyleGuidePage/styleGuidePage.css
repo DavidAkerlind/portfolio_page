@@ -188,3 +188,20 @@
 .sg-video {
 	max-width: 32rem;
 }
+
+
+.sg-contact {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-4);
+	max-width: 26rem;
+}
+
+/* The footer brings its own container; here it already sits inside one. */
+.sg-section .site-footer {
+	margin-top: var(--space-4);
+}
+
+.sg-section .site-footer .container {
+	padding-inline: 0;
+}

@@ -2,19 +2,14 @@ import Backdrop from '../../components/Backdrop/Backdrop';
 import Header from '../../components/Header/Header';
 import Button from '../../components/Button/Button';
 import PhotoFrame from '../../components/PhotoFrame/PhotoFrame';
-import SectionHeading from '../../components/SectionHeading/SectionHeading';
+import Footer from '../../components/Footer/Footer';
 import portrait from '../../assets/photos/david-portrait.webp';
 import { links } from '../../data/links';
 import ProjectsSection from './ProjectsSection';
 import AboutSection from './AboutSection';
 import OutsideSection from './OutsideSection';
+import ContactSection from './ContactSection';
 import './homePage.css';
-
-// Placeholder sections so the header navigation has somewhere to scroll to.
-// Each one is replaced by the real section in its own branch.
-const upcoming = [
-	{ id: 'contact', eyebrow: '04', title: 'Contact' },
-];
 
 export default function HomePage() {
 	return (
@@ -27,19 +22,10 @@ export default function HomePage() {
 				<ProjectsSection />
 				<AboutSection />
 				<OutsideSection />
-
-				{upcoming.map(({ id, eyebrow, title }) => (
-					<section
-						key={id}
-						id={id}
-						className="container home-upcoming"
-						aria-labelledby={`${id}-title`}>
-						<SectionHeading id={`${id}-title`} eyebrow={eyebrow} title={title}>
-							Coming in the next step.
-						</SectionHeading>
-					</section>
-				))}
+				<ContactSection />
 			</main>
+
+			<Footer />
 		</>
 	);
 }
