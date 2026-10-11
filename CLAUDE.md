@@ -25,6 +25,7 @@ Glassmorphism on a dark navy backdrop, kept simple. Open `/#styleguide` (run `np
 The new site is built at `/#home` while the under-construction page stays the default at `/`. When the new site is ready, make `HomePage` the default in `src/App.jsx`.
 
 - All tokens are CSS variables in `:root` in `src/index.css`: colors, glass, fonts, type scale, spacing, radii, layout, motion. Use them instead of hard-coded values.
+- Every hover effect eases in and out over `--duration` (0.2s, `--ease`). Links and buttons get this from the base rule in `src/index.css`; a component that sets its own `transition` must list the properties its hover changes.
 - Fonts: DM Serif Display for headings, DM Sans for body text, DM Mono for small labels (eyebrows, tags, buttons). They are loaded once in `index.html`. Do not `@import` fonts in CSS.
 - Every page renders `<Backdrop />` once. Glass surfaces blur what is behind them, so they need it.
 - Components in `src/components`: `Backdrop`, `GlassCard`, `Button`, `Tag`, `SectionHeading`, `PhotoFrame`, `VideoFrame`, `ProjectCard`, `Timeline`, `GlassLogo`, `TimerDisplay`, `Header`. Reuse these before writing new ones.
