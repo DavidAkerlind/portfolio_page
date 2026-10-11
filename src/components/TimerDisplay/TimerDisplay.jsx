@@ -5,7 +5,7 @@ import './timerDisplay.css';
 /* An LED scoreboard timer drawn in SVG: every digit is a grid of round dots, each
    one a small bead of red liquid glass with a bright rim and a soft highlight.
    Dots that are off stay as dark glass. There is deliberately no glow.
-   Pass the time as text: '04:09' or '04:09:12'. */
+   Pass the time as text: '04:09' or '04:09:12'. A '-' is a digit with every dot off. */
 
 const COLS = 8; // dots across one digit
 const ROWS = 16; // dots down one digit
@@ -62,6 +62,12 @@ function buildDots(time) {
 				});
 			});
 			x += COLON_COLS - 1 + GAP;
+		} else if (char === '-') {
+			ALL_DOTS.forEach((dot) => {
+				const [col, row] = dot.split(',').map(Number);
+				unlit.push({ key: `${index}-${dot}`, ...place(x, col, row) });
+			});
+			x += COLS - 1 + GAP;
 		} else if (Object.hasOwn(DIGITS, char)) {
 			const on = new Set(
 				[...DIGITS[char]].flatMap((segment) => SEGMENTS[segment]),

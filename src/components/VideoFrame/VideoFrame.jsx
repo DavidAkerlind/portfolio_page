@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
 import '../PhotoFrame/photoFrame.css';
 import './videoFrame.css';
 
@@ -7,6 +7,22 @@ import './videoFrame.css';
    reduced motion, and always has a pause/play button. `sources` is a list of
    { src, type } so browsers can pick a format they support. `poster` is the still
    shown until it plays. `alt` describes the clip for screen readers. */
+const REDUCED_MOTION = '(prefers-reduced-motion: reduce)';
+
+// Whether the visitor prefers reduced motion. On the server, and while the page is
+// being hydrated, this is false, so the markup matches.
+function useReducedMotion() {
+	return useSyncExternalStore(
+		(onChange) => {
+			const query = window.matchMedia(REDUCED_MOTION);
+			query.addEventListener('change', onChange);
+			return () => query.removeEventListener('change', onChange);
+		},
+		() => window.matchMedia(REDUCED_MOTION).matches,
+		() => false,
+	);
+}
+
 export default function VideoFrame({
 	sources = [],
 	poster,
@@ -19,9 +35,10 @@ export default function VideoFrame({
 	const videoRef = useRef(null);
 	const [visible, setVisible] = useState(false);
 	const [playing, setPlaying] = useState(false);
-	const [paused, setPaused] = useState(
-		() => window.matchMedia('(prefers-reduced-motion: reduce)').matches,
-	);
+	const reducedMotion = useReducedMotion();
+	// Null until the visitor presses the button; then their choice wins.
+	const [chosenPause, setChosenPause] = useState(null);
+	const paused = chosenPause ?? reducedMotion;
 
 	useEffect(() => {
 		const video = videoRef.current;
@@ -42,7 +59,7 @@ export default function VideoFrame({
 		}
 	}, [visible, paused]);
 
-	const toggle = () => setPaused((current) => !current);
+	const toggle = () => setChosenPause(!paused);
 
 	return (
 		<figure className={`photo-frame ${className}`.trim()}>
