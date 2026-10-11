@@ -9,7 +9,45 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const dist = join(root, 'dist');
 const serverDir = join(root, 'dist-server');
 
+import { links, site } from '../src/data/links.js';
+
 const template = await readFile(join(dist, 'index.html'), 'utf8');
+
+// Structured data for search engines: who the site is about and where else they are.
+const jsonLd = {
+	'@context': 'https://schema.org',
+	'@graph': [
+		{
+			'@type': 'WebSite',
+			'@id': `${site.url}/#website`,
+			url: `${site.url}/`,
+			name: site.name,
+			inLanguage: 'en',
+		},
+		{
+			'@type': 'Person',
+			'@id': `${site.url}/#person`,
+			name: site.name,
+			url: `${site.url}/`,
+			image: `${site.url}/og-image.jpg`,
+			description:
+				'Computer Science student specialising in Artificial Intelligence at Karlstad University.',
+			sameAs: [links.github, links.linkedin],
+			affiliation: {
+				'@type': 'CollegeOrUniversity',
+				name: 'Karlstad University',
+				url: 'https://www.kau.se',
+			},
+			knowsAbout: [
+				'Artificial intelligence',
+				'Machine learning',
+				'Python',
+				'React',
+				'Front-end development',
+			],
+		},
+	],
+};
 const { render } = await import(pathToFileURL(join(serverDir, 'entry-server.js')));
 
 // `path` is what the app renders, `file` where it is written in dist. Cloudflare
@@ -34,13 +72,22 @@ const pages = [
 const escapeHtml = (text) =>
 	text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
 
+// The home page keeps the tags from index.html and gets the structured data. A page
+// that must stay out of search results gets its own title and a noindex tag, and
+// loses the canonical link and the social tags that point at the home page.
 function withHead(html, { title, noindex }) {
 	let result = html;
-	if (title) {
-		result = result.replace(/<title>.*?<\/title>/s, `<title>${escapeHtml(title)}</title>`);
-	}
 	if (noindex) {
-		result = result.replace('</head>', '\t\t<meta name="robots" content="noindex" />\n\t</head>');
+		result = result
+			.replace(/<title>.*?<\/title>/s, `<title>${escapeHtml(title)}</title>`)
+			.replace(/\s*<link rel="canonical"[^>]*>/, '')
+			.replace(/\s*<meta\s+(?:property="og:|name="twitter:|name="description")[^>]*>/g, '')
+			.replace('</head>', '\t\t<meta name="robots" content="noindex" />\n\t</head>');
+	} else {
+		result = result.replace(
+			'</head>',
+			`\t\t<script type="application/ld+json">${JSON.stringify(jsonLd)}</script>\n\t</head>`,
+		);
 	}
 	return result;
 }
