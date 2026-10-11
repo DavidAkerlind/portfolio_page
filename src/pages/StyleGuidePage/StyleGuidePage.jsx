@@ -296,9 +296,10 @@ export default function StyleGuidePage() {
 
 				<section className="sg-section" aria-labelledby="timer">
 					<SectionHeading id="timer" eyebrow="09" title="Timer">
-						Seven-segment digits in red liquid glass: bright rims on the edges,
-						a soft bevel, and no glow. Used for the marathon time. The time is
-						passed as text, so seconds can be added later.
+						An LED scoreboard in red liquid glass: every digit is a grid of
+						round glass beads with a bright rim and a soft highlight, and no
+						glow. Used for the marathon time. The time is passed as text, so
+						seconds can be added later.
 					</SectionHeading>
 					<div className="sg-row">
 						<TimerDisplay
