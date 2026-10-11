@@ -100,8 +100,10 @@ body {
 	-webkit-font-smoothing: antialiased;
 }
 
-/* The backdrop sits behind the page content (z-index: -1), inside #root. */
+/* The backdrop sits behind the page content (z-index: -1), inside #root, and is as
+   tall as #root, so it scrolls with the page. */
 #root {
+	position: relative;
 	isolation: isolate;
 	min-height: 100vh;
 }

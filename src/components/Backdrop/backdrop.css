@@ -1,5 +1,6 @@
+/* As tall as the page (#root is positioned), so it scrolls with the content. */
 .backdrop {
-	position: fixed;
+	position: absolute;
 	inset: 0;
 	z-index: -1;
 	overflow: hidden;
@@ -13,11 +14,21 @@
 	background-size: 200px 200px;
 }
 
+/* A soft glow: a round gradient that fades out, which is much cheaper to draw than
+   a large blurred circle. */
 .backdrop-orb {
 	position: absolute;
+	width: var(--orb-size);
+	max-width: 90vw;
+	aspect-ratio: 1;
 	border-radius: 50%;
-	filter: blur(70px);
-	opacity: 0.28;
+	background: radial-gradient(
+		closest-side,
+		var(--orb-color) 0%,
+		color-mix(in srgb, var(--orb-color) 70%, transparent) 50%,
+		transparent 100%
+	);
+	opacity: 0.3;
 	animation: backdrop-drift 8s ease-in-out infinite alternate;
 }
 
