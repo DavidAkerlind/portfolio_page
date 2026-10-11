@@ -81,7 +81,6 @@
 	text-decoration: underline;
 	text-decoration-color: var(--glass-border-hover);
 	text-underline-offset: 0.2em;
-	transition: text-decoration-color var(--duration) var(--ease);
 }
 
 .timeline-place a:hover {

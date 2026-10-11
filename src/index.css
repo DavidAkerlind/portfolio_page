@@ -63,8 +63,8 @@
 	--gutter: clamp(1.2rem, 5vw, 3rem);
 
 	/* MOTION */
-	--duration: 0.3s;
-	--ease: ease;
+	--duration: 0.2s;
+	--ease: ease-in-out;
 }
 
 /*  ==== RESET ==== */
@@ -124,7 +124,18 @@ em {
 a {
 	color: var(--color-lavender);
 	text-decoration: none;
-	transition: color var(--duration) var(--ease);
+}
+
+/* Every hover effect eases in and out. A component that sets its own
+   `transition` must list the properties its hover changes. */
+a,
+button {
+	transition:
+		color var(--duration) var(--ease),
+		background-color var(--duration) var(--ease),
+		border-color var(--duration) var(--ease),
+		box-shadow var(--duration) var(--ease),
+		text-decoration-color var(--duration) var(--ease);
 }
 
 a:hover {
