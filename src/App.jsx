@@ -1,36 +1,30 @@
-import { useEffect, useState } from 'react';
-import UnderConstructionPage from './pages/UnderConstructionPage/UnderConstructionPage';
-import StyleGuidePage from './pages/StyleGuidePage/StyleGuidePage';
+import { lazy, Suspense } from 'react';
 import HomePage from './pages/HomePage/HomePage';
+import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 
-// Work in progress is previewed by hash, while the under-construction page stays
-// the default: /#home is the new site, /#styleguide is the design system.
-// Once a preview page is open it stays open, so its in-page links
-// (#projects, #colors, ...) work. When the new site is ready, make HomePage the default.
-const PREVIEW_PAGES = {
-	'#home': HomePage,
-	'#styleguide': StyleGuidePage,
+// The design system page is only for preview, so it loads on its own and never
+// weighs down the home page.
+const StyleGuidePage = lazy(() => import('./pages/StyleGuidePage/StyleGuidePage'));
+
+// Real paths, no hashes: / is the site and /styleguide is the design system.
+// Anything else is the not-found page. In-page links (#projects, #colors, ...)
+// stay anchors within a page.
+const PAGES = {
+	'/': HomePage,
+	'/styleguide': StyleGuidePage,
 };
 
-const previewFor = (hash) => (Object.hasOwn(PREVIEW_PAGES, hash) ? hash : null);
+const normalise = (path) => (path.length > 1 ? path.replace(/\/+$/, '') : path) || '/';
 
-function App() {
-	const [preview, setPreview] = useState(() => previewFor(window.location.hash));
+function App({ path = window.location.pathname }) {
+	const route = normalise(path);
+	const Page = Object.hasOwn(PAGES, route) ? PAGES[route] : NotFoundPage;
 
-	useEffect(() => {
-		const onHashChange = () => {
-			const next = previewFor(window.location.hash);
-			if (next) {
-				setPreview(next);
-			}
-		};
-		window.addEventListener('hashchange', onHashChange);
-		return () => window.removeEventListener('hashchange', onHashChange);
-	}, []);
-
-	const Page = PREVIEW_PAGES[preview] ?? UnderConstructionPage;
-
-	return <Page />;
+	return (
+		<Suspense fallback={null}>
+			<Page />
+		</Suspense>
+	);
 }
 
 export default App;
