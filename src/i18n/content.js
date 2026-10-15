@@ -3,7 +3,6 @@ import {
 	intro,
 	education,
 	experience,
-	earlierWork,
 	skills,
 } from '../data/about';
 import { marathon, alsoInto, studyTools } from '../data/outside';
@@ -41,7 +40,6 @@ const english = {
 	intro,
 	education,
 	experience,
-	earlierWork,
 	skills,
 	marathon,
 	alsoInto,

@@ -6,7 +6,7 @@ import { useContent, useUi } from '../../i18n/lang';
 import './aboutSection.css';
 
 export default function AboutSection() {
-	const { intro, education, experience, earlierWork, skills } = useContent();
+	const { intro, education, experience, skills } = useContent();
 	const ui = useUi().about;
 
 	return (
@@ -35,20 +35,6 @@ export default function AboutSection() {
 				<GlassCard as="article" className="about-card">
 					<h3 className="about-card-title">{ui.experience}</h3>
 					<Timeline items={experience} />
-
-					<div className="about-earlier">
-						<h4 className="about-label">{ui.earlier}</h4>
-						<ul>
-							{earlierWork.map(({ role, place, period }) => (
-								<li key={`${place}-${period}`}>
-									<span>
-										{role}, {place}
-									</span>
-									<span className="about-earlier-period">{period}</span>
-								</li>
-							))}
-						</ul>
-					</div>
 				</GlassCard>
 			</div>
 

@@ -35,7 +35,6 @@ export const ui = {
 			title: ['About ', 'me'],
 			education: 'Education',
 			experience: 'Experience',
-			earlier: 'Earlier work',
 			skills: 'Skills',
 		},
 		interests: {
@@ -114,7 +113,6 @@ export const ui = {
 			title: ['Om ', 'mig'],
 			education: 'Utbildning',
 			experience: 'Erfarenhet',
-			earlier: 'Tidigare arbete',
 			skills: 'Kompetenser',
 		},
 		interests: {

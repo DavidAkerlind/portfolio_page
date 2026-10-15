@@ -46,13 +46,6 @@ export const experience = [
 	},
 ];
 
-export const earlierWork = [
-	{ role: 'Kitchen assistant', place: 'The Fishery', period: '2023 – 2024' },
-	{ role: 'Caretaker and service', place: 'Region Stockholm', period: 'August 2023' },
-	{ role: 'Restaurant assistant', place: 'Mackverket', period: 'March – October 2023' },
-	{ role: 'Food delivery', place: 'FAVO', period: '2021 – 2023' },
-];
-
 export const skills = [
 	{ label: 'AI and data', items: ['Machine learning', 'scikit-learn', 'Python'] },
 	{

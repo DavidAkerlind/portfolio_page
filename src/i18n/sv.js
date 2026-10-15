@@ -68,13 +68,6 @@ export const sv = {
 		},
 	},
 
-	earlierWork: [
-		{ role: 'Köksbiträde' },
-		{ role: 'Vaktmästare och service', period: 'augusti 2023' },
-		{ role: 'Restaurangbiträde', period: 'mars – oktober 2023' },
-		{ role: 'Matleverans' },
-	],
-
 	skills: [
 		{ label: 'AI och data', items: ['Maskininlärning', 'scikit-learn', 'Python'] },
 		{

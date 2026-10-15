@@ -34,34 +34,6 @@
 	color: var(--color-muted);
 }
 
-.about-earlier {
-	display: flex;
-	flex-direction: column;
-	gap: var(--space-3);
-	padding-top: var(--space-6);
-	border-top: 1px solid var(--glass-border);
-}
-
-.about-earlier ul {
-	display: flex;
-	flex-direction: column;
-	gap: var(--space-2);
-}
-
-.about-earlier li {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-between;
-	column-gap: var(--space-4);
-	color: var(--color-muted);
-	font-size: var(--text-sm);
-}
-
-.about-earlier-period {
-	font-family: var(--font-mono);
-	font-size: var(--text-xs);
-}
-
 .about-skills {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr));
@@ -72,11 +44,4 @@
 	display: flex;
 	flex-direction: column;
 	gap: var(--space-3);
-}
-
-@media (max-width: 30rem) {
-	.about-earlier li {
-		flex-direction: column;
-		gap: var(--space-1);
-	}
 }
