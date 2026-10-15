@@ -1,10 +1,60 @@
-/* As tall as the page (#root is positioned), so it scrolls with the content. */
+/* As tall as the page (#root is positioned), so without scripting or scroll-driven
+   animations it simply scrolls with the content. */
 .backdrop {
+	/* How fast the backdrop moves compared with the page: 0.4 is two fifths of the
+	   scroll speed, which makes it feel far away. */
+	--parallax: 0.4;
 	position: absolute;
 	inset: 0;
 	z-index: -1;
 	overflow: hidden;
 	pointer-events: none;
+}
+
+/* A glow's place: a share of the page height. */
+.backdrop-orb {
+	top: calc(var(--p) * 100% + var(--dy));
+}
+
+/* Parallax. The layer is pushed down as the page scrolls, so it ends up moving at
+   --parallax times the scroll speed. Only the first part of it is ever seen, from the
+   top to --parallax of the way down plus one screen, so the glows are spread over
+   that part instead of the whole height. */
+@supports (animation-timeline: scroll()) {
+	.backdrop {
+		will-change: transform;
+		animation: backdrop-parallax linear both;
+		animation-timeline: scroll(root block);
+	}
+
+	.backdrop-orb {
+		top: calc(
+			var(--p) * (var(--parallax) * (100% - 100vh) + 100vh) + var(--dy)
+		);
+	}
+}
+
+/* The same layout when a script moves the layer instead. */
+.backdrop-scripted {
+	will-change: transform;
+}
+
+.backdrop-scripted .backdrop-orb {
+	top: calc(var(--p) * (var(--parallax) * (100% - 100vh) + 100vh) + var(--dy));
+}
+
+@keyframes backdrop-parallax {
+	to {
+		transform: translateY(calc((1 - var(--parallax)) * (100% - 100vh)));
+	}
+}
+
+/* Reduced motion stops the glows drifting, but the parallax follows the visitor's own
+   scrolling, so it keeps its timeline (a fixed duration would break it). */
+@media (prefers-reduced-motion: reduce) {
+	.backdrop {
+		animation-duration: auto !important;
+	}
 }
 
 .backdrop-noise {
