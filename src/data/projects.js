@@ -16,7 +16,7 @@ export const projects = [
 		period: 'June 2025',
 		description:
 			'A complete website solution for a Stockholm restaurant: a public site and an admin panel where the staff update menus and opening hours themselves. I handled everything that took it to production, from the React front end to the REST API in Node.js on MongoDB.',
-		tags: ['React', 'Node.js', 'MongoDB', 'REST API'],
+		tags: ['React', 'Node.js', 'MongoDB', 'REST API', 'Constantly improving'],
 		links: [
 			{ label: 'Visit site', href: 'https://www.harpaviljongen.com' },
 			{ label: 'Source', href: 'https://github.com/DavidAkerlind/harpaviljongen' },
@@ -53,7 +53,7 @@ export const projects = [
 		period: '2026',
 		description:
 			'The site you are looking at: a simple, glassy React site with its own small design system, hosted on Cloudflare.',
-		tags: ['React', 'Vite', 'CSS', 'Cloudflare'],
+		tags: ['React', 'Vite', 'CSS', 'Cloudflare', 'Constantly improving'],
 		links: [
 			{
 				label: 'Source',
