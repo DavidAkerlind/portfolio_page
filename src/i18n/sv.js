@@ -7,7 +7,7 @@ export const sv = {
 			period: 'juni 2025',
 			description:
 				'En komplett hemsidelösning för en restaurang i Stockholm: en publik sida och en adminpanel där personalen själva uppdaterar menyer och öppettider. Jag stod för allt som tog den till produktion, från React-frontenden till REST-API:t i Node.js på MongoDB.',
-			links: [{ label: 'Besök sidan' }],
+			links: [{ label: 'Besök sidan' }, { label: 'Källkod' }],
 			imageAlt:
 				'Harpaviljongens startsida: ett dukat bord i ett dunkelt matsalsrum med en grön harlogotyp och knappen Boka bord',
 			gallery: [
