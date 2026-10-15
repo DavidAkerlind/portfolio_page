@@ -23,7 +23,7 @@
 	--glow-blue: light-dark(#2f7cf0, #375a88);
 	--glow-lavender: light-dark(#6f8cff, #bfb5ce);
 	--glow-slate: light-dark(#4fb3f5, #334b6d);
-	--glow-opacity: 0.3;
+	--glow-opacity: 0.28;
 
 	/* GLASS */
 	--glass-bg: light-dark(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.04));
@@ -123,12 +123,12 @@
 /* In light mode the glows are stronger, since pale colour on a pale page needs it.
    (A number cannot be a light-dark() pair, so this follows the same two switches.) */
 :root[data-theme='light'] {
-	--glow-opacity: 0.38;
+	--glow-opacity: 0.3;
 }
 
 @media (prefers-color-scheme: light) {
 	:root:not([data-theme='dark']) {
-		--glow-opacity: 0.38;
+		--glow-opacity: 0.3;
 	}
 }
 

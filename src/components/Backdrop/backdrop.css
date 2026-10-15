@@ -71,19 +71,27 @@
 	background-size: 200px 200px;
 }
 
-/* A soft glow: a round gradient that fades out, which is much cheaper to draw than
-   a large blurred circle. */
+/* A soft glow, drawn the way the first one-page site drew its orbs: a flat disc of
+   colour with no edge (that site blurs a disc by 70px). A gradient with the profile of
+   such a blurred disc looks the same and is much cheaper to draw than a large blurred
+   layer. --orb-r is the radius of the disc; the box reaches 175px past it so the soft
+   edge has room, and the negative margin puts the disc where the offsets say. */
 .backdrop-orb {
+	--orb-r: calc(min(var(--orb-size), 90vw) / 2);
 	position: absolute;
-	width: var(--orb-size);
-	max-width: 90vw;
+	width: calc(var(--orb-r) * 2 + 350px);
 	aspect-ratio: 1;
+	margin: -175px;
 	border-radius: 50%;
 	background: radial-gradient(
-		closest-side,
-		var(--orb-color) 0%,
-		color-mix(in srgb, var(--orb-color) 70%, transparent) 50%,
-		transparent 100%
+		circle closest-side,
+		var(--orb-color) 0,
+		var(--orb-color) max(0px, calc(var(--orb-r) - 140px)),
+		color-mix(in srgb, var(--orb-color) 84%, transparent) calc(var(--orb-r) - 70px),
+		color-mix(in srgb, var(--orb-color) 50%, transparent) var(--orb-r),
+		color-mix(in srgb, var(--orb-color) 16%, transparent) calc(var(--orb-r) + 70px),
+		color-mix(in srgb, var(--orb-color) 2%, transparent) calc(var(--orb-r) + 140px),
+		transparent calc(var(--orb-r) + 175px)
 	);
 	opacity: var(--glow-opacity);
 	/* Each glow floats on its own: a slow sideways sway and a slower bob with a gentle
