@@ -7,7 +7,7 @@ export const sv = {
 			period: 'juni 2025',
 			description:
 				'En komplett hemsidelösning för en restaurang i Stockholm: en publik sida och en adminpanel där personalen själva uppdaterar menyer och öppettider. Jag stod för allt som tog den till produktion, från React-frontenden till REST-API:t i Node.js på MongoDB.',
-			tags: ['React', 'Node.js', 'MongoDB', 'REST API', 'Ständigt under förbättring'],
+			tags: ['React', 'Node.js', 'MongoDB', 'REST API', 'Ständigt uppdaterad'],
 			links: [{ label: 'Besök sidan' }, { label: 'Källkod' }],
 			imageAlt:
 				'Harpaviljongens startsida: ett dukat bord i ett dunkelt matsalsrum med en grön harlogotyp och knappen Boka bord',
@@ -30,7 +30,7 @@ export const sv = {
 			title: 'Den här portfolion',
 			description:
 				'Sidan du tittar på just nu: en enkel, glasig React-sida med ett eget litet designsystem, hostad på Cloudflare.',
-			tags: ['React', 'Vite', 'CSS', 'Cloudflare', 'Ständigt under förbättring'],
+			tags: ['React', 'Vite', 'CSS', 'Cloudflare', 'Ständigt uppdaterad'],
 			links: [{ label: 'Källkod' }],
 			imageAlt:
 				'Startsidan på den här portfolion, med ett glashuvud, namnet David Åkerlind och ett porträttfoto',
