@@ -46,7 +46,8 @@ export default function ProjectsSection() {
 											src={shot.src}
 											alt={shot.alt}
 											ratio={shot.ratio ?? '16 / 10'}
-											position="top"
+											position={shot.position ?? 'top'}
+											fit={shot.fit}
 											zoomable
 										/>
 									</li>

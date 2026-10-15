@@ -7,7 +7,8 @@ import portfolioHome from '../assets/projects/portfolio-home.webp';
 
 // Projects shown in the Projects section, in display order.
 // `gallery` items are extra screenshots, shown cropped to the top of the page (16 / 10
-// unless the item sets its own `ratio`) and opened uncropped when clicked.
+// unless the item sets its own `ratio`, and `fit: 'contain'` shows a whole picture
+// inside the frame) and opened uncropped when clicked.
 export const projects = [
 	{
 		id: 'harpaviljongen',
@@ -35,11 +36,14 @@ export const projects = [
 			{
 				src: harpaviljongenAdmin,
 				alt: 'The Harpaviljongen admin panel: an overview with visitor numbers, system status, recent changes, opening hours and the current menus',
+				ratio: '1120 / 660',
 			},
 			{
 				src: harpaviljongenAdminMobile,
 				alt: 'The admin panel on three phone screens: the overview, visitor statistics and the opening hours editor, with a menu bar at the bottom',
-				ratio: '1063 / 710',
+				// The same frame as the admin overview beside it, so the two are equally tall.
+				ratio: '1120 / 660',
+				fit: 'contain',
 			},
 		],
 	},
