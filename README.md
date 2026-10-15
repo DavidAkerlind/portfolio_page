@@ -4,7 +4,7 @@ Source for my personal portfolio, live at **https://davidakerlind.com**.
 
 ![The home page: a glass header, my name in large serif type and a portrait photo](src/assets/projects/portfolio-home.webp)
 
-It is a single-page site, in English at `/` and in Swedish at `/sv/`, with light and dark mode that follows the device. It has four sections: selected projects, about me (education and experience), my interests (running, golf, skateboarding and a few study tools I built) and contact. The design is glassmorphism on a dark navy backdrop, with its own small design system.
+It is a single-page site, in English at `/` and in Swedish at `/sv/`, with light and dark mode that follows the device. It has four sections: selected projects, about me (education and experience), my interests (running, nature, sailing and more, and a few study tools I built) and contact. The design is glassmorphism on a dark navy backdrop, with its own small design system.
 
 ## Built with
 

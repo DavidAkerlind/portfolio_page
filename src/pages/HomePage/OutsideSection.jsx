@@ -162,9 +162,8 @@ export default function OutsideSection() {
 						{ui.title[0]}
 						<em>{ui.title[1]}</em>
 					</>
-				}>
-				{ui.lead}
-			</SectionHeading>
+				}
+			/>
 
 			<Marathon />
 

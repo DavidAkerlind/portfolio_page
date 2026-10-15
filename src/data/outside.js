@@ -58,20 +58,22 @@ export const alsoInto = [
 	'Skateboarding',
 	'Rock climbing',
 	'Travelling',
+	'Nature',
+	'Sailing',
 	'Family',
 ];
 
 export const studyTools = {
 	title: 'Vibe-coded study tools',
 	intro:
-		'I build tools to experiment with what I am learning, so I can understand it in a more interactive and visual way. I make them together with Lovable and Claude Code.',
+		'I like building tools to experiment with what I am learning, so I can understand it in a more interactive and visual way. I mostly work with Claude Code and Lovable.',
 	items: [
 		{
 			id: 'ml-playground',
 			title: 'ML Playground',
 			period: 'Study tool',
 			description:
-				'When I was learning the basics of machine learning and reinforcement learning, I wanted to see what changing the parameters actually did, not just look at numbers. So I vibe-coded this site, where I can control a scenario and watch what happens. I kept adding to it, from the first RL sandbox to flashcards, an exam question generator and more ML tools.',
+				'When I was learning the basics of machine learning and reinforcement learning, I wanted to see what changing the parameters actually did, not just look at numbers. So I vibe-coded this site, where I can control a scenario and watch what happens. Feel free to try it yourself. I kept adding to it, from the first RL sandbox to flashcards, an exam question generator and more ML tools.',
 			tags: ['Machine learning', 'Q-learning', 'Visualisation', 'Lovable'],
 			links: [{ label: 'Open site', href: 'https://explore-ml.lovable.app/' }],
 			image: mlPlayground,
