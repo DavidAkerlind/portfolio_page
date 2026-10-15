@@ -41,7 +41,7 @@ export default function ProjectsSection() {
 										<PhotoFrame
 											src={shot.src}
 											alt={shot.alt}
-											ratio="16 / 10"
+											ratio={shot.ratio ?? '16 / 10'}
 											position="top"
 											zoomable
 										/>
