@@ -49,11 +49,18 @@
 	}
 }
 
-/* Reduced motion stops the glows drifting, but the parallax follows the visitor's own
-   scrolling, so it keeps its timeline (a fixed duration would break it). */
+/* The page-wide rule for reduced motion shortens every animation to nothing. Two
+   things are kept, by the owner's choice: the parallax, which only follows the
+   visitor's own scrolling (a fixed duration would break its timeline), and the slow
+   float of the glows, which is soft, blurred and very slow. */
 @media (prefers-reduced-motion: reduce) {
 	.backdrop {
 		animation-duration: auto !important;
+	}
+
+	.backdrop-orb {
+		animation-duration: var(--sway-time), var(--bob-time) !important;
+		animation-iteration-count: infinite, infinite !important;
 	}
 }
 
@@ -79,7 +86,12 @@
 		transparent 100%
 	);
 	opacity: var(--glow-opacity);
-	animation: backdrop-drift 8s ease-in-out infinite alternate;
+	/* Each glow floats on its own: a slow sideways sway and a slower bob with a gentle
+	   swell, with different distances and times, so no two follow the same path and
+	   the pattern never quite repeats. The numbers are set per glow in Backdrop.jsx. */
+	animation:
+		orb-sway var(--sway-time) ease-in-out infinite alternate,
+		orb-bob var(--bob-time) ease-in-out infinite alternate;
 }
 
 .backdrop-accent {
@@ -98,11 +110,20 @@
 	opacity: 0.6;
 }
 
-@keyframes backdrop-drift {
+@keyframes orb-sway {
 	from {
-		transform: translate(0, 0) scale(1);
+		translate: calc(var(--sway) * -1) 0;
 	}
 	to {
-		transform: translate(30px, 20px) scale(1.05);
+		translate: var(--sway) 0;
+	}
+}
+
+@keyframes orb-bob {
+	from {
+		transform: translateY(calc(var(--bob) * -1)) scale(var(--swell-from));
+	}
+	to {
+		transform: translateY(var(--bob)) scale(var(--swell-to));
 	}
 }
