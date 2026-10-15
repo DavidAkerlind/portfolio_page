@@ -1,4 +1,5 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
+import { startSmoothAnchors } from './lib/smoothScroll';
 import HomePage from './pages/HomePage/HomePage';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 
@@ -19,6 +20,8 @@ const normalise = (path) => (path.length > 1 ? path.replace(/\/+$/, '') : path) 
 function App({ path = window.location.pathname }) {
 	const route = normalise(path);
 	const Page = Object.hasOwn(PAGES, route) ? PAGES[route] : NotFoundPage;
+
+	useEffect(startSmoothAnchors, []);
 
 	return (
 		<Suspense fallback={null}>
