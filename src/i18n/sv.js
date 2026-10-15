@@ -26,30 +26,6 @@ export const sv = {
 				},
 			],
 		},
-		'knee-training': {
-			title: 'Knäträningsapp',
-			period: 'mars 2026',
-			description:
-				'När en knäskada kom i vägen för min maratonträning behövde jag styrkeövningar, och jag är inte bäst på att veta vad man ska göra på gymmet. Därför vibe-kodade jag den här guiden att ha med mig: ett veckoschema, varje övning med hur man gör den och hur den ska kännas, råd för löpningen och en logg för hur knäet mår. Appen är på svenska.',
-			tags: ['HTML', 'CSS', 'JavaScript', 'Vibe-kodad'],
-			links: [{ label: 'Öppna appen' }, { label: 'Källkod' }],
-			imageAlt:
-				'Knäträningsappen: en mörk sida med titeln Knästyrka & löpschema, ett veckoschema med gym-, intervall- och löpdagar samt flikar för gympass, löpning, knäinfo och framsteg',
-			gallery: [
-				{
-					alt: 'Gympasset i appen med en övning öppnad, Terminal knee extension med gummiband: varför den är viktig, vilken utrustning som behövs, hur man gör den och hur den ska kännas',
-				},
-				{
-					alt: 'Appen på tre telefonskärmar: gympasset, en öppnad övning och löpfliken',
-				},
-				{
-					alt: 'Löpfliken: råd om att springa på framfoten, tre typer av träningsdagar och tips om kadens, höftdrivet löpande och smärtgräns',
-				},
-				{
-					alt: 'Knäinfo-fliken, med en förklaring av skadan, varför framfotslöpning hjälper, gympassets logik och en tidslinje för förväntad förbättring',
-				},
-			],
-		},
 		portfolio: {
 			title: 'Den här portfolion',
 			description:
