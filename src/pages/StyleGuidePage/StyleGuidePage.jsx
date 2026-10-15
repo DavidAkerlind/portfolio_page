@@ -5,6 +5,7 @@ import Button from '../../components/Button/Button';
 import Tag from '../../components/Tag/Tag';
 import SectionHeading from '../../components/SectionHeading/SectionHeading';
 import PhotoFrame from '../../components/PhotoFrame/PhotoFrame';
+import portfolioHome from '../../assets/projects/portfolio-home.webp';
 import VideoFrame from '../../components/VideoFrame/VideoFrame';
 import ProjectCard from '../../components/ProjectCard/ProjectCard';
 import Timeline from '../../components/Timeline/Timeline';
@@ -264,7 +265,9 @@ export default function StyleGuidePage() {
 				<section className="sg-section" aria-labelledby="photos">
 					<SectionHeading id="photos" eyebrow="07" title="Photos and video">
 						A frame for your own pictures, in any ratio, with an optional
-						caption. Placeholders stand in until the real photos arrive. The
+						caption. Add zoomable and the picture opens uncropped and enlarged
+						when clicked (Escape or a click closes it); project screenshots use
+						it. Placeholders stand in until the real photos arrive. The
 						video frame holds a short silent loop: it plays only while on
 						screen, starts paused for visitors who prefer reduced motion, and
 						always has a pause button.
@@ -273,6 +276,14 @@ export default function StyleGuidePage() {
 						<PhotoFrame ratio="4 / 3" caption="Landscape, 4:3" />
 						<PhotoFrame ratio="3 / 4" caption="Portrait, 3:4" />
 						<PhotoFrame ratio="1 / 1" caption="Square, 1:1" />
+						<PhotoFrame
+							src={portfolioHome}
+							alt="The home page of this portfolio"
+							ratio="4 / 3"
+							position="top"
+							zoomable
+							caption="Zoomable, click to enlarge"
+						/>
 					</div>
 					<div className="sg-video">
 						<VideoFrame

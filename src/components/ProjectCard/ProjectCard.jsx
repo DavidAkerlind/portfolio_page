@@ -31,6 +31,7 @@ export default function ProjectCard({
 				alt={imageAlt}
 				ratio="16 / 10"
 				placeholder="Screenshot coming soon"
+				zoomable
 				className="project-card-media"
 			/>
 

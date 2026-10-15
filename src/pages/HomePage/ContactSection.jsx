@@ -24,7 +24,7 @@ export default function ContactSection() {
 						Get in <em>touch</em>
 					</>
 				}>
-				Have a question, an idea or something you would like to build together?
+				Have a question, an idea or something you would like to build?
 				Email is the quickest way to reach me. You can also find me on GitHub
 				and LinkedIn.
 			</SectionHeading>

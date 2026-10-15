@@ -167,11 +167,13 @@ export default function OutsideSection() {
 			<Marathon />
 
 			<div className="outside-block">
-				<div className="outside-activities">
-					{activities.map((activity) => (
-						<Activity key={activity.id} {...activity} />
-					))}
-				</div>
+				{activities.length > 0 && (
+					<div className="outside-activities">
+						{activities.map((activity) => (
+							<Activity key={activity.id} {...activity} />
+						))}
+					</div>
+				)}
 
 				<div className="outside-also">
 					<span className="outside-label">Also</span>

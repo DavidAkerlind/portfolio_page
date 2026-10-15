@@ -46,10 +46,10 @@ function Hero() {
 					</h1>
 
 					<p className="hero-lead">
-						BSc student in Computer Science, specialising in Artificial
-						Intelligence at Karlstad University. I like technology in all its
-						forms, from programming and system development to electronics and
-						AI.
+						I have always liked technology and building things. A few years ago I
+						realised I had no idea how the tools I used every day were built, so
+						I started to learn. That led me into programming, system development
+						and AI.
 					</p>
 
 					<div className="hero-actions">

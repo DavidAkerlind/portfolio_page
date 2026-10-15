@@ -35,6 +35,7 @@ Routing uses real paths, no router library and no hashes: `/` is the site, `/sty
 - Components in `src/components`: `Backdrop`, `GlassCard`, `Button`, `Tag`, `SectionHeading`, `PhotoFrame`, `VideoFrame`, `ProjectCard`, `Timeline`, `GlassLogo`, `TimerDisplay`, `ContactLink`, `Header`, `Footer`. Reuse these before writing new ones.
 - The favicon is a bold glass "D" in `public/favicon.svg`, the same glass recipe as `GlassLogo`. `favicon-32.png` and `apple-touch-icon.png` (for Safari and iOS, which do not use SVG icons) are screenshots of it, so re-render them when the SVG changes.
 - Red (`--color-timer`) is only for the marathon timer, and green (`--color-success`) only for the check on "signed up". Blue and slate are too dark for text.
+- Project screenshots are `zoomable` (`PhotoFrame`): a click opens the uncropped picture in a native `<dialog>`, which Escape or a click closes. Use it for any screenshot a visitor may want to read.
 - Images go in `src/assets/`, as WebP, resized before committing to about twice the width they are shown at (screenshots 1120px wide at most, photos 800 to 900px), and always get `alt` text.
 - Photos and videos from a phone carry GPS location, device and date metadata. Always strip it: re-encode photos (no EXIF) and encode video with `-map_metadata -1`, then check the output with `ffprobe`. Videos are short, silent loops (MP4 plus WebM, 720p, well under 1 MB each) in `src/assets/video/` with a poster image, shown with `VideoFrame`.
 
@@ -44,9 +45,9 @@ Routing uses real paths, no router library and no hashes: `/` is the site, `/sty
 - Do not publish the phone number from the CV. Contact is email, GitHub and LinkedIn. The Contact section (`ContactSection.jsx`) and the footer both read the addresses from `src/data/links.js`; there is no contact form, because the site is static and has no backend.
 - Personal photos and project screenshots come from the owner, or are taken from the live project sites.
 - Projects live in `src/data/projects.js` (text, tags, links, screenshots from `src/assets/projects/`). To add a project, add an entry there; `ProjectsSection` renders them in order.
-- The About section reads `src/data/about.js` (intro, education, experience, earlier work, skills, languages), translated from the CV. Update that file when the CV changes.
+- The About section reads `src/data/about.js` (intro, education, experience, earlier work, skills), translated from the CV. Update that file when the CV changes.
 - Organisation logos are shown as colourless liquid glass by `GlassLogo` (only the shape is used, never the brand colours). Add a silhouette to `src/assets/logos/`: a white shape on a transparent square canvas (about 256px, WebP or SVG, artwork filling roughly 85%), made by thresholding the logo or by filling an SVG white. Then set it as `logo` on the entry in `about.js`.
-- The "My interests" section reads `src/data/outside.js`: running (started in early 2026) and the marathon (official time 4:09:34 at Stockholm 2026; signed up for Stockholm Marathon 29 May 2027, 12:00 Stockholm time, which drives the live countdown), golf (photo), skateboarding (tre flip clip), rock climbing, travelling, family, and the two Lovable study tools (ML Playground, Stats Lab). Update the race date there after the race. Left out for now: piano and Strava stats.
+- The "My interests" section reads `src/data/outside.js`: running (started in early 2026) and the marathon (official time 4:09:34 at Stockholm 2026; signed up for Stockholm Marathon 29 May 2027, 12:00 Stockholm time, which drives the live countdown), golf, skateboarding, rock climbing, travelling and family (all under "Also"; the golf photo and tre flip clip cards are commented out in `outside.js`, ready to come back), and the two Lovable study tools (ML Playground, Stats Lab). Update the race date there after the race. Left out for now: piano and Strava stats.
 
 ## SEO and speed
 
