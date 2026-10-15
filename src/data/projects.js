@@ -3,11 +3,6 @@ import harpaviljongenMenu from '../assets/projects/harpaviljongen-menu.webp';
 import harpaviljongenInfo from '../assets/projects/harpaviljongen-info.webp';
 import harpaviljongenAdmin from '../assets/projects/harpaviljongen-admin.webp';
 import harpaviljongenAdminMobile from '../assets/projects/harpaviljongen-admin-mobile.webp';
-import kneeStart from '../assets/projects/knee-training-start.webp';
-import kneeExercise from '../assets/projects/knee-training-exercise.webp';
-import kneePhone from '../assets/projects/knee-training-phone.webp';
-import kneeRunning from '../assets/projects/knee-training-running.webp';
-import kneeInfo from '../assets/projects/knee-training-info.webp';
 import portfolioHome from '../assets/projects/portfolio-home.webp';
 
 // Projects shown in the Projects section, in display order.
@@ -49,45 +44,6 @@ export const projects = [
 				// The same frame as the admin overview beside it, so the two are equally tall.
 				ratio: '1120 / 660',
 				fit: 'contain',
-			},
-		],
-	},
-	{
-		id: 'knee-training',
-		title: 'Knee training app',
-		period: 'March 2026',
-		description:
-			'When a knee injury got in the way of my marathon training I needed strength exercises, and I am not the best at knowing what to do at the gym. So I vibe-coded this guide to bring along: a weekly plan, every exercise with how to do it and what it should feel like, advice for the running, and a log for how the knee feels. It is in Swedish.',
-		tags: ['HTML', 'CSS', 'JavaScript', 'Vibe-coded'],
-		links: [
-			{
-				label: 'Open app',
-				href: 'https://davidakerlind.github.io/knee_training_app/',
-			},
-			{
-				label: 'Source',
-				href: 'https://github.com/DavidAkerlind/knee_training_app',
-			},
-		],
-		image: kneeStart,
-		imageAlt:
-			'The knee training app, in Swedish: a dark page with the title Knästyrka & löpschema, a week plan with gym, interval and running days, and tabs for the gym session, running, knee info and progress',
-		gallery: [
-			{
-				src: kneeExercise,
-				alt: 'The gym session in the app with one exercise opened, Terminal knee extension with a resistance band: why it matters, what equipment to use, how to do it and what it should feel like',
-			},
-			{
-				src: kneePhone,
-				alt: 'The app on three phone screens: the gym session, an opened exercise and the running tab',
-			},
-			{
-				src: kneeRunning,
-				alt: 'The running tab: advice to run on the forefoot, three kinds of training day, and tips on cadence, hip-driven running and a pain limit',
-			},
-			{
-				src: kneeInfo,
-				alt: 'The knee info tab, with an explanation of the injury, why forefoot running helps, the logic of the gym session and a timeline of the expected improvement',
 			},
 		],
 	},
