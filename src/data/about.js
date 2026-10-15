@@ -37,7 +37,7 @@ export const experience = [
 		period: 'June – August 2026',
 		logo: cotaLogo,
 		description:
-			'Internship at a robotics startup that works to automate retail. I got to try a wide variety of things, from learning about robotics and testing to bringing in ideas of my own, and I learned a lot from the team around me.',
+			'Internship at a robotics startup that works to automate retail. I got to try a wide variety of things, from learning about robotics and testing to bringing in ideas of my own, and I learned a lot from the team around me. I hope to be back next summer.',
 		points: [
 			'Helped develop robot arms and data-collection software for AI training, including 3D printing.',
 			'Designed and built a pipeline that turns store video into a point cloud, with 3D mapping of products and a 2D map of the store layout.',
