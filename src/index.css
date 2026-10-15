@@ -9,8 +9,8 @@
 	--color-navy: light-dark(#e2e8f3, #15263b);
 	--color-blue: light-dark(#7f9fcf, #375a88);
 	--color-slate: light-dark(#a8b9d6, #334b6d);
-	--color-muted: light-dark(#55546f, #908faa);
-	--color-lavender: light-dark(#5a4a88, #bfb5ce);
+	--color-muted: light-dark(#4d5d78, #908faa);
+	--color-lavender: light-dark(#375a88, #bfb5ce);
 	--color-white: #ffffff;
 	--color-text: light-dark(#16233a, #e8e2f0);
 	--color-selection: light-dark(#b9cbeb, #375a88);
@@ -21,7 +21,7 @@
 
 	/* The soft glows behind the page: paler in light mode. */
 	--glow-blue: light-dark(#7fa3dc, #375a88);
-	--glow-lavender: light-dark(#b8a6e4, #bfb5ce);
+	--glow-lavender: light-dark(#9db8e2, #bfb5ce);
 	--glow-slate: light-dark(#a5b8da, #334b6d);
 
 	/* GLASS */
@@ -96,6 +96,27 @@
 
 :root[data-theme='dark'] {
 	color-scheme: dark;
+}
+
+/* Switching theme fades the whole page. Browsers with view transitions cross-fade the
+   old and the new page; the others fade colours (ThemeToggle adds .theme-fading for
+   the length of the fade). */
+::view-transition-old(root),
+::view-transition-new(root) {
+	animation-duration: 0.5s;
+	animation-timing-function: var(--ease);
+}
+
+:root.theme-fading *,
+:root.theme-fading *::before,
+:root.theme-fading *::after {
+	transition:
+		background-color 0.5s var(--ease),
+		color 0.5s var(--ease),
+		border-color 0.5s var(--ease),
+		fill 0.5s var(--ease),
+		stroke 0.5s var(--ease),
+		box-shadow 0.5s var(--ease) !important;
 }
 
 /*  ==== RESET ==== */

@@ -10,8 +10,7 @@ const languages = [
 ];
 
 /* The end of the page. First row: the name and the three ways to reach David.
-   Second row: a short note on how the site is made, the language choice and a link
-   back to the top. */
+   Second row: the language choice and a link back to the top. */
 export default function Footer() {
 	const ui = useUi().footer;
 	const lang = useLang();
@@ -47,8 +46,6 @@ export default function Footer() {
 				</div>
 
 				<div className="site-footer-row">
-					<p className="site-footer-note">{ui.note}</p>
-
 					<nav aria-label={ui.language}>
 						<ul className="site-footer-links site-footer-languages">
 							{languages.map(({ code, label, href }) => (
