@@ -41,8 +41,8 @@
 	background: linear-gradient(
 		90deg,
 		transparent,
-		var(--color-blue),
-		var(--color-lavender),
+		var(--glow-blue),
+		var(--glow-lavender),
 		transparent
 	);
 	opacity: 0.6;

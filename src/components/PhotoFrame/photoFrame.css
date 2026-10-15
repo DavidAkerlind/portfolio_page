@@ -66,12 +66,12 @@
 	justify-content: center;
 	width: 2rem;
 	height: 2rem;
-	border: 1px solid var(--glass-border);
+	border: 1px solid rgba(191, 181, 206, 0.2);
 	border-radius: var(--radius-pill);
 	background: rgba(15, 30, 48, 0.55);
 	backdrop-filter: blur(8px);
 	-webkit-backdrop-filter: blur(8px);
-	color: var(--color-lavender);
+	color: #bfb5ce;
 	transition:
 		color var(--duration) var(--ease),
 		background-color var(--duration) var(--ease),
@@ -80,13 +80,15 @@
 
 .photo-frame-zoom:hover .photo-frame-zoom-icon,
 .photo-frame-zoom:focus-visible .photo-frame-zoom-icon {
-	border-color: var(--glass-border-hover);
+	border-color: rgba(191, 181, 206, 0.4);
 	background: rgba(15, 30, 48, 0.8);
-	color: var(--color-text);
+	color: #e8e2f0;
 }
 
 /* ==== Enlarged picture ==== */
 .lightbox {
+	/* The enlarged picture sits on a dark backdrop in both modes. */
+	color-scheme: dark;
 	position: fixed;
 	inset: 0;
 	display: flex;

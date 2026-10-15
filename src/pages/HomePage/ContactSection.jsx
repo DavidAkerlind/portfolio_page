@@ -1,16 +1,19 @@
 import SectionHeading from '../../components/SectionHeading/SectionHeading';
 import ContactLink from '../../components/ContactLink/ContactLink';
 import { links } from '../../data/links';
+import { useUi } from '../../i18n/lang';
 import './contactSection.css';
 
 // Email first: it is the quickest way to reach me. No phone number, on purpose.
-const contacts = [
-	{ id: 'email', icon: 'mail', label: 'Email', value: links.email, href: `mailto:${links.email}` },
+const contacts = (emailLabel) => [
+	{ id: 'email', icon: 'mail', label: emailLabel, value: links.email, href: `mailto:${links.email}` },
 	{ id: 'github', icon: 'github', label: 'GitHub', value: 'DavidAkerlind', href: links.github },
 	{ id: 'linkedin', icon: 'linkedin', label: 'LinkedIn', value: 'David Åkerlind', href: links.linkedin },
 ];
 
 export default function ContactSection() {
+	const ui = useUi().contact;
+
 	return (
 		<section
 			id="contact"
@@ -21,16 +24,15 @@ export default function ContactSection() {
 				eyebrow="04"
 				title={
 					<>
-						Get in <em>touch</em>
+						{ui.title[0]}
+						<em>{ui.title[1]}</em>
 					</>
 				}>
-				Have a question, an idea or something you would like to build?
-				Email is the quickest way to reach me. You can also find me on GitHub
-				and LinkedIn.
+				{ui.lead}
 			</SectionHeading>
 
 			<ul className="contact-list">
-				{contacts.map(({ id, ...contact }) => (
+				{contacts(ui.email).map(({ id, ...contact }) => (
 					<li key={id}>
 						<ContactLink {...contact} />
 					</li>

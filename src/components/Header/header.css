@@ -26,6 +26,18 @@
 	color: var(--color-lavender);
 }
 
+.site-header-controls {
+	display: flex;
+	align-items: center;
+	gap: var(--space-2);
+	/* After the links on a wide screen; beside the name on a narrow one. */
+	order: 2;
+}
+
+.site-header-nav {
+	order: 1;
+}
+
 .site-header-nav ul {
 	display: flex;
 	gap: var(--space-6);
@@ -72,9 +84,15 @@
 		display: inline-flex;
 	}
 
+	.site-header-controls,
+	.site-header-nav {
+		order: 0;
+	}
+
 	.site-header-nav {
 		display: none;
 		flex-basis: 100%;
+		order: 1;
 	}
 
 	.site-header-nav-open {

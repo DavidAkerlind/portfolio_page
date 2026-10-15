@@ -18,12 +18,12 @@
 	place-items: center;
 	width: 2.5rem;
 	height: 2.5rem;
-	border: 1px solid var(--glass-border-hover);
+	border: 1px solid rgba(191, 181, 206, 0.3);
 	border-radius: 50%;
 	background: rgba(15, 30, 48, 0.55);
 	-webkit-backdrop-filter: blur(8px);
 	backdrop-filter: blur(8px);
-	color: var(--color-text);
+	color: #e8e2f0;
 	cursor: pointer;
 	transition:
 		background var(--duration) var(--ease),
@@ -32,7 +32,7 @@
 
 .video-frame-toggle:hover {
 	background: rgba(15, 30, 48, 0.8);
-	border-color: var(--color-lavender);
+	border-color: #bfb5ce;
 }
 
 .video-frame-toggle svg {

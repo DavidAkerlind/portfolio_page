@@ -12,6 +12,7 @@ import Timeline from '../../components/Timeline/Timeline';
 import TimerDisplay from '../../components/TimerDisplay/TimerDisplay';
 import ContactLink from '../../components/ContactLink/ContactLink';
 import Footer from '../../components/Footer/Footer';
+import ThemeToggle from '../../components/ThemeToggle/ThemeToggle';
 import sampleLogo from '../../assets/logos/cota-robotics.svg';
 import skateTrickMp4 from '../../assets/video/skate-trick.mp4';
 import skateTrickWebm from '../../assets/video/skate-trick.webm';
@@ -26,7 +27,10 @@ const colors = [
 	{ token: '--color-muted', role: 'Secondary text' },
 	{ token: '--color-lavender', role: 'Accent, links, highlights' },
 	{ token: '--color-text', role: 'Primary text' },
-	{ token: '--color-white', role: 'Text on blue fills' },
+	{ token: '--color-white', role: 'Text on dark fills' },
+	{ token: '--color-selection', role: 'Selected text' },
+	{ token: '--glow-blue', role: 'The soft glows behind the page' },
+	{ token: '--glow-lavender', role: 'The soft glows behind the page' },
 	{ token: '--color-timer', role: 'The marathon timer only' },
 	{ token: '--color-success', role: 'The green check on "signed up" only' },
 ];
@@ -115,9 +119,16 @@ export default function StyleGuidePage() {
 
 				<section className="sg-section" aria-labelledby="colors">
 					<SectionHeading id="colors" eyebrow="01" title="Colors">
-						One palette. Lavender is the accent; blue and slate are too dark for
-						text and are used for fills and borders only.
+						One palette in two modes. The page follows the device's light or
+						dark setting, and the round button (also in the page header) lets a
+						visitor override it; the choice is remembered. Every color is a
+						light-dark() pair in :root, so a token never needs a second
+						definition. Lavender is the accent; blue and slate are for fills
+						and borders only.
 					</SectionHeading>
+					<div className="sg-theme">
+						<ThemeToggle />
+					</div>
 					<div className="sg-swatches">
 						{colors.map((color) => (
 							<Swatch key={color.token} {...color} />
@@ -361,7 +372,8 @@ export default function StyleGuidePage() {
 						A contact link is a whole glass card: a round icon, a small label
 						and the address or handle, with an arrow that nudges on hover.
 						Links to other sites open in a new tab. The footer closes the page
-						with the name, the same three links and a way back to the top.
+						with the name, the same three links, the language choice (English or
+						Swedish) and a way back to the top.
 					</SectionHeading>
 					<div className="sg-contact">
 						<ContactLink

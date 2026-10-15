@@ -1,15 +1,27 @@
 import { links } from '../../data/links';
+import { useLang, useUi } from '../../i18n/lang';
 import './footer.css';
 
-const elsewhere = [
-	{ label: 'Email', href: `mailto:${links.email}` },
-	{ label: 'GitHub', href: links.github, external: true },
-	{ label: 'LinkedIn', href: links.linkedin, external: true },
+// The same page in each language. The links go to a whole page, so they are plain
+// links (and search engines can follow them).
+const languages = [
+	{ code: 'en', label: 'English', href: '/' },
+	{ code: 'sv', label: 'Svenska', href: '/sv/' },
 ];
 
 /* The end of the page. First row: the name and the three ways to reach David.
-   Second row: a short note on how the site is made and a link back to the top. */
+   Second row: a short note on how the site is made, the language choice and a link
+   back to the top. */
 export default function Footer() {
+	const ui = useUi().footer;
+	const lang = useLang();
+
+	const elsewhere = [
+		{ label: ui.email, href: `mailto:${links.email}` },
+		{ label: 'GitHub', href: links.github, external: true },
+		{ label: 'LinkedIn', href: links.linkedin, external: true },
+	];
+
 	return (
 		<footer className="site-footer">
 			<div className="container site-footer-inner">
@@ -18,7 +30,7 @@ export default function Footer() {
 						David <em>Åkerlind</em>
 					</p>
 
-					<nav aria-label="Elsewhere">
+					<nav aria-label={ui.elsewhere}>
 						<ul className="site-footer-links">
 							{elsewhere.map(({ label, href, external }) => (
 								<li key={label}>
@@ -35,10 +47,26 @@ export default function Footer() {
 				</div>
 
 				<div className="site-footer-row">
-					<p className="site-footer-note">Built with React and Vite.</p>
+					<p className="site-footer-note">{ui.note}</p>
+
+					<nav aria-label={ui.language}>
+						<ul className="site-footer-links site-footer-languages">
+							{languages.map(({ code, label, href }) => (
+								<li key={code}>
+									<a
+										href={href}
+										lang={code}
+										hrefLang={code}
+										aria-current={code === lang ? 'true' : undefined}>
+										{label}
+									</a>
+								</li>
+							))}
+						</ul>
+					</nav>
 
 					<a href="#top" className="site-footer-top">
-						Back to top
+						{ui.top}
 					</a>
 				</div>
 			</div>

@@ -1,10 +1,13 @@
 import SectionHeading from '../../components/SectionHeading/SectionHeading';
 import ProjectCard from '../../components/ProjectCard/ProjectCard';
 import PhotoFrame from '../../components/PhotoFrame/PhotoFrame';
-import { projects } from '../../data/projects';
+import { useContent, useUi } from '../../i18n/lang';
 import './projectsSection.css';
 
 export default function ProjectsSection() {
+	const { projects } = useContent();
+	const [before, accent] = useUi().projects.title;
+
 	return (
 		<section
 			id="projects"
@@ -15,7 +18,8 @@ export default function ProjectsSection() {
 				eyebrow="01"
 				title={
 					<>
-						Selected <em>projects</em>
+						{before}
+						<em>{accent}</em>
 					</>
 				}
 			/>

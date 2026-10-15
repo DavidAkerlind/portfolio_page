@@ -205,3 +205,8 @@
 .sg-section .site-footer .container {
 	padding-inline: 0;
 }
+
+.sg-theme {
+	display: flex;
+	margin-top: var(--space-6);
+}

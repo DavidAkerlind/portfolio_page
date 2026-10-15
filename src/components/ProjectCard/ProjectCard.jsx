@@ -2,6 +2,7 @@ import GlassCard from '../GlassCard/GlassCard';
 import PhotoFrame from '../PhotoFrame/PhotoFrame';
 import Tag from '../Tag/Tag';
 import Button from '../Button/Button';
+import { useUi } from '../../i18n/lang';
 import './projectCard.css';
 
 /* A project: screenshot, title, short description, technologies and links.
@@ -18,6 +19,7 @@ export default function ProjectCard({
 	featured = false,
 	headingLevel = 3,
 }) {
+	const ui = useUi().photo;
 	const Heading = `h${headingLevel}`;
 
 	return (
@@ -30,7 +32,7 @@ export default function ProjectCard({
 				src={image}
 				alt={imageAlt}
 				ratio="16 / 10"
-				placeholder="Screenshot coming soon"
+				placeholder={ui.screenshotPlaceholder}
 				zoomable
 				className="project-card-media"
 			/>

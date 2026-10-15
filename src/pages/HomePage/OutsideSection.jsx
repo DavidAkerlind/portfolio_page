@@ -7,7 +7,8 @@ import PhotoFrame from '../../components/PhotoFrame/PhotoFrame';
 import VideoFrame from '../../components/VideoFrame/VideoFrame';
 import ProjectCard from '../../components/ProjectCard/ProjectCard';
 import TimerDisplay from '../../components/TimerDisplay/TimerDisplay';
-import { marathon, activities, alsoInto, studyTools } from '../../data/outside';
+import { activities } from '../../data/outside';
+import { useContent, useUi } from '../../i18n/lang';
 import './outsideSection.css';
 
 // The current time in whole seconds, ticking every second. `null` on the server and
@@ -73,42 +74,40 @@ function CheckIcon() {
 }
 
 function Marathon() {
+	const { marathon } = useContent();
+	const ui = useUi().interests;
 	const { next } = marathon;
 	const { days, text } = formatTimeLeft(useTimeLeft(next.start));
 
 	return (
 		<div className="marathon">
 			<div className="marathon-text">
-				<span className="outside-label">Running</span>
-				<h3 className="outside-title">Stockholm Marathon</h3>
+				<span className="outside-label">{ui.running}</span>
+				<h3 className="outside-title">{ui.marathonTitle}</h3>
 				<p className="outside-lead">{marathon.story}</p>
-				<p className="outside-lead">
-					My first marathon was the Stockholm Marathon in 2026, finished in an
-					official 4 hours, 9 minutes and 34 seconds. I am already signed up for
-					the next one on {next.startLabel}.
-				</p>
+				<p className="outside-lead">{ui.firstMarathon(next.startLabel)}</p>
 				<Button href={next.href} variant="secondary">
 					<CheckIcon />
-					Signed up for 2027
+					{ui.signedUp}
 				</Button>
 			</div>
 
 			<div className="marathon-timers">
 				<TimerDisplay
-					label={`My time · ${marathon.finishLabel}`}
+					label={`${ui.myTime} · ${marathon.finishLabel}`}
 					time={marathon.finishTime}
-					caption="hours : minutes : seconds"
+					caption={ui.finishCaption}
 					ariaLabel={marathon.finishAriaLabel}
 				/>
 				<TimerDisplay
-					label={`Next · ${next.label}`}
+					label={`${ui.next} · ${next.label}`}
 					time={text}
-					caption="days : hours : minutes : seconds"
+					caption={ui.countdownCaption}
 					ariaLabel={
-							days === null
-								? `Countdown to the ${next.name} on ${next.startLabel}`
-								: `${days} ${days === 1 ? 'day' : 'days'} left until the ${next.name} on ${next.startLabel}`
-						}
+						days === null
+							? ui.countdownAria(next.name, next.startLabel)
+							: ui.daysLeftAria(days, next.name, next.startLabel)
+					}
 				/>
 			</div>
 		</div>
@@ -147,6 +146,9 @@ function Activity({ title, text, photo, video }) {
 }
 
 export default function OutsideSection() {
+	const { alsoInto, studyTools } = useContent();
+	const ui = useUi().interests;
+
 	return (
 		<section
 			id="interests"
@@ -157,11 +159,11 @@ export default function OutsideSection() {
 				eyebrow="03"
 				title={
 					<>
-						My <em>interests</em>
+						{ui.title[0]}
+						<em>{ui.title[1]}</em>
 					</>
 				}>
-				What I do away from the keyboard: running, golf and skateboarding, plus
-				a few tools I build to learn.
+				{ui.lead}
 			</SectionHeading>
 
 			<Marathon />
@@ -176,7 +178,7 @@ export default function OutsideSection() {
 				)}
 
 				<div className="outside-also">
-					<span className="outside-label">Also</span>
+					<span className="outside-label">{ui.also}</span>
 					<ul className="tag-list">
 						{alsoInto.map((item) => (
 							<li key={item}>
@@ -189,7 +191,7 @@ export default function OutsideSection() {
 
 			<div className="outside-block">
 				<div className="outside-intro">
-					<span className="outside-label">Built to learn</span>
+					<span className="outside-label">{ui.builtToLearn}</span>
 					<h3 className="outside-title">{studyTools.title}</h3>
 					<p className="outside-lead">{studyTools.intro}</p>
 				</div>

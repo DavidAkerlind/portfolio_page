@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
+import { useUi } from '../../i18n/lang';
 import '../PhotoFrame/photoFrame.css';
 import './videoFrame.css';
 
@@ -32,6 +33,7 @@ export default function VideoFrame({
 	position = 'center',
 	className = '',
 }) {
+	const ui = useUi().video;
 	const videoRef = useRef(null);
 	const [visible, setVisible] = useState(false);
 	const [playing, setPlaying] = useState(false);
@@ -85,7 +87,7 @@ export default function VideoFrame({
 				<button
 					type="button"
 					className="video-frame-toggle"
-					aria-label={playing ? 'Pause video' : 'Play video'}
+					aria-label={playing ? ui.pause : ui.play}
 					onClick={toggle}>
 					<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
 						{playing ? (

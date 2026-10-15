@@ -5,6 +5,7 @@ import PhotoFrame from '../../components/PhotoFrame/PhotoFrame';
 import Footer from '../../components/Footer/Footer';
 import portrait from '../../assets/photos/david-portrait.webp';
 import { links } from '../../data/links';
+import { useUi } from '../../i18n/lang';
 import ProjectsSection from './ProjectsSection';
 import AboutSection from './AboutSection';
 import OutsideSection from './OutsideSection';
@@ -31,12 +32,14 @@ export default function HomePage() {
 }
 
 function Hero() {
+	const ui = useUi().hero;
+
 	return (
 		<section className="hero" aria-labelledby="hero-title">
 			<div className="container hero-grid">
 				<div className="hero-text">
 					<span className="hero-eyebrow">
-						Computer Science · Artificial Intelligence
+						{ui.eyebrow}
 					</span>
 
 					<h1 id="hero-title" className="hero-title">
@@ -45,17 +48,12 @@ function Hero() {
 						<em>Åkerlind</em>
 					</h1>
 
-					<p className="hero-lead">
-						I have always liked technology and building things. A few years ago I
-						realised I had no idea how the tools I used every day were built, so
-						I started to learn. That led me into programming, system development
-						and AI.
-					</p>
+					<p className="hero-lead">{ui.lead}</p>
 
 					<div className="hero-actions">
-						<Button href="#projects">See my projects</Button>
+						<Button href="#projects">{ui.projects}</Button>
 						<Button href={`mailto:${links.email}`} variant="secondary">
-							Get in touch
+							{ui.contact}
 						</Button>
 					</div>
 				</div>
@@ -66,7 +64,7 @@ function Hero() {
 					ratio="4 / 5"
 					loading="eager"
 					fetchPriority="high"
-					alt="David Åkerlind smiling on the deck of a boat, with a lake and forest behind"
+					alt={ui.portraitAlt}
 				/>
 			</div>
 		</section>
