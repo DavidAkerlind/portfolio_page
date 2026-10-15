@@ -10,7 +10,7 @@
 /* Browsers without backdrop-filter get a more opaque fill so text stays readable. */
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
 	.glass-card {
-		background: rgba(21, 38, 59, 0.88);
+		background: var(--glass-bg-fallback);
 	}
 }
 

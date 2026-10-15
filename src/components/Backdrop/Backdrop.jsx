@@ -4,16 +4,16 @@ import './backdrop.css';
 // spread out down the whole page on any screen size, and `left` / `right` are
 // offsets from the edge (negative ones push a glow partly off-screen).
 const orbs = [
-	{ size: 520, color: 'var(--color-blue)', top: '-120px', left: '-100px' },
-	{ size: 380, color: 'var(--color-lavender)', top: '6%', right: '-80px' },
-	{ size: 460, color: 'var(--color-blue)', top: '20%', left: '-140px' },
-	{ size: 340, color: 'var(--color-lavender)', top: '31%', right: '-100px' },
-	{ size: 300, color: 'var(--color-slate)', top: '42%', left: '38%' },
-	{ size: 500, color: 'var(--color-blue)', top: '52%', right: '-140px' },
-	{ size: 400, color: 'var(--color-lavender)', top: '64%', left: '-120px' },
-	{ size: 420, color: 'var(--color-blue)', top: '76%', right: '-100px' },
-	{ size: 360, color: 'var(--color-lavender)', top: '88%', left: '-80px' },
-	{ size: 300, color: 'var(--color-slate)', top: '95%', right: '10%' },
+	{ size: 520, color: 'var(--glow-blue)', top: '-120px', left: '-100px' },
+	{ size: 380, color: 'var(--glow-lavender)', top: '6%', right: '-80px' },
+	{ size: 460, color: 'var(--glow-blue)', top: '20%', left: '-140px' },
+	{ size: 340, color: 'var(--glow-lavender)', top: '31%', right: '-100px' },
+	{ size: 300, color: 'var(--glow-slate)', top: '42%', left: '38%' },
+	{ size: 500, color: 'var(--glow-blue)', top: '52%', right: '-140px' },
+	{ size: 400, color: 'var(--glow-lavender)', top: '64%', left: '-120px' },
+	{ size: 420, color: 'var(--glow-blue)', top: '76%', right: '-100px' },
+	{ size: 360, color: 'var(--glow-lavender)', top: '88%', left: '-80px' },
+	{ size: 300, color: 'var(--glow-slate)', top: '95%', right: '10%' },
 ];
 
 /* Background layer behind the whole page: noise, soft glows and a top accent

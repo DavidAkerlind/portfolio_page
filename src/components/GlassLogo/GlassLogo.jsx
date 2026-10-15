@@ -72,7 +72,7 @@ export default function GlassLogo({ src, className = '' }) {
 					</feSpecularLighting>
 					<feComposite in="litSheen" in2="SourceAlpha" operator="in" result="sheen" />
 
-					<feFlood floodColor="#fff" floodOpacity="0.1" />
+					<feFlood style={{ floodColor: 'var(--logo-body)' }} />
 					<feComposite in2="SourceAlpha" operator="in" result="body" />
 
 					{/* A thin bright line all the way round the edge. */}
@@ -95,7 +95,7 @@ export default function GlassLogo({ src, className = '' }) {
 					{/* The shadow only shows outside the shape, so the glass stays clear. */}
 					<feGaussianBlur in="SourceAlpha" stdDeviation="2.2" result="shadowBlur" />
 					<feOffset in="shadowBlur" dy="2.4" result="shadowOffset" />
-					<feFlood floodColor="#020a14" floodOpacity="0.6" />
+					<feFlood style={{ floodColor: 'var(--logo-shadow)' }} />
 					<feComposite in2="shadowOffset" operator="in" result="shadowFull" />
 					<feComposite
 						in="shadowFull"

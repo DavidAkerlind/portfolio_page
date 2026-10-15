@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
+import { useUi } from '../../i18n/lang';
 import './photoFrame.css';
 
 /* The enlarged picture: a native modal <dialog>, so Escape closes it, focus stays
    inside it and goes back to the picture afterwards. A click anywhere closes it too.
    It is only rendered once opened, so the built page holds no dialog. */
 function Lightbox({ src, alt, onClose }) {
+	const ui = useUi().photo;
 	const dialog = useRef(null);
 
 	useEffect(() => {
@@ -15,11 +17,11 @@ function Lightbox({ src, alt, onClose }) {
 		<dialog
 			ref={dialog}
 			className="lightbox"
-			aria-label={alt || 'Enlarged picture'}
+			aria-label={alt || ui.enlarged}
 			onClose={onClose}
 			onClick={() => dialog.current?.close()}>
 			<img className="lightbox-image" src={src} alt={alt} />
-			<button type="button" className="lightbox-close" aria-label="Close">
+			<button type="button" className="lightbox-close" aria-label={ui.close}>
 				<svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false">
 					<path
 						d="M5 5l10 10M15 5L5 15"
@@ -60,14 +62,16 @@ export default function PhotoFrame({
 	alt = '',
 	caption,
 	ratio = '4 / 3',
-	placeholder = 'Photo coming soon',
+	placeholder,
 	loading = 'lazy',
 	fetchPriority,
 	position = 'center',
 	zoomable = false,
 	className = '',
 }) {
+	const ui = useUi().photo;
 	const [open, setOpen] = useState(false);
+	const emptyText = placeholder ?? ui.placeholder;
 
 	const image = (
 		<img
@@ -87,8 +91,8 @@ export default function PhotoFrame({
 					<div
 						className="photo-frame-placeholder"
 						role="img"
-						aria-label={alt || placeholder}>
-						{placeholder}
+						aria-label={alt || emptyText}>
+						{emptyText}
 					</div>
 				)}
 
@@ -98,7 +102,7 @@ export default function PhotoFrame({
 					<button
 						type="button"
 						className="photo-frame-zoom"
-						aria-label="Enlarge picture"
+						aria-label={ui.enlarge}
 						aria-haspopup="dialog"
 						onClick={() => setOpen(true)}>
 						{image}

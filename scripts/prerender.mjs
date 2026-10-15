@@ -16,16 +16,47 @@ const template = await readFile(join(dist, 'index.html'), 'utf8');
 const assets = await readdir(join(dist, 'assets'));
 const { render } = await import(pathToFileURL(join(serverDir, 'entry-server.js')));
 
+// What differs between the English and the Swedish home page. The English values are
+// the ones written in index.html; the Swedish page gets the others swapped in.
+const meta = {
+	en: {
+		lang: 'en',
+		url: `${site.url}/`,
+		title: 'David Åkerlind – Computer Science and AI student',
+		description:
+			'Portfolio of David Åkerlind, a Computer Science student specialising in Artificial Intelligence at Karlstad University. Projects, experience and interests.',
+		imageAlt:
+			'David Åkerlind, Computer Science and Artificial Intelligence, next to a portrait of him on a boat deck',
+		person:
+			'Computer Science student specialising in Artificial Intelligence at Karlstad University.',
+		locale: 'en_GB',
+		otherLocale: 'sv_SE',
+	},
+	sv: {
+		lang: 'sv',
+		url: `${site.url}/sv/`,
+		title: 'David Åkerlind – student i datavetenskap och AI',
+		description:
+			'Portfolio för David Åkerlind, student i datavetenskap med inriktning mot artificiell intelligens vid Karlstads universitet. Projekt, erfarenhet och intressen.',
+		imageAlt:
+			'David Åkerlind, datavetenskap och artificiell intelligens, bredvid ett porträtt av David på ett båtdäck',
+		person:
+			'Student i datavetenskap med inriktning mot artificiell intelligens vid Karlstads universitet.',
+		locale: 'sv_SE',
+		otherLocale: 'en_GB',
+	},
+};
+
 // Structured data for search engines: who the site is about and where else they are.
-const jsonLd = {
+const jsonLdFor = ({ lang, url, person }) => ({
 	'@context': 'https://schema.org',
 	'@graph': [
 		{
 			'@type': 'WebSite',
-			'@id': `${site.url}/#website`,
-			url: `${site.url}/`,
+			'@id': `${url}#website`,
+			url,
 			name: site.name,
-			inLanguage: 'en',
+			inLanguage: lang,
 		},
 		{
 			'@type': 'Person',
@@ -33,8 +64,7 @@ const jsonLd = {
 			name: site.name,
 			url: `${site.url}/`,
 			image: `${site.url}/og-image.jpg`,
-			description:
-				'Computer Science student specialising in Artificial Intelligence at Karlstad University.',
+			description: person,
 			sameAs: [links.github, links.linkedin],
 			affiliation: {
 				'@type': 'CollegeOrUniversity',
@@ -50,7 +80,7 @@ const jsonLd = {
 			],
 		},
 	],
-};
+});
 
 // The fonts used above the fold. They are preloaded so text appears in the right
 // typeface at once instead of swapping.
@@ -66,7 +96,8 @@ const PRELOAD_FONTS = [
 // path that does not exist, with a real 404 status. `css` is the stylesheet of a
 // page that loads its own code (the others are in the main stylesheet).
 const pages = [
-	{ path: '/', file: 'index.html' },
+	{ path: '/', file: 'index.html', lang: 'en' },
+	{ path: '/sv', file: 'sv/index.html', lang: 'sv' },
 	{
 		path: '/styleguide',
 		file: 'styleguide/index.html',
@@ -112,19 +143,39 @@ async function inlineStylesheets(html) {
 // The home page keeps the tags from index.html and gets the structured data. A page
 // that must stay out of search results gets its own title and a noindex tag, and
 // loses the canonical link and the social tags that point at the home page.
-function withHead(html, { title, noindex }) {
+function withHead(html, { title, noindex, lang }) {
 	let result = html;
 	if (noindex) {
 		result = result
 			.replace(/<title>.*?<\/title>/s, () => `<title>${escapeHtml(title)}</title>`)
-			.replace(/\s*<link rel="canonical"[^>]*>/, '')
+			.replace(/\s*<link rel="(?:canonical|alternate)"[^>]*>/g, '')
 			.replace(/\s*<meta\s+(?:property="og:|name="twitter:|name="description")[^>]*>/g, '');
 		result = replaceOnce(result, '</head>', '\t\t<meta name="robots" content="noindex" />\n\t</head>');
 	} else {
+		// index.html is written for the English page; the Swedish page swaps the
+		// language-bound parts for the Swedish ones.
+		if (lang !== 'en') {
+			const en = meta.en;
+			const here = meta[lang];
+			const swaps = [
+				['<html lang="en">', `<html lang="${here.lang}">`],
+				[escapeHtml(en.title), escapeHtml(here.title)],
+				[escapeHtml(en.description), escapeHtml(here.description)],
+				[escapeHtml(en.imageAlt), escapeHtml(here.imageAlt)],
+				[`<link rel="canonical" href="${en.url}" />`, `<link rel="canonical" href="${here.url}" />`],
+				[`<meta property="og:url" content="${en.url}" />`, `<meta property="og:url" content="${here.url}" />`],
+				[`<meta property="og:locale" content="${en.locale}" />`, `<meta property="og:locale" content="${here.locale}" />`],
+				[`<meta property="og:locale:alternate" content="${en.otherLocale}" />`, `<meta property="og:locale:alternate" content="${here.otherLocale}" />`],
+			];
+			for (const [from, to] of swaps) {
+				if (!result.includes(from)) throw new Error(`Could not find ${from} in index.html`);
+				result = result.replaceAll(from, () => to);
+			}
+		}
 		result = replaceOnce(
 			result,
 			'</head>',
-			`\t\t<script type="application/ld+json">${JSON.stringify(jsonLd)}</script>\n\t</head>`,
+			`\t\t<script type="application/ld+json">${JSON.stringify(jsonLdFor(meta[lang]))}</script>\n\t</head>`,
 		);
 	}
 	return result;

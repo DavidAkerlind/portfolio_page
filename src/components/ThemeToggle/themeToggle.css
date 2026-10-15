@@ -1,0 +1,39 @@
+.theme-toggle {
+	display: grid;
+	place-items: center;
+	width: 2.25rem;
+	height: 2.25rem;
+	border: 1px solid var(--glass-border);
+	border-radius: var(--radius-pill);
+	color: var(--color-muted);
+}
+
+.theme-toggle:hover {
+	color: var(--color-text);
+	border-color: var(--glass-border-hover);
+}
+
+/* The sun shows in light mode and the moon in dark mode. Light is what a device with
+   no setting gets, so it is the default; the media query and data-theme turn on the
+   moon. */
+.theme-toggle-moon {
+	display: none;
+}
+
+:root[data-theme='dark'] .theme-toggle-sun {
+	display: none;
+}
+
+:root[data-theme='dark'] .theme-toggle-moon {
+	display: block;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root:not([data-theme='light']) .theme-toggle-sun {
+		display: none;
+	}
+
+	:root:not([data-theme='light']) .theme-toggle-moon {
+		display: block;
+	}
+}

@@ -56,3 +56,8 @@
 	font-size: var(--text-sm);
 	color: var(--color-muted);
 }
+
+/* The language you are on is the brighter one. */
+.site-footer-languages a[aria-current='true'] {
+	color: var(--color-text);
+}

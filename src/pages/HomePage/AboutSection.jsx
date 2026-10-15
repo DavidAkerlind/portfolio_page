@@ -2,16 +2,13 @@ import SectionHeading from '../../components/SectionHeading/SectionHeading';
 import GlassCard from '../../components/GlassCard/GlassCard';
 import Timeline from '../../components/Timeline/Timeline';
 import Tag from '../../components/Tag/Tag';
-import {
-	intro,
-	education,
-	experience,
-	earlierWork,
-	skills,
-} from '../../data/about';
+import { useContent, useUi } from '../../i18n/lang';
 import './aboutSection.css';
 
 export default function AboutSection() {
+	const { intro, education, experience, earlierWork, skills } = useContent();
+	const ui = useUi().about;
+
 	return (
 		<section
 			id="about"
@@ -22,7 +19,8 @@ export default function AboutSection() {
 				eyebrow="02"
 				title={
 					<>
-						About <em>me</em>
+						{ui.title[0]}
+						<em>{ui.title[1]}</em>
 					</>
 				}>
 				{intro}
@@ -30,16 +28,16 @@ export default function AboutSection() {
 
 			<div className="about-grid">
 				<GlassCard as="article" className="about-card">
-					<h3 className="about-card-title">Education</h3>
+					<h3 className="about-card-title">{ui.education}</h3>
 					<Timeline items={education} />
 				</GlassCard>
 
 				<GlassCard as="article" className="about-card">
-					<h3 className="about-card-title">Experience</h3>
+					<h3 className="about-card-title">{ui.experience}</h3>
 					<Timeline items={experience} />
 
 					<div className="about-earlier">
-						<h4 className="about-label">Earlier work</h4>
+						<h4 className="about-label">{ui.earlier}</h4>
 						<ul>
 							{earlierWork.map(({ role, place, period }) => (
 								<li key={`${place}-${period}`}>
@@ -55,7 +53,7 @@ export default function AboutSection() {
 			</div>
 
 			<GlassCard as="article" className="about-card">
-				<h3 className="about-card-title">Skills</h3>
+				<h3 className="about-card-title">{ui.skills}</h3>
 
 				<div className="about-skills">
 					{skills.map(({ label, items }) => (

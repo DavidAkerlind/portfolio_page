@@ -29,7 +29,7 @@
 .button-primary:hover {
 	background: var(--color-text);
 	color: var(--color-bg);
-	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+	box-shadow: 0 4px 20px var(--shadow-hover);
 }
 
 .button-secondary {
@@ -44,5 +44,5 @@
 	background: var(--glass-bg-hover);
 	border-color: var(--glass-border-hover);
 	color: var(--color-text);
-	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 4px 20px var(--shadow-hover);
 }

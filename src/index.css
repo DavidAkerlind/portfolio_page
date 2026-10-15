@@ -1,28 +1,48 @@
 /* Fonts are loaded once, in index.html. */
 
 :root {
-	/* COLORS */
-	--color-bg: #0f1e30;
-	--color-navy: #15263b;
-	--color-blue: #375a88;
-	--color-slate: #334b6d;
-	--color-muted: #908faa;
-	--color-lavender: #bfb5ce;
+	color-scheme: light dark;
+
+	/* COLORS: light-dark(light mode, dark mode). The page follows the device's setting
+	   through color-scheme; the theme switch overrides it with data-theme on <html>. */
+	--color-bg: light-dark(#eef1f7, #0f1e30);
+	--color-navy: light-dark(#e2e8f3, #15263b);
+	--color-blue: light-dark(#7f9fcf, #375a88);
+	--color-slate: light-dark(#a8b9d6, #334b6d);
+	--color-muted: light-dark(#55546f, #908faa);
+	--color-lavender: light-dark(#5a4a88, #bfb5ce);
 	--color-white: #ffffff;
-	--color-text: #e8e2f0;
+	--color-text: light-dark(#16233a, #e8e2f0);
+	--color-selection: light-dark(#b9cbeb, #375a88);
 	--color-timer: #ff4d4d;
 	--color-timer-light: #ff5e54;
 	--color-timer-deep: #a8161f;
-	--color-success: #6ee7a8;
+	--color-success: light-dark(#12804a, #6ee7a8);
+
+	/* The soft glows behind the page: paler in light mode. */
+	--glow-blue: light-dark(#7fa3dc, #375a88);
+	--glow-lavender: light-dark(#b8a6e4, #bfb5ce);
+	--glow-slate: light-dark(#a5b8da, #334b6d);
 
 	/* GLASS */
-	--glass-bg: rgba(255, 255, 255, 0.04);
-	--glass-bg-hover: rgba(191, 181, 206, 0.12);
-	--glass-border: rgba(191, 181, 206, 0.12);
-	--glass-border-hover: rgba(191, 181, 206, 0.3);
+	--glass-bg: light-dark(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.04));
+	--glass-bg-hover: light-dark(rgba(255, 255, 255, 0.88), rgba(191, 181, 206, 0.12));
+	--glass-bg-fallback: light-dark(rgba(255, 255, 255, 0.94), rgba(21, 38, 59, 0.88));
+	--glass-border: light-dark(rgba(40, 55, 95, 0.14), rgba(191, 181, 206, 0.12));
+	--glass-border-hover: light-dark(rgba(40, 55, 95, 0.32), rgba(191, 181, 206, 0.3));
 	--glass-blur: 24px;
 	--glass-shadow:
-		0 8px 48px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+		0 8px 48px light-dark(rgba(40, 55, 95, 0.14), rgba(0, 0, 0, 0.35)),
+		inset 0 1px 0 light-dark(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.06));
+	--shadow-hover: light-dark(rgba(40, 55, 95, 0.22), rgba(0, 0, 0, 0.25));
+
+	/* The marathon timer is a display with its own dark screen in both modes. */
+	--timer-screen-top: light-dark(#0c1422, rgba(4, 9, 16, 0.72));
+	--timer-screen-bottom: light-dark(#16203a, rgba(4, 9, 16, 0.46));
+
+	/* The glass logos: the body and the shadow they cast. */
+	--logo-body: light-dark(rgba(45, 60, 100, 0.2), rgba(255, 255, 255, 0.1));
+	--logo-shadow: light-dark(rgba(30, 45, 80, 0.3), rgba(2, 10, 20, 0.6));
 
 	/* FONTS */
 	--font-display: 'DM Serif Display', serif;
@@ -67,6 +87,15 @@
 	--duration: 0.3s;
 	--duration-link: 0.2s;
 	--ease: ease-in-out;
+}
+
+/* The theme switch sets data-theme; without it the device's setting decides. */
+:root[data-theme='light'] {
+	color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+	color-scheme: dark;
 }
 
 /*  ==== RESET ==== */
@@ -178,8 +207,8 @@ ul {
 }
 
 ::selection {
-	background: var(--color-blue);
-	color: var(--color-white);
+	background: var(--color-selection);
+	color: light-dark(var(--color-text), var(--color-white));
 }
 
 /*  ==== LAYOUT ==== */

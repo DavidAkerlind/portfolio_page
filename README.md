@@ -4,7 +4,7 @@ Source for my personal portfolio, live at **https://davidakerlind.com**.
 
 ![The home page: a glass header, my name in large serif type and a portrait photo](src/assets/projects/portfolio-home.webp)
 
-It is a single-page site with four sections: selected projects, about me (education and experience), my interests (running, golf, skateboarding and a few study tools I built) and contact. The design is glassmorphism on a dark navy backdrop, with its own small design system.
+It is a single-page site, in English at `/` and in Swedish at `/sv/`, with light and dark mode that follows the device. It has four sections: selected projects, about me (education and experience), my interests (running, golf, skateboarding and a few study tools I built) and contact. The design is glassmorphism on a dark navy backdrop, with its own small design system.
 
 ## Built with
 
@@ -36,7 +36,8 @@ npm run dev
 src/
   components/   Reusable pieces: GlassCard, Button, Timeline, Footer, ...
   pages/        HomePage and its sections, the style guide and the 404 page
-  data/         The content: projects.js, about.js, outside.js and links.js
+  data/         The content in English: projects.js, about.js, outside.js and links.js
+  i18n/         The Swedish text (sv.js), the interface texts in both languages (ui.js) and the language helpers
   assets/       Images, logos and video (photos and video have no location or device metadata)
   index.css     Design tokens (colors, type, spacing, motion) and the reset
 scripts/
@@ -44,7 +45,7 @@ scripts/
 public/         robots.txt, sitemap.xml, _headers, favicons and the share image
 ```
 
-To change what the site says, edit the files in `src/data/`. To see every token and component, open `/styleguide` (use `npm run dev`, or a Cloudflare preview URL). That page is a preview only and is kept out of search results.
+To change what the site says, edit the files in `src/data/` and the Swedish twin of the text in `src/i18n/`. To see every token and component, open `/styleguide` (use `npm run dev`, or a Cloudflare preview URL). That page is a preview only and is kept out of search results.
 
 ## Deployment
 
