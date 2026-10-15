@@ -8,7 +8,6 @@ import {
 	experience,
 	earlierWork,
 	skills,
-	languages,
 } from '../../data/about';
 import './aboutSection.css';
 
@@ -72,8 +71,6 @@ export default function AboutSection() {
 						</div>
 					))}
 				</div>
-
-				<p className="about-languages">{languages}</p>
 			</GlassCard>
 		</section>
 	);

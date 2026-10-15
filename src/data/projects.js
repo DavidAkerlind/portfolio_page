@@ -11,7 +11,7 @@ export const projects = [
 		title: 'Harpaviljongen',
 		period: 'June 2025',
 		description:
-			'A complete website for a Stockholm restaurant: a public site and an admin panel where staff update menus and opening hours directly. Built with React and a REST API in Node.js on MongoDB.',
+			'A complete website solution for a Stockholm restaurant: a public site and an admin panel where the staff update menus and opening hours themselves. I handled everything that took it to production, from the React front end to the REST API in Node.js on MongoDB.',
 		tags: ['React', 'Node.js', 'MongoDB', 'REST API'],
 		links: [{ label: 'Visit site', href: 'https://www.harpaviljongen.com' }],
 		image: harpaviljongenStart,
@@ -21,12 +21,10 @@ export const projects = [
 			{
 				src: harpaviljongenMenu,
 				alt: 'Harpaviljongen page with a photo of an oyster dish, Meny and Vinlista buttons, and links to Instagram and Facebook',
-				caption: 'Menu, wine list and social links',
 			},
 			{
 				src: harpaviljongenInfo,
 				alt: 'Harpaviljongen opening hours, contact details, a map and a newsletter sign-up',
-				caption: 'Opening hours, contact and map',
 			},
 		],
 	},

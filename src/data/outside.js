@@ -1,7 +1,10 @@
-import golfSwing from '../assets/photos/golf-swing.webp';
-import skateTrickMp4 from '../assets/video/skate-trick.mp4';
-import skateTrickWebm from '../assets/video/skate-trick.webm';
-import skateTrickPoster from '../assets/video/skate-trick-poster.webp';
+// Golf and skateboarding are listed under "Also" for now. Their photo and clip are
+// kept here, commented out, so the cards can come back: uncomment these imports and
+// the two entries in `activities`, and remove the two names from `alsoInto`.
+// import golfSwing from '../assets/photos/golf-swing.webp';
+// import skateTrickMp4 from '../assets/video/skate-trick.mp4';
+// import skateTrickWebm from '../assets/video/skate-trick.webm';
+// import skateTrickPoster from '../assets/video/skate-trick-poster.webp';
 import mlPlayground from '../assets/tools/ml-playground.webp';
 import statsLab from '../assets/tools/stats-lab.webp';
 
@@ -26,31 +29,37 @@ export const marathon = {
 };
 
 export const activities = [
-	{
-		id: 'golf',
-		title: 'Golf',
-		text: 'Out on the course.',
-		photo: {
-			src: golfSwing,
-			alt: 'David seen from behind finishing a golf swing on a sunny course, with birch trees on the left and a clear blue sky',
-		},
-	},
-	{
-		id: 'skateboarding',
-		title: 'Skateboarding',
-		text: 'A tre flip. I want to get back into skating.',
-		video: {
-			sources: [
-				{ src: skateTrickMp4, type: 'video/mp4' },
-				{ src: skateTrickWebm, type: 'video/webm' },
-			],
-			poster: skateTrickPoster,
-			alt: 'Short looping clip of a tre flip at a skatepark: the skater rolls in, pops the board, it spins under their feet in the air, and they land and roll away',
-		},
-	},
+	// {
+	// 	id: 'golf',
+	// 	title: 'Golf',
+	// 	text: 'Out on the course.',
+	// 	photo: {
+	// 		src: golfSwing,
+	// 		alt: 'David seen from behind finishing a golf swing on a sunny course, with birch trees on the left and a clear blue sky',
+	// 	},
+	// },
+	// {
+	// 	id: 'skateboarding',
+	// 	title: 'Skateboarding',
+	// 	text: 'A tre flip. I want to get back into skating.',
+	// 	video: {
+	// 		sources: [
+	// 			{ src: skateTrickMp4, type: 'video/mp4' },
+	// 			{ src: skateTrickWebm, type: 'video/webm' },
+	// 		],
+	// 		poster: skateTrickPoster,
+	// 		alt: 'Short looping clip of a tre flip at a skatepark: the skater rolls in, pops the board, it spins under their feet in the air, and they land and roll away',
+	// 	},
+	// },
 ];
 
-export const alsoInto = ['Rock climbing', 'Travelling', 'Family'];
+export const alsoInto = [
+	'Golf',
+	'Skateboarding',
+	'Rock climbing',
+	'Travelling',
+	'Family',
+];
 
 export const studyTools = {
 	title: 'Vibe-coded study tools',
@@ -62,7 +71,7 @@ export const studyTools = {
 			title: 'ML Playground',
 			period: 'Study tool',
 			description:
-				'An interactive machine learning playground with real-time visual simulations. Train a FrozenLake Q-learning agent live, tune regression and KNN models, explore K-Means clustering and PCA, forecast time series, and practise with timed exam simulations and flashcards.',
+				'When I was learning the basics of machine learning and reinforcement learning, I wanted to see what changing the parameters actually did, not just look at numbers. So I vibe-coded this site, where I can control a scenario and watch what happens. I kept adding to it, from the first RL sandbox to flashcards, an exam question generator and more ML tools.',
 			tags: ['Machine learning', 'Q-learning', 'Visualisation', 'Lovable'],
 			links: [{ label: 'Open site', href: 'https://explore-ml.lovable.app/' }],
 			image: mlPlayground,
@@ -74,7 +83,7 @@ export const studyTools = {
 			title: 'Stats Lab',
 			period: 'Study tool',
 			description:
-				'An interactive study tool for statistics. Edit number sets and see descriptive statistics and box plots update instantly. A separate Probability Lab shows sample spaces, Venn diagrams, contingency tables, conditional probabilities and probability trees in real time.',
+				'I am studying statistics right now and wanted help with Venn diagrams, and a quick way to get everything calculated from a set of numbers, from the normal distribution to intersections and unions, with graphs that help me see probabilities and more.',
 			tags: ['Statistics', 'Probability', 'Visualisation', 'Lovable'],
 			links: [
 				{ label: 'Open site', href: 'https://explore-statistics.lovable.app/' },

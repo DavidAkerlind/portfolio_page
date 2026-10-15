@@ -37,11 +37,11 @@ export const experience = [
 		period: 'June – August 2026',
 		logo: cotaLogo,
 		description:
-			'Internship at a robotics startup that works to automate retail.',
+			'Internship at a robotics startup that works to automate retail. I got to try a wide variety of things, from learning about robotics and testing to bringing in ideas of my own, and I learned a lot from the team around me.',
 		points: [
 			'Helped develop robot arms and data-collection software for AI training, including 3D printing.',
 			'Designed and built a pipeline that turns store video into a point cloud, with 3D mapping of products and a 2D map of the store layout.',
-			'The work aimed to make autonomous robot navigation possible in stores.',
+			'The work was part of Cota\'s larger goal of robotising the whole retail sector, with robots doing everyday work in ordinary stores.',
 		],
 	},
 ];
@@ -62,5 +62,3 @@ export const skills = [
 	{ label: 'Systems', items: ['C', 'Assembly (MIPS)'] },
 	{ label: 'Ways of working', items: ['Git', 'Agile / Scrum'] },
 ];
-
-export const languages = 'Fluent in spoken and written Swedish and English.';

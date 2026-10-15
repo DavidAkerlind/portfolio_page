@@ -17,10 +17,8 @@ export default function ProjectsSection() {
 					<>
 						Selected <em>projects</em>
 					</>
-				}>
-				What I have built so far, from a full-stack site for a Stockholm
-				restaurant to this portfolio.
-			</SectionHeading>
+				}
+			/>
 
 			<div className="projects-list">
 				{projects.map((project) => (
@@ -45,7 +43,7 @@ export default function ProjectsSection() {
 											alt={shot.alt}
 											ratio="16 / 10"
 											position="top"
-											caption={shot.caption}
+											zoomable
 										/>
 									</li>
 								))}
