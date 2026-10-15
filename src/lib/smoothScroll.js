@@ -1,9 +1,9 @@
 // A slow, eased glide for links that point at a place on the same page (#projects,
 // #top, ...). The browser's own smooth scrolling is quick and linear-ish, and a
 // long jump looks like a hop; this one takes longer the further it goes and eases
-// in and out, like a swipe. Visitors who ask their system for reduced motion get
-// the plain instant jump instead.
-const REDUCED_MOTION = '(prefers-reduced-motion: reduce)';
+// in and out, like a swipe. It is the owner's choice that this glide also runs for
+// visitors who ask their system for reduced motion: it only happens after a click,
+// and any scroll input stops it.
 
 const easeInOutCubic = (t) =>
 	t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
@@ -59,7 +59,7 @@ function anchorFrom(event) {
 
 function onClick(event) {
 	const url = anchorFrom(event);
-	if (!url || window.matchMedia(REDUCED_MOTION).matches) return;
+	if (!url) return;
 
 	const id = decodeURIComponent(url.hash.slice(1));
 	// #top is the top of the page; it has no element of its own.

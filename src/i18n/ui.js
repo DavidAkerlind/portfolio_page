@@ -65,7 +65,6 @@ export const ui = {
 		footer: {
 			elsewhere: 'Elsewhere',
 			email: 'Email',
-			note: 'Built with React and Vite.',
 			top: 'Back to top',
 			language: 'Language',
 		},
@@ -145,7 +144,6 @@ export const ui = {
 		footer: {
 			elsewhere: 'Hitta mig online',
 			email: 'E-post',
-			note: 'Byggd med React och Vite.',
 			top: 'Till toppen',
 			language: 'Språk',
 		},

@@ -25,17 +25,30 @@ function currentTheme() {
 	return window.matchMedia(LIGHT).matches ? 'light' : 'dark';
 }
 
-function choose(theme) {
+function apply(theme) {
 	document.documentElement.dataset.theme = theme;
+	document
+		.querySelectorAll('meta[name="theme-color"]')
+		.forEach((meta) => (meta.content = META_COLOR[theme]));
+	listeners.forEach((onChange) => onChange());
+}
+
+function choose(theme) {
 	try {
 		localStorage.setItem('theme', theme);
 	} catch {
 		// Storage can be blocked; the choice then lasts until the page closes.
 	}
-	document
-		.querySelectorAll('meta[name="theme-color"]')
-		.forEach((meta) => (meta.content = META_COLOR[theme]));
-	listeners.forEach((onChange) => onChange());
+
+	// Fade between the two looks instead of snapping.
+	if (document.startViewTransition) {
+		document.startViewTransition(() => apply(theme));
+		return;
+	}
+	const root = document.documentElement;
+	root.classList.add('theme-fading');
+	apply(theme);
+	setTimeout(() => root.classList.remove('theme-fading'), 550);
 }
 
 /* Round glass button that switches between light and dark mode. Both icons are in
