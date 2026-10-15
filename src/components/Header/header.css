@@ -75,6 +75,20 @@
 	border-color: var(--glass-border-hover);
 }
 
+/* On a wide screen the bar is three equal-weight columns, so the links sit in the
+   true middle whatever the widths of the name and the switch. */
+@media (min-width: 40.0625rem) {
+	.site-header-bar {
+		display: grid;
+		grid-template-columns: 1fr auto 1fr;
+		gap: var(--space-6);
+	}
+
+	.site-header-controls {
+		justify-self: end;
+	}
+}
+
 @media (max-width: 40rem) {
 	.site-header-bar {
 		padding: var(--space-2) var(--space-4);
