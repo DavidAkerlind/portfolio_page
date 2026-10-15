@@ -15,7 +15,7 @@ export const education = [
 		period: '2025 – 2028',
 		logo: karlstadLogo,
 		description:
-			"Bachelor's degree (BSc). I have built a foundation in programming, data structures, computer systems and artificial intelligence, and I am going deeper into systems development, machine learning and AI with Python and scikit-learn.",
+			"Bachelor's degree (BSc). I have built a foundation in programming, data structures, computer systems and artificial intelligence. This term the focus is software development and optimising AI.",
 	},
 	{
 		id: 'folkuniversitetet',
@@ -37,17 +37,17 @@ export const experience = [
 		period: 'June – August 2026',
 		logo: cotaLogo,
 		description:
-			'Internship at a robotics startup that works to automate retail. I got to try a wide variety of things, from learning about robotics and testing to bringing in ideas of my own, and I learned a lot from the team around me. I hope to be back next summer.',
+			'Internship at a robotics startup that works to automate retail. Most of my time went into software development, but I got to try a wide variety of things, from learning about robotics and testing to bringing in ideas of my own, and I learned a lot from the team around me. I hope to be back next summer.',
 		points: [
 			'Helped develop robot arms and data-collection software for AI training, including 3D printing.',
 			'Designed and built a pipeline that turns store video into a point cloud, with 3D mapping of products and a 2D map of the store layout.',
-			'The work was part of Cota\'s larger goal of robotising the whole retail sector, with robots doing everyday work in ordinary stores.',
+			'Cota was at an early stage then, with a small, tight team.',
 		],
 	},
 ];
 
 export const skills = [
-	{ label: 'AI and data', items: ['Machine learning', 'scikit-learn', 'Python'] },
+	{ label: 'AI and data', items: ['Machine learning', 'scikit-learn', 'Hugging Face', 'Python'] },
 	{
 		label: 'Web',
 		items: ['JavaScript', 'React', 'HTML and CSS', 'Node.js', 'MongoDB'],

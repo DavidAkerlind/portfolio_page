@@ -39,7 +39,6 @@ export const ui = {
 		},
 		interests: {
 			title: ['My ', 'interests'],
-			lead: 'What I do away from the keyboard: running, golf and skateboarding, plus a few tools I build to learn.',
 			running: 'Running',
 			marathonTitle: 'Stockholm Marathon',
 			firstMarathon: (startLabel) =>
@@ -117,7 +116,6 @@ export const ui = {
 		},
 		interests: {
 			title: ['Mina ', 'intressen'],
-			lead: 'Vad jag gör borta från tangentbordet: löpning, golf och skateboard, plus några verktyg jag bygger för att lära mig.',
 			running: 'Löpning',
 			marathonTitle: 'Stockholm Marathon',
 			firstMarathon: (startLabel) =>

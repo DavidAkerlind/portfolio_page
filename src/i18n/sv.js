@@ -45,7 +45,7 @@ export const sv = {
 			title: 'Datavetenskap, artificiell intelligens',
 			place: 'Karlstads universitet',
 			description:
-				'Kandidatexamen (BSc). Jag har byggt en grund i programmering, datastrukturer, datorsystem och artificiell intelligens, och jag fördjupar mig nu i systemutveckling, maskininlärning och AI med Python och scikit-learn.',
+				'Kandidatexamen (BSc). Jag har byggt en grund i programmering, datastrukturer, datorsystem och artificiell intelligens. Den här terminen ligger fokus på mjukvaruutveckling och optimering av AI.',
 		},
 		folkuniversitetet: {
 			title: 'Frontend-utvecklare',
@@ -56,20 +56,20 @@ export const sv = {
 
 	experience: {
 		'cota-robotics': {
-			title: 'Teknikpraktikant',
+			title: 'Tech intern',
 			period: 'juni – augusti 2026',
 			description:
-				'Praktik på ett robotikstartup som arbetar med att automatisera detaljhandeln. Jag fick prova på många olika saker, från att lära mig om robotik och testning till att komma med egna idéer, och jag lärde mig mycket av teamet runt omkring mig. Jag hoppas få komma tillbaka nästa sommar.',
+				'Praktik på ett robotikstartup som arbetar med att automatisera detaljhandeln. Det mesta av min tid gick till mjukvaruutveckling, men jag fick prova på många olika saker, från att lära mig om robotik och testning till att komma med egna idéer, och jag lärde mig mycket av teamet runt omkring mig. Jag hoppas få komma tillbaka nästa sommar.',
 			points: [
 				'Hjälpte till att utveckla robotarmar och programvara för datainsamling till AI-träning, inklusive 3D-printning.',
 				'Konstruerade och byggde en pipeline som gör om video från butiker till ett punktmoln, med 3D-kartläggning av produkter och en 2D-karta över butikens planlösning.',
-				'Arbetet var en del av Cotas större mål att robotisera hela detaljhandeln, med robotar som gör vardagligt arbete i vanliga butiker.',
+				'Cota var i ett tidigt skede då, med ett litet, sammansvetsat team.',
 			],
 		},
 	},
 
 	skills: [
-		{ label: 'AI och data', items: ['Maskininlärning', 'scikit-learn', 'Python'] },
+		{ label: 'AI och data', items: ['Maskininlärning', 'scikit-learn', 'Hugging Face', 'Python'] },
 		{
 			label: 'Webb',
 			items: ['JavaScript', 'React', 'HTML och CSS', 'Node.js', 'MongoDB'],
@@ -85,17 +85,17 @@ export const sv = {
 		next: { startLabel: '29 maj 2027' },
 	},
 
-	alsoInto: ['Golf', 'Skateboard', 'Klättring', 'Resor', 'Familj'],
+	alsoInto: ['Golf', 'Skateboard', 'Klättring', 'Resor', 'Natur', 'Segling', 'Familj'],
 
 	studyTools: {
 		title: 'Vibe-kodade studieverktyg',
 		intro:
-			'Jag bygger verktyg för att experimentera med det jag lär mig, så att jag kan förstå det på ett mer interaktivt och visuellt sätt. Jag gör dem tillsammans med Lovable och Claude Code.',
+			'Jag gillar att bygga verktyg för att experimentera med det jag lär mig, så att jag kan förstå det på ett mer interaktivt och visuellt sätt. Mest arbetar jag med Claude Code och Lovable.',
 		items: {
 			'ml-playground': {
 				period: 'Studieverktyg',
 				description:
-					'När jag lärde mig grunderna i maskininlärning och förstärkningsinlärning ville jag se vad som faktiskt händer när man ändrar parametrarna, inte bara titta på siffror. Därför vibe-kodade jag den här sidan, där jag kan styra ett scenario och se vad som händer. Jag byggde på den steg för steg, från den första RL-sandlådan till flashcards, en generator för tentafrågor och fler ML-verktyg.',
+					'När jag lärde mig grunderna i maskininlärning och förstärkningsinlärning ville jag se vad som faktiskt händer när man ändrar parametrarna, inte bara titta på siffror. Därför vibe-kodade jag den här sidan, där jag kan styra ett scenario och se vad som händer. Testa gärna själv. Jag byggde på den steg för steg, från den första RL-sandlådan till flashcards, en generator för tentafrågor och fler ML-verktyg.',
 				tags: ['Maskininlärning', 'Q-learning', 'Visualisering', 'Lovable'],
 				links: [{ label: 'Öppna sidan' }],
 				imageAlt:
