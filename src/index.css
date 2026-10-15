@@ -158,6 +158,9 @@ body {
 	position: relative;
 	isolation: isolate;
 	min-height: 100vh;
+	/* The parallax backdrop is moved down inside the page; clip so it never makes the
+	   page longer. (clip, not hidden: sticky still works.) */
+	overflow: clip;
 }
 
 /*  ==== BASE ==== */
