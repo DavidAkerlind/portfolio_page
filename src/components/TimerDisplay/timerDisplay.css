@@ -1,0 +1,65 @@
+.timer {
+	display: inline-flex;
+	max-width: 100%;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--space-3);
+	margin: 0;
+	padding: var(--space-4);
+}
+
+.timer-label,
+.timer-caption {
+	font-family: var(--font-mono);
+	font-size: var(--text-xs);
+	letter-spacing: var(--tracking-label);
+	text-transform: uppercase;
+	color: var(--color-muted);
+}
+
+/* The display window: dark glass, with a diagonal reflection laid over the digits. */
+.timer-screen {
+	position: relative;
+	padding: var(--space-3) var(--space-4);
+	border: 1px solid var(--glass-border);
+	border-radius: var(--radius-md);
+	background: linear-gradient(
+		180deg,
+		var(--timer-screen-top),
+		var(--timer-screen-bottom)
+	);
+	box-shadow:
+		inset 0 2px 14px rgba(0, 0, 0, 0.55),
+		inset 0 1px 0 rgba(255, 255, 255, 0.1);
+	overflow: hidden;
+}
+
+.timer-screen::after {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(
+		120deg,
+		rgba(255, 255, 255, 0.12) 0%,
+		rgba(255, 255, 255, 0.03) 28%,
+		transparent 42%
+	);
+	pointer-events: none;
+}
+
+.timer-svg {
+	--timer-height: clamp(3.5rem, 11vw, 5.5rem);
+	display: block;
+	width: calc(var(--timer-ratio) * var(--timer-height));
+	max-width: 100%;
+	height: auto;
+	overflow: visible;
+}
+
+/* A dot that is off: dark glass with only a hint of red. */
+.timer-off {
+	fill: var(--color-timer);
+	fill-opacity: 0.07;
+	stroke: var(--glass-border);
+	stroke-width: 0.05;
+}

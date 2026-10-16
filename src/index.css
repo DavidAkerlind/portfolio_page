@@ -1,49 +1,313 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400&display=swap');
+/* Fonts are loaded once, in index.html. */
 
 :root {
-	/* COLORS */
-	--color-bg: #0f1e30;
-	--color-navy: #15263b;
-	--color-blue: #375a88;
-	--color-slate: #334b6d;
-	--color-muted: #908faa;
-	--color-lavender: #bfb5ce;
+	color-scheme: light dark;
+
+	/* COLORS: light-dark(light mode, dark mode). The page follows the device's setting
+	   through color-scheme; the theme switch overrides it with data-theme on <html>. */
+	--color-bg: light-dark(#eef1f7, #0f1e30);
+	--color-navy: light-dark(#e2e8f3, #15263b);
+	--color-blue: light-dark(#7f9fcf, #375a88);
+	--color-slate: light-dark(#a8b9d6, #334b6d);
+	--color-muted: light-dark(#4d5d78, #908faa);
+	--color-lavender: light-dark(#375a88, #bfb5ce);
 	--color-white: #ffffff;
-	--color-text: #e8e2f0;
+	--color-text: light-dark(#16233a, #e8e2f0);
+	--color-selection: light-dark(#b9cbeb, #375a88);
+	--color-timer: #ff4d4d;
+	--color-timer-light: #ff5e54;
+	--color-timer-deep: #a8161f;
+	--color-success: light-dark(#12804a, #6ee7a8);
+
+	/* The soft glows behind the page: paler in light mode. */
+	--glow-blue: light-dark(#2f7cf0, #375a88);
+	--glow-lavender: light-dark(#6f8cff, #bfb5ce);
+	--glow-slate: light-dark(#4fb3f5, #334b6d);
+	--glow-opacity: 0.28;
+
+	/* GLASS */
+	--glass-bg: light-dark(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.04));
+	--glass-bg-hover: light-dark(rgba(255, 255, 255, 0.88), rgba(191, 181, 206, 0.12));
+	--glass-bg-fallback: light-dark(rgba(255, 255, 255, 0.94), rgba(21, 38, 59, 0.88));
+	--glass-border: light-dark(rgba(40, 55, 95, 0.14), rgba(191, 181, 206, 0.12));
+	--glass-border-hover: light-dark(rgba(40, 55, 95, 0.32), rgba(191, 181, 206, 0.3));
+	--glass-blur: 24px;
+	--glass-shadow:
+		0 8px 48px light-dark(rgba(40, 55, 95, 0.14), rgba(0, 0, 0, 0.35)),
+		inset 0 1px 0 light-dark(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.06));
+	--shadow-hover: light-dark(rgba(40, 55, 95, 0.22), rgba(0, 0, 0, 0.25));
+
+	/* The marathon timer is a display with its own dark screen in both modes. */
+	--timer-screen-top: light-dark(#0c1422, rgba(4, 9, 16, 0.72));
+	--timer-screen-bottom: light-dark(#16203a, rgba(4, 9, 16, 0.46));
+
+	/* The glass logos: the body and the shadow they cast. */
+	--logo-body: light-dark(rgba(45, 60, 100, 0.2), rgba(255, 255, 255, 0.1));
+	--logo-shadow: light-dark(rgba(30, 45, 80, 0.3), rgba(2, 10, 20, 0.6));
 
 	/* FONTS */
 	--font-display: 'DM Serif Display', serif;
-	--font-base: 'DM Mono', monospace;
-	--font-size-base: 16px;
+	--font-base: 'DM Sans Variable', 'DM Sans', sans-serif;
+	--font-mono: 'DM Mono', monospace;
+
+	/* TYPE SCALE */
+	--text-xs: 0.75rem;
+	--text-sm: 0.875rem;
+	--text-base: 1rem;
+	--text-lg: 1.25rem;
+	--text-xl: 1.5rem;
+	--text-2xl: clamp(2rem, 4.5vw, 2.75rem);
+	--text-hero: clamp(3rem, 8vw, 6rem);
+	--leading-tight: 1.05;
+	--leading-body: 1.7;
+	--tracking-label: 0.22em;
+	--tracking-pill: 0.12em;
+
+	/* SPACING */
+	--space-1: 0.25rem;
+	--space-2: 0.5rem;
+	--space-3: 0.75rem;
+	--space-4: 1rem;
+	--space-6: 1.5rem;
+	--space-8: 2rem;
+	--space-12: 3rem;
+	--space-16: 4rem;
+	--space-24: 6rem;
+
+	/* SHAPE */
+	--radius-md: 16px;
+	--radius-lg: 24px;
+	--radius-pill: 999px;
+
+	/* LAYOUT */
+	--container-width: 64rem;
+	--gutter: clamp(1.2rem, 5vw, 3rem);
+
+	/* MOTION: --duration is for cards, buttons and whole segments, --duration-link
+	   for text links, which feel better a little quicker. */
+	--duration: 0.3s;
+	--duration-link: 0.2s;
+	--ease: ease-in-out;
+}
+
+/* Browsers that do not know light-dark() (before Chrome 123, Firefox 120 and Safari
+   17.5) would lose every colour above, so they get the dark look, which is how the
+   page is designed first. Keep this list in step with the tokens above (the dark value
+   of each light-dark() pair). The theme switch has nothing to switch there, so it is
+   hidden. */
+@supports not (color: light-dark(white, black)) {
+	:root,
+	:root[data-theme='light'] {
+		color-scheme: dark;
+		--color-bg: #0f1e30;
+		--color-navy: #15263b;
+		--color-blue: #375a88;
+		--color-slate: #334b6d;
+		--color-muted: #908faa;
+		--color-lavender: #bfb5ce;
+		--color-text: #e8e2f0;
+		--color-selection: #375a88;
+		--color-success: #6ee7a8;
+		--glow-blue: #375a88;
+		--glow-lavender: #bfb5ce;
+		--glow-slate: #334b6d;
+		--glow-opacity: 0.28;
+		--glass-bg: rgba(255, 255, 255, 0.04);
+		--glass-bg-hover: rgba(191, 181, 206, 0.12);
+		--glass-bg-fallback: rgba(21, 38, 59, 0.88);
+		--glass-border: rgba(191, 181, 206, 0.12);
+		--glass-border-hover: rgba(191, 181, 206, 0.3);
+		--glass-shadow:
+			0 8px 48px rgba(0, 0, 0, 0.35),
+			inset 0 1px 0 rgba(255, 255, 255, 0.06);
+		--shadow-hover: rgba(0, 0, 0, 0.25);
+		--timer-screen-top: rgba(4, 9, 16, 0.72);
+		--timer-screen-bottom: rgba(4, 9, 16, 0.46);
+		--logo-body: rgba(255, 255, 255, 0.1);
+		--logo-shadow: rgba(2, 10, 20, 0.6);
+	}
+
+	.theme-toggle {
+		display: none;
+	}
+}
+
+/* The theme switch sets data-theme; without it the device's setting decides. */
+:root[data-theme='light'] {
+	color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+	color-scheme: dark;
+}
+
+/* Switching theme fades the whole page. Browsers with view transitions cross-fade the
+   old and the new page; the others fade colours (ThemeToggle adds .theme-fading for
+   the length of the fade). */
+::view-transition-old(root),
+::view-transition-new(root) {
+	animation-duration: 0.5s;
+	animation-timing-function: var(--ease);
+}
+
+:root.theme-fading *,
+:root.theme-fading *::before,
+:root.theme-fading *::after {
+	transition:
+		background-color 0.5s var(--ease),
+		color 0.5s var(--ease),
+		border-color 0.5s var(--ease),
+		fill 0.5s var(--ease),
+		stroke 0.5s var(--ease),
+		box-shadow 0.5s var(--ease) !important;
+}
+
+/* In light mode the glows are stronger, since pale colour on a pale page needs it.
+   (A number cannot be a light-dark() pair, so this follows the same two switches.) */
+:root[data-theme='light'] {
+	--glow-opacity: 0.3;
+}
+
+@media (prefers-color-scheme: light) {
+	:root:not([data-theme='dark']) {
+		--glow-opacity: 0.3;
+	}
 }
 
 /*  ==== RESET ==== */
-* {
+*,
+*::before,
+*::after {
 	box-sizing: border-box;
+}
+
+* {
 	margin: 0;
 	padding: 0;
+}
+
+html {
+	scroll-behavior: smooth;
+	-webkit-text-size-adjust: 100%;
+}
+
+/* clip, not hidden: hidden would turn body into a scroll container and break sticky. */
+html,
+body {
+	overflow-x: clip;
+}
+
+body {
+	min-height: 100vh;
+	background: var(--color-bg);
+	color: var(--color-text);
 	font-family: var(--font-base);
-	word-spacing: 0.4ch;
+	font-size: var(--text-base);
+	line-height: var(--leading-body);
+	-webkit-font-smoothing: antialiased;
+}
+
+/* The backdrop sits behind the page content (z-index: -1), inside #root, and is as
+   tall as #root, so it scrolls with the page. */
+#root {
+	position: relative;
+	isolation: isolate;
+	min-height: 100vh;
+	/* The parallax backdrop is moved down inside the page; clip so it never makes the
+	   page longer. (clip, not hidden: sticky still works.) */
+	overflow: clip;
+}
+
+/*  ==== BASE ==== */
+h1,
+h2,
+h3,
+h4 {
+	font-family: var(--font-display);
+	font-weight: 400;
+	line-height: var(--leading-tight);
+	letter-spacing: -0.02em;
+}
+
+em {
+	font-style: italic;
 }
 
 a {
-	color: var(--color-blue-dark);
+	color: var(--color-lavender);
 	text-decoration: none;
+}
+
+/* Every hover effect eases in and out: text links over --duration-link, buttons
+   over --duration. A component that sets its own `transition` (cards, the Button
+   component) must list the properties its hover changes. */
+a {
+	transition:
+		color var(--duration-link) var(--ease),
+		background-color var(--duration-link) var(--ease),
+		border-color var(--duration-link) var(--ease),
+		box-shadow var(--duration-link) var(--ease),
+		text-decoration-color var(--duration-link) var(--ease);
+}
+
+button {
+	transition:
+		color var(--duration) var(--ease),
+		background-color var(--duration) var(--ease),
+		border-color var(--duration) var(--ease),
+		box-shadow var(--duration) var(--ease),
+		text-decoration-color var(--duration) var(--ease);
+}
+
+a:hover {
+	color: var(--color-text);
+}
+
+img {
+	display: block;
+	max-width: 100%;
 }
 
 button {
 	border: none;
+	background: none;
+	font: inherit;
+	color: inherit;
+	cursor: pointer;
 }
 
 ul {
 	list-style-type: none;
 }
 
-html {
-	scroll-behavior: smooth;
+:focus-visible {
+	outline: 2px solid var(--color-lavender);
+	outline-offset: 3px;
 }
 
-html,
-body {
-	overflow-x: hidden;
+::selection {
+	background: var(--color-selection);
+	color: light-dark(var(--color-text), var(--color-white));
+}
+
+/*  ==== LAYOUT ==== */
+.container {
+	width: 100%;
+	max-width: calc(var(--container-width) + 2 * var(--gutter));
+	margin-inline: auto;
+	padding-inline: var(--gutter);
+}
+
+/* Reduced motion switches off what moves: the looping and entrance animations and
+   the smooth scrolling. Hover transitions stay, because a colour fade moves
+   nothing; a component whose hover does move something (see ContactLink) stops
+   that movement in its own reduced-motion rule. */
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		scroll-behavior: auto !important;
+	}
 }

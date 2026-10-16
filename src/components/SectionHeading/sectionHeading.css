@@ -1,0 +1,27 @@
+.section-heading {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-3);
+	max-width: 40rem;
+}
+
+.section-heading-eyebrow {
+	font-family: var(--font-mono);
+	font-size: var(--text-xs);
+	letter-spacing: var(--tracking-label);
+	text-transform: uppercase;
+	color: var(--color-muted);
+}
+
+.section-heading-title {
+	font-size: var(--text-2xl);
+	color: var(--color-text);
+}
+
+.section-heading-title em {
+	color: var(--color-lavender);
+}
+
+.section-heading-lead {
+	color: var(--color-muted);
+}

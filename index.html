@@ -3,13 +3,55 @@
 	<head>
 		<meta charset="UTF-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>David Åkerlind</title>
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link
-			href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400&display=swap"
-			rel="stylesheet" />
+		<meta name="color-scheme" content="dark light" />
+		<meta name="theme-color" content="#eef1f7" media="(prefers-color-scheme: light)" />
+		<meta name="theme-color" content="#0f1e30" media="(prefers-color-scheme: dark)" />
+		<script>
+			// Apply the saved colour theme before the first paint, so the page never flashes.
+			try {
+				var t = localStorage.getItem('theme');
+				if (t === 'light' || t === 'dark') {
+					document.documentElement.dataset.theme = t;
+					document.querySelectorAll('meta[name="theme-color"]').forEach(function (m) {
+						m.content = t === 'light' ? '#eef1f7' : '#0f1e30';
+					});
+				}
+			} catch (e) {}
+		</script>
+		<title>David Åkerlind – Computer Science and AI student</title>
+		<meta
+			name="description"
+			content="Portfolio of David Åkerlind, a Computer Science student specialising in Artificial Intelligence at Karlstad University. Projects, experience and interests." />
+		<meta name="robots" content="index, follow, max-image-preview:large" />
+		<link rel="canonical" href="https://davidakerlind.com/" />
+		<link rel="alternate" hreflang="en" href="https://davidakerlind.com/" />
+		<link rel="alternate" hreflang="sv" href="https://davidakerlind.com/sv/" />
+		<link rel="alternate" hreflang="x-default" href="https://davidakerlind.com/" />
+
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content="David Åkerlind" />
+		<meta property="og:locale" content="en_GB" />
+		<meta property="og:locale:alternate" content="sv_SE" />
+		<meta property="og:title" content="David Åkerlind – Computer Science and AI student" />
+		<meta
+			property="og:description"
+			content="Portfolio of David Åkerlind, a Computer Science student specialising in Artificial Intelligence at Karlstad University. Projects, experience and interests." />
+		<meta property="og:url" content="https://davidakerlind.com/" />
+		<meta property="og:image" content="https://davidakerlind.com/og-image.jpg" />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta
+			property="og:image:alt"
+			content="David Åkerlind, Computer Science and Artificial Intelligence, next to a portrait of him on a boat deck" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content="David Åkerlind – Computer Science and AI student" />
+		<meta
+			name="twitter:description"
+			content="Portfolio of David Åkerlind, a Computer Science student specialising in Artificial Intelligence at Karlstad University. Projects, experience and interests." />
+		<meta name="twitter:image" content="https://davidakerlind.com/og-image.jpg" />
 	</head>
 	<body>
 		<div id="root"></div>

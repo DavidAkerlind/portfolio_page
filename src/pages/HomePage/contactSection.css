@@ -1,0 +1,28 @@
+.contact {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr);
+	align-items: center;
+	gap: var(--space-8);
+	padding-block: var(--space-16) var(--space-24);
+	scroll-margin-top: 5rem;
+}
+
+.contact-list {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-4);
+	width: 100%;
+	max-width: 30rem;
+}
+
+/* Heading on the left, the three links stacked on the right. */
+@media (min-width: 52rem) {
+	.contact {
+		grid-template-columns: minmax(0, 1fr) minmax(0, 26rem);
+		gap: var(--space-16);
+	}
+
+	.contact-list {
+		max-width: none;
+	}
+}

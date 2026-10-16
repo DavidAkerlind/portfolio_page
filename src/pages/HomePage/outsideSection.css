@@ -1,0 +1,157 @@
+.outside {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-16);
+	padding-block: var(--space-16);
+	scroll-margin-top: 5rem;
+}
+
+.outside-block {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-8);
+}
+
+/* Small mono label above a block. */
+.outside-label {
+	font-family: var(--font-mono);
+	font-size: var(--text-xs);
+	line-height: 1.5;
+	letter-spacing: var(--tracking-label);
+	text-transform: uppercase;
+	color: var(--color-muted);
+}
+
+.outside-title {
+	font-size: var(--text-xl);
+	color: var(--color-text);
+}
+
+.outside-lead {
+	max-width: 40rem;
+	color: var(--color-muted);
+}
+
+.marathon-text,
+.outside-intro {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: var(--space-3);
+}
+
+.marathon-text .button {
+	margin-top: var(--space-2);
+}
+
+.outside-check {
+	flex: none;
+	color: var(--color-success);
+}
+
+/* Text on the left and the two timers stacked on the right while there is room.
+   The digits fill the width of their screen, so there is no empty space inside it. */
+.marathon {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr);
+	align-items: center;
+	gap: var(--space-8);
+}
+
+.marathon-timers {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-4);
+	width: 100%;
+	max-width: 30rem;
+}
+
+.marathon-timers .timer {
+	width: 100%;
+	justify-content: space-between;
+}
+
+.marathon-timers .timer-screen {
+	align-self: stretch;
+}
+
+.marathon-timers .timer-svg {
+	width: 100%;
+}
+
+.outside-activities {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr);
+	gap: var(--space-6);
+}
+
+.activity-card {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-4);
+	padding: var(--space-4);
+}
+
+.activity-body {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-2);
+	padding: var(--space-2) var(--space-2) var(--space-4);
+}
+
+.activity-title {
+	font-size: var(--text-xl);
+	color: var(--color-text);
+}
+
+.activity-text {
+	color: var(--color-muted);
+}
+
+.outside-also {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--space-3) var(--space-4);
+}
+
+.outside-tools {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr));
+	gap: var(--space-6);
+}
+
+/* Side by side while the text sits above them, then stacked beside the text. */
+@media (min-width: 44rem) {
+	.marathon-timers {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		max-width: none;
+	}
+}
+
+@media (min-width: 64rem) {
+	.marathon {
+		grid-template-columns: minmax(0, 1fr) 24rem;
+		gap: var(--space-12);
+	}
+
+	.marathon-timers {
+		display: flex;
+		flex-direction: column;
+	}
+}
+
+/* The portrait photo (4:5) and the near-square clip (8:7) are sized so both cards
+   are equally tall: the column widths follow the ratio of the two aspect ratios. */
+@media (min-width: 52rem) {
+	.outside-activities {
+		grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+	}
+}
+
+@media (max-width: 52rem) {
+	.activity-card-portrait {
+		max-width: 24rem;
+	}
+}

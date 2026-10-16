@@ -1,0 +1,137 @@
+/* As tall as the page (#root is positioned), so without scripting or scroll-driven
+   animations it simply scrolls with the content. */
+.backdrop {
+	/* How fast the backdrop moves compared with the page: 0.4 is two fifths of the
+	   scroll speed, which makes it feel far away. */
+	--parallax: 0.4;
+	position: absolute;
+	inset: 0;
+	z-index: -1;
+	overflow: hidden;
+	pointer-events: none;
+}
+
+/* A glow's place: a share of the page height. */
+.backdrop-orb {
+	top: calc(var(--p) * 100% + var(--dy));
+}
+
+/* Parallax. The layer is pushed down as the page scrolls, so it ends up moving at
+   --parallax times the scroll speed. Only the first part of it is ever seen, from the
+   top to --parallax of the way down plus one screen, so the glows are spread over
+   that part instead of the whole height. */
+@supports (animation-timeline: scroll()) {
+	.backdrop {
+		will-change: transform;
+		animation: backdrop-parallax linear both;
+		animation-timeline: scroll(root block);
+	}
+
+	.backdrop-orb {
+		top: calc(
+			var(--p) * (var(--parallax) * (100% - 100vh) + 100vh) + var(--dy)
+		);
+	}
+}
+
+/* The same layout when a script moves the layer instead. */
+.backdrop-scripted {
+	will-change: transform;
+}
+
+.backdrop-scripted .backdrop-orb {
+	top: calc(var(--p) * (var(--parallax) * (100% - 100vh) + 100vh) + var(--dy));
+}
+
+@keyframes backdrop-parallax {
+	to {
+		transform: translateY(calc((1 - var(--parallax)) * (100% - 100vh)));
+	}
+}
+
+/* The page-wide rule for reduced motion shortens every animation to nothing. Two
+   things are kept, by the owner's choice: the parallax, which only follows the
+   visitor's own scrolling (a fixed duration would break its timeline), and the slow
+   float of the glows, which is soft, blurred and very slow. */
+@media (prefers-reduced-motion: reduce) {
+	.backdrop {
+		animation-duration: auto !important;
+	}
+
+	.backdrop-orb {
+		animation-duration: var(--sway-time), var(--bob-time) !important;
+		animation-iteration-count: infinite, infinite !important;
+	}
+}
+
+.backdrop-noise {
+	position: absolute;
+	inset: 0;
+	background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+	background-size: 200px 200px;
+}
+
+/* A soft glow, drawn the way the first one-page site drew its orbs: a flat disc of
+   colour with no edge (that site blurs a disc by 70px). A gradient with the profile of
+   such a blurred disc looks the same and is much cheaper to draw than a large blurred
+   layer. --orb-r is the radius of the disc; the box reaches 175px past it so the soft
+   edge has room, and the negative margin puts the disc where the offsets say. */
+.backdrop-orb {
+	--orb-r: calc(min(var(--orb-size), 90vw) / 2);
+	position: absolute;
+	width: calc(var(--orb-r) * 2 + 350px);
+	aspect-ratio: 1;
+	margin: -175px;
+	border-radius: 50%;
+	background: radial-gradient(
+		circle closest-side,
+		var(--orb-color) 0,
+		var(--orb-color) max(0px, calc(var(--orb-r) - 140px)),
+		color-mix(in srgb, var(--orb-color) 84%, transparent) calc(var(--orb-r) - 70px),
+		color-mix(in srgb, var(--orb-color) 50%, transparent) var(--orb-r),
+		color-mix(in srgb, var(--orb-color) 16%, transparent) calc(var(--orb-r) + 70px),
+		color-mix(in srgb, var(--orb-color) 2%, transparent) calc(var(--orb-r) + 140px),
+		transparent calc(var(--orb-r) + 175px)
+	);
+	opacity: var(--glow-opacity);
+	/* Each glow floats on its own: a slow sideways sway and a slower bob with a gentle
+	   swell, with different distances and times, so no two follow the same path and
+	   the pattern never quite repeats. The numbers are set per glow in Backdrop.jsx. */
+	animation:
+		orb-sway var(--sway-time) ease-in-out infinite alternate,
+		orb-bob var(--bob-time) ease-in-out infinite alternate;
+}
+
+.backdrop-accent {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 2px;
+	background: linear-gradient(
+		90deg,
+		transparent,
+		var(--glow-blue),
+		var(--glow-lavender),
+		transparent
+	);
+	opacity: 0.6;
+}
+
+@keyframes orb-sway {
+	from {
+		translate: calc(var(--sway) * -1) 0;
+	}
+	to {
+		translate: var(--sway) 0;
+	}
+}
+
+@keyframes orb-bob {
+	from {
+		transform: translateY(calc(var(--bob) * -1)) scale(var(--swell-from));
+	}
+	to {
+		transform: translateY(var(--bob)) scale(var(--swell-to));
+	}
+}

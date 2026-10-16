@@ -1,10 +1,29 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.jsx'
+import { StrictMode } from 'react';
+import { createRoot, hydrateRoot } from 'react-dom/client';
+// Fonts are served from this site (no third-party requests). Only the Latin sets and
+// the weights the design uses are loaded; scripts/prerender.mjs preloads the main ones.
+import '@fontsource-variable/dm-sans/wght.css';
+import '@fontsource/dm-serif-display/latin-400.css';
+import '@fontsource/dm-serif-display/latin-400-italic.css';
+import '@fontsource/dm-mono/latin-400.css';
+import './index.css';
+import App from './App.jsx';
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-)
+const root = document.getElementById('root');
+const app = (
+	<StrictMode>
+		<App />
+	</StrictMode>
+);
+
+// A built page already holds its HTML, so React picks that up. The dev server
+// serves an empty root, which is rendered from scratch.
+if (root.hasChildNodes()) {
+	// Hydration is the heaviest script work of the page load. The built page is already
+	// readable, so let the browser paint it first and hydrate in the next task.
+	const hydrate = () => hydrateRoot(root, app);
+	if (document.visibilityState === 'hidden') hydrate();
+	else requestAnimationFrame(() => setTimeout(hydrate));
+} else {
+	createRoot(root).render(app);
+}
