@@ -44,6 +44,7 @@ const jsonLdFor = ({ lang, url, person }) => ({
 			knowsAbout: [
 				'Artificial intelligence',
 				'Machine learning',
+				'Hugging Face',
 				'Python',
 				'React',
 				'Front-end development',
@@ -119,7 +120,7 @@ function withHead(html, { title, noindex, lang }) {
 		result = result
 			.replace(/<title>.*?<\/title>/s, () => `<title>${escapeHtml(title)}</title>`)
 			.replace(/\s*<link rel="(?:canonical|alternate)"[^>]*>/g, '')
-			.replace(/\s*<meta\s+(?:property="og:|name="twitter:|name="description")[^>]*>/g, '');
+			.replace(/\s*<meta\s+(?:property="og:|name="twitter:|name="description"|name="robots")[^>]*>/g, '');
 		result = replaceOnce(result, '</head>', '\t\t<meta name="robots" content="noindex" />\n\t</head>');
 	} else {
 		// index.html is written for the English page; the Swedish page swaps the

@@ -1,9 +1,11 @@
-import harpaviljongenStart from '../assets/projects/harpaviljongen-start.webp';
-import harpaviljongenMenu from '../assets/projects/harpaviljongen-menu.webp';
-import harpaviljongenInfo from '../assets/projects/harpaviljongen-info.webp';
-import harpaviljongenAdmin from '../assets/projects/harpaviljongen-admin.webp';
-import harpaviljongenAdminMobile from '../assets/projects/harpaviljongen-admin-mobile.webp';
-import portfolioHome from '../assets/projects/portfolio-home.webp';
+import { picture } from '../lib/picture';
+
+const harpaviljongenStart = picture('projects/harpaviljongen-start', 1120, [560, 840]);
+const harpaviljongenMenu = picture('projects/harpaviljongen-menu', 1120, [560, 840]);
+const harpaviljongenInfo = picture('projects/harpaviljongen-info', 1120, [560, 840]);
+const harpaviljongenAdmin = picture('projects/harpaviljongen-admin', 1120, [560, 840]);
+const harpaviljongenAdminMobile = picture('projects/harpaviljongen-admin-mobile', 1063, [560, 840]);
+const portfolioHome = picture('projects/portfolio-home', 1280, [560, 840]);
 
 // Projects shown in the Projects section, in display order.
 // `gallery` items are extra screenshots, shown cropped to the top of the page (16 / 10

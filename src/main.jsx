@@ -19,7 +19,11 @@ const app = (
 // A built page already holds its HTML, so React picks that up. The dev server
 // serves an empty root, which is rendered from scratch.
 if (root.hasChildNodes()) {
-	hydrateRoot(root, app);
+	// Hydration is the heaviest script work of the page load. The built page is already
+	// readable, so let the browser paint it first and hydrate in the next task.
+	const hydrate = () => hydrateRoot(root, app);
+	if (document.visibilityState === 'hidden') hydrate();
+	else requestAnimationFrame(() => setTimeout(hydrate));
 } else {
 	createRoot(root).render(app);
 }

@@ -41,11 +41,12 @@ export default function ProjectsSection() {
 						{project.gallery && (
 							<ul className="projects-gallery">
 								{project.gallery.map((shot) => (
-									<li key={shot.src}>
+									<li key={shot.alt}>
 										<PhotoFrame
 											src={shot.src}
 											alt={shot.alt}
 											ratio={shot.ratio ?? '16 / 10'}
+											sizes="(min-width: 64rem) 480px, (min-width: 40rem) 45vw, calc(100vw - 42px)"
 											position={shot.position ?? 'top'}
 											fit={shot.fit}
 											zoomable

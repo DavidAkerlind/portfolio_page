@@ -19,10 +19,13 @@ function stop() {
 	frame = null;
 }
 
-function glideTo(top, onDone) {
+// `getTop` is asked again on every frame: the sections below the first screen are only
+// drawn once they get near (content-visibility), so the page can change height on the
+// way and the place being glided to moves with it.
+function glideTo(getTop, onDone) {
 	stop();
 	const from = window.scrollY;
-	const distance = top - from;
+	const distance = getTop() - from;
 	if (Math.abs(distance) < 2) return onDone();
 
 	const duration = durationFor(distance);
@@ -31,7 +34,7 @@ function glideTo(top, onDone) {
 	const step = (now) => {
 		const progress = Math.min(1, (now - start) / duration);
 		// 'instant' so the page's CSS scroll-behavior does not smooth every frame again.
-		window.scrollTo({ top: from + distance * easeInOutCubic(progress), behavior: 'instant' });
+		window.scrollTo({ top: from + (getTop() - from) * easeInOutCubic(progress), behavior: 'instant' });
 		if (progress < 1) {
 			frame = requestAnimationFrame(step);
 		} else {
@@ -68,10 +71,13 @@ function onClick(event) {
 
 	event.preventDefault();
 	const margin = target ? parseFloat(getComputedStyle(target).scrollMarginTop) || 0 : 0;
-	const top = target ? target.getBoundingClientRect().top + window.scrollY - margin : 0;
-	const maxTop = document.documentElement.scrollHeight - window.innerHeight;
+	const getTop = () => {
+		const top = target ? target.getBoundingClientRect().top + window.scrollY - margin : 0;
+		const maxTop = document.documentElement.scrollHeight - window.innerHeight;
+		return Math.max(0, Math.min(top, maxTop));
+	};
 
-	glideTo(Math.max(0, Math.min(top, maxTop)), () => {
+	glideTo(getTop, () => {
 		// Like a normal jump: the address shows the place, and focus moves there so
 		// keyboard and screen reader users carry on from it.
 		if (window.location.hash !== url.hash) history.pushState(null, '', url.hash);
