@@ -63,3 +63,40 @@
 	stroke: var(--glass-border);
 	stroke-width: 0.05;
 }
+
+/* The lit beads: every layer is a stroke with round caps (see TimerDisplay.jsx), from
+   the whole bead in deep red down to a small light spot. The first line of each is the
+   fallback for browsers without color-mix(). */
+.timer-bead {
+	fill: none;
+	stroke-linecap: round;
+}
+
+.timer-bead-0 {
+	stroke: var(--color-timer-deep);
+	stroke: color-mix(in srgb, var(--color-timer-deep) 90%, var(--color-timer));
+}
+
+.timer-bead-1 {
+	stroke: var(--color-timer-deep);
+	stroke: color-mix(in srgb, var(--color-timer-deep) 64%, var(--color-timer));
+}
+
+.timer-bead-2 {
+	stroke: var(--color-timer);
+	stroke: color-mix(in srgb, var(--color-timer-deep) 36%, var(--color-timer));
+}
+
+.timer-bead-3 {
+	stroke: var(--color-timer);
+}
+
+.timer-bead-4 {
+	stroke: var(--color-timer);
+	stroke: color-mix(in srgb, var(--color-timer) 68%, var(--color-timer-light));
+}
+
+.timer-bead-5 {
+	stroke: var(--color-timer-light);
+	stroke: color-mix(in srgb, var(--color-timer) 28%, var(--color-timer-light));
+}
