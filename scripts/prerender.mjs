@@ -7,6 +7,7 @@ import { access, mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promise
 import { dirname, join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { links, site } from '../src/data/links.js';
+import { meta } from '../src/i18n/meta.js';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const dist = join(root, 'dist');
@@ -15,37 +16,6 @@ const serverDir = join(root, 'dist-server');
 const template = await readFile(join(dist, 'index.html'), 'utf8');
 const assets = await readdir(join(dist, 'assets'));
 const { render } = await import(pathToFileURL(join(serverDir, 'entry-server.js')));
-
-// What differs between the English and the Swedish home page. The English values are
-// the ones written in index.html; the Swedish page gets the others swapped in.
-const meta = {
-	en: {
-		lang: 'en',
-		url: `${site.url}/`,
-		title: 'David Åkerlind – Computer Science and AI student',
-		description:
-			'Portfolio of David Åkerlind, a Computer Science student specialising in Artificial Intelligence at Karlstad University. Projects, experience and interests.',
-		imageAlt:
-			'David Åkerlind, Computer Science and Artificial Intelligence, next to a portrait of him on a boat deck',
-		person:
-			'Computer Science student specialising in Artificial Intelligence at Karlstad University.',
-		locale: 'en_GB',
-		otherLocale: 'sv_SE',
-	},
-	sv: {
-		lang: 'sv',
-		url: `${site.url}/sv/`,
-		title: 'David Åkerlind – student i datavetenskap och AI',
-		description:
-			'Portfolio för David Åkerlind, student i datavetenskap med inriktning mot artificiell intelligens vid Karlstads universitet. Projekt, erfarenhet och intressen.',
-		imageAlt:
-			'David Åkerlind, datavetenskap och artificiell intelligens, bredvid ett porträtt av David på ett båtdäck',
-		person:
-			'Student i datavetenskap med inriktning mot artificiell intelligens vid Karlstads universitet.',
-		locale: 'sv_SE',
-		otherLocale: 'en_GB',
-	},
-};
 
 // Structured data for search engines: who the site is about and where else they are.
 const jsonLdFor = ({ lang, url, person }) => ({

@@ -1,9 +1,10 @@
 import { links } from '../../data/links';
-import { useLang, useUi } from '../../i18n/lang';
+import { useLang, useSwitchLang, useUi } from '../../i18n/lang';
 import './footer.css';
 
-// The same page in each language. The links go to a whole page, so they are plain
-// links (and search engines can follow them).
+// The same page in each language. They are real links (search engines follow them, and
+// they work without JavaScript); on the home page a plain click changes the language in
+// place instead (see App.jsx).
 const languages = [
 	{ code: 'en', label: 'English', href: '/' },
 	{ code: 'sv', label: 'Svenska', href: '/sv/' },
@@ -14,6 +15,7 @@ const languages = [
 export default function Footer() {
 	const ui = useUi().footer;
 	const lang = useLang();
+	const switchLang = useSwitchLang();
 
 	const elsewhere = [
 		{ label: ui.email, href: `mailto:${links.email}` },
@@ -54,7 +56,15 @@ export default function Footer() {
 										href={href}
 										lang={code}
 										hrefLang={code}
-										aria-current={code === lang ? 'true' : undefined}>
+										aria-current={code === lang ? 'true' : undefined}
+										onClick={(event) => {
+											const plain =
+												event.button === 0 &&
+												!(event.metaKey || event.ctrlKey || event.shiftKey || event.altKey);
+											if (!switchLang || !plain) return;
+											event.preventDefault();
+											if (code !== lang) switchLang(code);
+										}}>
 										{label}
 									</a>
 								</li>
