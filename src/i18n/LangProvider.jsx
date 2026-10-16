@@ -1,5 +1,9 @@
-import { LangContext } from './lang';
+import { LangContext, LangSwitchContext } from './lang';
 
-export function LangProvider({ lang, children }) {
-	return <LangContext value={lang}>{children}</LangContext>;
+export function LangProvider({ lang, onSwitch = null, children }) {
+	return (
+		<LangContext value={lang}>
+			<LangSwitchContext value={onSwitch}>{children}</LangSwitchContext>
+		</LangContext>
+	);
 }

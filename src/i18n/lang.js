@@ -16,3 +16,9 @@ export const useUi = () => ui[useLang()];
 export const useContent = () => getContent(useLang());
 
 export const homePath = (lang) => (lang === 'sv' ? '/sv/' : '/');
+
+// Changes the language in place, without loading the page again. Only the home page
+// (/ and /sv/) provides it; elsewhere it is null and a language link is an ordinary link.
+export const LangSwitchContext = createContext(null);
+
+export const useSwitchLang = () => useContext(LangSwitchContext);
