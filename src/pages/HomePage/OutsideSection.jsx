@@ -85,7 +85,7 @@ function Marathon() {
 				<span className="outside-label">{ui.running}</span>
 				<h3 className="outside-title">{ui.marathonTitle}</h3>
 				<p className="outside-lead">{marathon.story}</p>
-				<p className="outside-lead">{ui.firstMarathon(next.startLabel)}</p>
+				<p className="outside-lead">{ui.firstMarathon}</p>
 				<Button href={next.href} variant="secondary">
 					<CheckIcon />
 					{ui.signedUp}
