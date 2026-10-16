@@ -1,11 +1,19 @@
-import { useId } from 'react';
+import { useId, useMemo } from 'react';
 import GlassCard from '../GlassCard/GlassCard';
 import './timerDisplay.css';
 
 /* An LED scoreboard timer drawn in SVG: every digit is a grid of round dots, each
    one a small bead of red liquid glass with a bright rim and a soft highlight.
    Dots that are off stay as dark glass. There is deliberately no glow.
-   Pass the time as text: '04:09' or '04:09:12'. A '-' is a digit with every dot off. */
+   Pass the time as text: '04:09' or '04:09:12'. A '-' is a digit with every dot off.
+
+   A timer has a few hundred dots, so every part of the bead is one path for the whole
+   display, not an element per dot (which was about a thousand elements and made the
+   page slow to draw). A round dot is a zero-length line with a round cap, so the
+   bead's shading is a stack of copies of one path of dots (a <use> each), every copy
+   a smaller and lighter circle moved towards the top-left. The rim is the same trick
+   with a path of circles, dashed so that only an arc of each shows, and the highlight
+   is a small light dot. */
 
 const COLS = 8; // dots across one digit
 const ROWS = 16; // dots down one digit
@@ -86,7 +94,7 @@ function buildDots(time) {
 
 // One path made of a small circle for every dot.
 const round = (value) => Math.round(value * 1000) / 1000;
-const dotsPath = (dots) =>
+const circles = (dots) =>
 	dots
 		.map(
 			({ x, y }) =>
@@ -94,12 +102,63 @@ const dotsPath = (dots) =>
 		)
 		.join('');
 
+// A dot drawn as a line of no length: the round cap makes the disc.
+const discs = (dots) => dots.map(({ x, y }) => `M${round(x)} ${round(y)}h.001`).join('');
+
+// The shading: copies of the discs from the whole bead (darkest) down to a small one
+// (lightest), as a share of the bead's radius. Their colours are the .timer-bead-*
+// classes. The smaller the copy, the further it is moved up and to the left, towards
+// the light (at most this far, in dot pitches).
+const SHADES = [1, 0.86, 0.72, 0.58, 0.44, 0.3];
+const LIGHT_SOURCE = { x: -0.61 * 0.15, y: -0.79 * 0.15 };
+
+// The rim: a circle around every bead that starts at RIM_START degrees (0 is to the
+// right, 90 straight down, 225 up and to the left) and runs clockwise. Dashing shows
+// one arc of each: it starts `from` degrees and is `extent` degrees long.
+const RIM_RADIUS = RADIUS * 0.92;
+const RIM_START = -5;
+const RIM_LENGTH = 2 * Math.PI * RIM_RADIUS;
+const rimCircles = (dots) => {
+	const radians = (RIM_START * Math.PI) / 180;
+	const dx = round(RIM_RADIUS * Math.cos(radians));
+	const dy = round(RIM_RADIUS * Math.sin(radians));
+	const half = `a${round(RIM_RADIUS)} ${round(RIM_RADIUS)} 0 1 1`;
+	return dots
+		.map(({ x, y }) => `M${round(x + dx)} ${round(y + dy)}${half} ${-2 * dx} ${-2 * dy}${half} ${2 * dx} ${2 * dy}`)
+		.join('');
+};
+const rimArc = (from, extent, color, opacity) => {
+	const length = (extent / 360) * RIM_LENGTH;
+	const start = ((from - RIM_START) / 360) * RIM_LENGTH;
+	return {
+		color,
+		opacity,
+		dash: `${round(length)} ${round(RIM_LENGTH - length)}`,
+		offset: round(start === 0 ? 0 : RIM_LENGTH - start),
+	};
+};
+const RIM_ARCS = [
+	rimArc(135, 180, '#ffffff', 0.24), // a wide, faint one up and to the left
+	rimArc(180, 90, '#ffffff', 0.3), // and a narrower one on top of it, so it is brightest there
+	rimArc(-5, 100, '#ffb3ac', 0.28), // the faint reflection down and to the right
+];
+
+// The highlight: a small light dot near the top-left of every bead.
+const HIGHLIGHT = { x: -RADIUS * 0.33, y: -RADIUS * 0.4, size: RADIUS * 0.6 };
+
+const translate = (x, y) => `translate(${round(x)} ${round(y)})`;
+
+function buildTimer(time) {
+	const { lit, unlit, width } = buildDots(time);
+	return { width, off: circles(unlit), discs: discs(lit), rim: rimCircles(lit) };
+}
+
 export default function TimerDisplay({ time, label, caption, ariaLabel }) {
 	const uid = useId().replace(/[^a-zA-Z0-9_-]/g, '');
-	const { lit, unlit, width } = buildDots(time);
+	const timer = useMemo(() => buildTimer(time), [time]);
 
 	const pad = RADIUS + 0.1;
-	const viewWidth = width + pad * 2;
+	const viewWidth = timer.width + pad * 2;
 	const viewHeight = ROWS - 1 + pad * 2;
 
 	return (
@@ -115,47 +174,49 @@ export default function TimerDisplay({ time, label, caption, ariaLabel }) {
 					aria-label={ariaLabel ?? time}
 					focusable="false">
 					<defs>
-						{/* The bead: red glass, lighter towards the top-left. */}
-						<radialGradient id={`${uid}-bead`} cx="0.36" cy="0.32" r="0.8">
-							<stop offset="0" style={{ stopColor: 'var(--color-timer-light)' }} />
-							<stop offset="0.5" style={{ stopColor: 'var(--color-timer)' }} />
-							<stop offset="1" style={{ stopColor: 'var(--color-timer-deep)' }} />
-						</radialGradient>
-
-						{/* A bright rim on the top-left edge, a faint reflected one opposite. */}
-						<linearGradient id={`${uid}-rim`} x1="0" y1="0" x2="1" y2="1">
-							<stop offset="0" stopColor="#ffffff" stopOpacity="0.75" />
-							<stop offset="0.45" stopColor="#ffffff" stopOpacity="0" />
-							<stop offset="0.75" stopColor="#ffb3ac" stopOpacity="0" />
-							<stop offset="1" stopColor="#ffb3ac" stopOpacity="0.4" />
-						</linearGradient>
-
-						<g id={`${uid}-on`}>
-							<circle r={RADIUS} fill={`url(#${uid}-bead)`} fillOpacity="0.96" />
-							<circle
-								r={RADIUS * 0.92}
-								fill="none"
-								stroke={`url(#${uid}-rim)`}
-								strokeWidth={RADIUS * 0.17}
-							/>
-							<ellipse
-								cx={-RADIUS * 0.33}
-								cy={-RADIUS * 0.4}
-								rx={RADIUS * 0.38}
-								ry={RADIUS * 0.21}
-								transform={`rotate(-38 ${-RADIUS * 0.33} ${-RADIUS * 0.4})`}
-								fill="#ffffff"
-								fillOpacity="0.45"
-							/>
-						</g>
-
+						<path id={`${uid}-discs`} d={timer.discs} />
+						<path id={`${uid}-rim`} d={timer.rim} />
 					</defs>
 
-					{/* All the dots that are off are one path, which keeps the page light. */}
-					<path className="timer-off" d={dotsPath(unlit)} />
-					{lit.map(({ key, x, y }) => (
-						<use key={key} href={`#${uid}-on`} x={x} y={y} />
+					{/* The dots that are off: dark glass. */}
+					<path className="timer-off" d={timer.off} />
+
+					{/* The beads that are lit, from the darkest layer to the lightest. */}
+					{SHADES.map((share, index) => {
+						const move = (1 - share) / 0.7;
+						return (
+							<use
+								key={share}
+								href={`#${uid}-discs`}
+								className={`timer-bead timer-bead-${index}`}
+								transform={translate(LIGHT_SOURCE.x * move, LIGHT_SOURCE.y * move)}
+								strokeWidth={round(2 * RADIUS * share)}
+							/>
+						);
+					})}
+
+					{/* A bright rim on the top-left edge, a faint reflected one opposite. */}
+					{RIM_ARCS.map(({ color, opacity, dash, offset }) => (
+						<use
+							key={dash + color}
+							href={`#${uid}-rim`}
+							className="timer-bead"
+							stroke={color}
+							strokeOpacity={opacity}
+							strokeWidth={round(RADIUS * 0.17)}
+							strokeDasharray={dash}
+							strokeDashoffset={offset}
+						/>
 					))}
+
+					<use
+						href={`#${uid}-discs`}
+						className="timer-bead"
+						transform={translate(HIGHLIGHT.x, HIGHLIGHT.y)}
+						stroke="#ffffff"
+						strokeOpacity="0.6"
+						strokeWidth={round(HIGHLIGHT.size)}
+					/>
 				</svg>
 			</div>
 
