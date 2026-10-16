@@ -41,8 +41,8 @@ export const ui = {
 			title: ['My ', 'interests'],
 			running: 'Running',
 			marathonTitle: 'Stockholm Marathon',
-			firstMarathon: (startLabel) =>
-				`My first marathon was the Stockholm Marathon in 2026, finished in an official 4 hours, 9 minutes and 34 seconds. I am already signed up for the next one on ${startLabel}.`,
+			firstMarathon:
+				'My first marathon was the Stockholm Marathon in 2026, a really fun race that I get to experience again in 2027, which I am looking forward to a lot.',
 			signedUp: 'Signed up for 2027',
 			myTime: 'My time',
 			next: 'Next',
@@ -118,8 +118,8 @@ export const ui = {
 			title: ['Mina ', 'intressen'],
 			running: 'Löpning',
 			marathonTitle: 'Stockholm Marathon',
-			firstMarathon: (startLabel) =>
-				`Mitt första maraton var Stockholm Marathon 2026, som jag gick i mål på en officiell tid av 4 timmar, 9 minuter och 34 sekunder. Jag är redan anmäld till nästa den ${startLabel}.`,
+			firstMarathon:
+				'Mitt första maraton var i Stockholm Marathon 2026, ett superroligt lopp som jag får uppleva igen 2027, det ser jag mycket fram emot.',
 			signedUp: 'Anmäld till 2027',
 			myTime: 'Min tid',
 			next: 'Nästa',
