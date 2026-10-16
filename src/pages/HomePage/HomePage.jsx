@@ -3,7 +3,7 @@ import Header from '../../components/Header/Header';
 import Button from '../../components/Button/Button';
 import PhotoFrame from '../../components/PhotoFrame/PhotoFrame';
 import Footer from '../../components/Footer/Footer';
-import portrait from '../../assets/photos/david-portrait.webp';
+import { picture } from '../../lib/picture';
 import { links } from '../../data/links';
 import { useUi } from '../../i18n/lang';
 import ProjectsSection from './ProjectsSection';
@@ -11,6 +11,8 @@ import AboutSection from './AboutSection';
 import OutsideSection from './OutsideSection';
 import ContactSection from './ContactSection';
 import './homePage.css';
+
+const portrait = picture('photos/david-portrait', 800, [480, 640]);
 
 export default function HomePage() {
 	return (
@@ -62,6 +64,7 @@ function Hero() {
 					className="hero-photo"
 					src={portrait}
 					ratio="4 / 5"
+					sizes="(min-width: 52rem) 400px, calc(100vw - 54px)"
 					loading="eager"
 					fetchPriority="high"
 					alt={ui.portraitAlt}

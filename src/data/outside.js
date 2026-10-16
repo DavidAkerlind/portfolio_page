@@ -5,8 +5,10 @@
 // import skateTrickMp4 from '../assets/video/skate-trick.mp4';
 // import skateTrickWebm from '../assets/video/skate-trick.webm';
 // import skateTrickPoster from '../assets/video/skate-trick-poster.webp';
-import mlPlayground from '../assets/tools/ml-playground.webp';
-import statsLab from '../assets/tools/stats-lab.webp';
+import { picture } from '../lib/picture';
+
+const mlPlayground = picture('tools/ml-playground', 1120, [560, 840]);
+const statsLab = picture('tools/stats-lab', 1120, [560, 840]);
 
 // Content for the "My interests" section, in display order.
 

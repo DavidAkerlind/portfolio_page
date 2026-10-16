@@ -57,15 +57,19 @@ function ExpandIcon() {
    one) for the ones visible on first load.
    `position` is the CSS object-position used when the image is cropped to the ratio,
    and `fit` is the object-fit ('contain' shows the whole picture inside the frame).
-   `zoomable` makes the picture a button that opens it uncropped and enlarged. */
+   `zoomable` makes the picture a button that opens it uncropped and enlarged.
+   `src` is a URL, or { src, srcSet } from picture() (src/lib/picture.js) when smaller
+   copies exist; `sizes` says how wide the picture is shown, so the browser can pick
+   one. The enlarged view always uses the full `src`. */
 export default function PhotoFrame({
-	src,
+	src: source,
 	alt = '',
 	caption,
 	ratio = '4 / 3',
 	placeholder,
 	loading = 'lazy',
 	fetchPriority,
+	sizes,
 	position = 'center',
 	fit = 'cover',
 	zoomable = false,
@@ -73,11 +77,14 @@ export default function PhotoFrame({
 }) {
 	const ui = useUi().photo;
 	const [open, setOpen] = useState(false);
+	const { src, srcSet } = typeof source === 'object' && source ? source : { src: source };
 	const emptyText = placeholder ?? ui.placeholder;
 
 	const image = (
 		<img
 			src={src}
+			srcSet={srcSet}
+			sizes={srcSet ? sizes : undefined}
 			alt={alt}
 			loading={loading}
 			fetchPriority={fetchPriority}

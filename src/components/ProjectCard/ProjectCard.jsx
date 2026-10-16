@@ -32,6 +32,7 @@ export default function ProjectCard({
 				src={image}
 				alt={imageAlt}
 				ratio="16 / 10"
+				sizes="(min-width: 52rem) 480px, calc(100vw - 54px)"
 				placeholder={ui.screenshotPlaceholder}
 				zoomable
 				className="project-card-media"
