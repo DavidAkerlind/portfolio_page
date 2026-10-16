@@ -80,7 +80,7 @@ export const sv = {
 
 	marathon: {
 		story:
-			'Jag började springa i början av 2026. Jag är inte den snabbaste, men jag tycker verkligen om att springa några rundor i veckan när jag har tid. Min favoritrunda tar jag helst på morgonen.',
+			'Jag började springa i början av 2026. Jag är inte den snabbaste, men jag tycker verkligen om att springa några rundor i veckan när jag har tid. Mina favoritrundor är de lugna långa, där man får se mycket och utforska nya platser, och de tas helst på morgonen eller en solig eftermiddag.',
 		finishAriaLabel: 'Officiell måltid: 4 timmar 9 minuter 34 sekunder',
 		next: { startLabel: '29 maj 2027' },
 	},
