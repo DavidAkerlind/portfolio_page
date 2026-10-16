@@ -13,7 +13,7 @@ import statsLab from '../assets/tools/stats-lab.webp';
 export const marathon = {
 	// How running started and what David likes about it.
 	story:
-		'I picked up running in early 2026. I am not the fastest, but I really like going for a few runs a week when I have time. I prefer to take my favourite run in the morning.',
+		'I picked up running in early 2026. I am not the fastest, but I really like going for a few runs a week when I have time. My favourite runs are the chill long ones, where you get to see a lot and explore new places, preferably in the morning or on a sunny afternoon.',
 	// First marathon, Stockholm 2026: the official finish time.
 	finishTime: '04:09:34',
 	finishLabel: 'Stockholm 2026',
