@@ -6,12 +6,25 @@
 }
 
 .site-header-bar {
+	position: relative;
+	/* The glass layer sits behind the bar's content. */
+	isolation: isolate;
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
 	justify-content: space-between;
 	gap: var(--space-2) var(--space-6);
 	padding: var(--space-3) var(--space-6);
+	/* The height of the open menu. Header.jsx sets the real one, measured; this is
+	   the guess for the moment before it has. */
+	--panel-h: 13rem;
+}
+
+.site-header-glass {
+	position: absolute;
+	inset: 0;
+	z-index: -1;
+	pointer-events: none;
 }
 
 .site-header-brand {
@@ -98,19 +111,56 @@
 		display: inline-flex;
 	}
 
-	.site-header-controls,
-	.site-header-nav {
+	.site-header-controls {
 		order: 0;
 	}
 
-	.site-header-nav {
-		display: none;
-		flex-basis: 100%;
-		order: 1;
+	/* The menu folds out of the bar. The bar's glass grows downwards by the height of
+	   the links, and the links are uncovered at the same pace, as if the bar itself
+	   stretched. Both are laid over the page (absolute), so the page below never
+	   moves. It opens with a little spring and closes quicker and without it. Only
+	   the glass layer's height and the links' fade change; the blur is not redone for
+	   anything else. `visibility` keeps the closed links out of the tab order once
+	   the fold has finished. */
+	.site-header-glass {
+		bottom: auto;
+		height: 100%;
+		transition:
+			height 0.3s var(--ease),
+			background-color 0.3s var(--ease);
 	}
 
-	.site-header-nav-open {
-		display: block;
+	/* A little denser while open, so the links read over whatever is behind. */
+	.site-header-bar-open .site-header-glass {
+		height: calc(100% + var(--panel-h));
+		background: light-dark(rgba(255, 255, 255, 0.78), rgba(21, 38, 59, 0.72));
+		transition:
+			height 0.55s var(--ease-bounce),
+			background-color 0.3s var(--ease);
+	}
+
+	.site-header-nav {
+		position: absolute;
+		top: 100%;
+		left: var(--space-4);
+		right: var(--space-4);
+		order: 0;
+		height: 0;
+		overflow: hidden;
+		visibility: hidden;
+		pointer-events: none;
+		transition:
+			height 0.3s var(--ease),
+			visibility 0s linear 0.3s;
+	}
+
+	.site-header-bar-open .site-header-nav {
+		height: var(--panel-h);
+		visibility: visible;
+		pointer-events: auto;
+		transition:
+			height 0.55s var(--ease-bounce),
+			visibility 0s;
 	}
 
 	.site-header-nav ul {
@@ -119,8 +169,49 @@
 		padding-bottom: var(--space-2);
 	}
 
+	.site-header-nav li {
+		border-top: 1px solid var(--glass-border);
+		opacity: 0;
+		transform: translateY(-0.5rem);
+		transition:
+			opacity 0.12s ease-in,
+			transform 0.12s ease-in;
+	}
+
+	.site-header-bar-open .site-header-nav li {
+		opacity: 1;
+		transform: none;
+		transition:
+			opacity 0.3s ease-out calc(0.1s + var(--i) * 0.045s),
+			transform 0.5s var(--ease-bounce) calc(0.1s + var(--i) * 0.045s);
+	}
+
 	.site-header-nav a {
 		width: 100%;
 		padding: var(--space-3) 0;
+	}
+
+	.site-header-toggle:active {
+		transform: scale(0.94);
+	}
+}
+
+/* Reduced motion: the bar does not stretch, spring or slide; the links just fade. */
+@media (max-width: 40rem) and (prefers-reduced-motion: reduce) {
+	.site-header-glass,
+	.site-header-bar-open .site-header-glass {
+		transition: background-color 0.3s var(--ease);
+	}
+
+	.site-header-nav,
+	.site-header-bar-open .site-header-nav {
+		transition: visibility 0s;
+	}
+
+	.site-header-nav li,
+	.site-header-bar-open .site-header-nav li {
+		transform: none;
+		transition-delay: 0s;
+		transition-property: opacity;
 	}
 }
