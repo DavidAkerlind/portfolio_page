@@ -6,12 +6,22 @@
 }
 
 .site-header-bar {
+	position: relative;
+	/* The glass layer sits behind the bar's content. */
+	isolation: isolate;
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
 	justify-content: space-between;
 	gap: var(--space-2) var(--space-6);
 	padding: var(--space-3) var(--space-6);
+}
+
+.site-header-glass {
+	position: absolute;
+	inset: 0;
+	z-index: -1;
+	pointer-events: none;
 }
 
 .site-header-brand {
@@ -87,6 +97,16 @@
 	.site-header-controls {
 		justify-self: end;
 	}
+
+	/* The links sit straight in the bar; the panel's glass is only for the dropdown. */
+	.site-header-nav .site-header-panel {
+		background: none;
+		border: 0;
+		border-radius: 0;
+		box-shadow: none;
+		-webkit-backdrop-filter: none;
+		backdrop-filter: none;
+	}
 }
 
 @media (max-width: 40rem) {
@@ -98,29 +118,101 @@
 		display: inline-flex;
 	}
 
-	.site-header-controls,
-	.site-header-nav {
+	.site-header-controls {
 		order: 0;
 	}
 
+	/* The menu is a glass panel dropped over the page, just under the bar, so opening
+	   it never pushes anything down. It springs open from the Menu button (a little
+	   overshoot), and shuts again quicker and without the bounce. Only transform and
+	   opacity animate, so it stays smooth on a phone. `visibility` keeps the closed
+	   links out of the tab order once the fade has finished. */
 	.site-header-nav {
-		display: none;
-		flex-basis: 100%;
-		order: 1;
+		position: absolute;
+		top: calc(100% + var(--space-2));
+		left: 0;
+		right: 0;
+		order: 0;
+		visibility: hidden;
+		pointer-events: none;
+		opacity: 0;
+		transform: translateY(-0.75rem) scale(0.92);
+		transform-origin: 85% 0;
+		transition:
+			transform 0.22s ease-in,
+			opacity 0.16s ease-in,
+			visibility 0s linear 0.22s;
 	}
 
 	.site-header-nav-open {
-		display: block;
+		visibility: visible;
+		pointer-events: auto;
+		opacity: 1;
+		transform: none;
+		transition:
+			transform 0.55s var(--ease-bounce),
+			opacity 0.2s ease-out,
+			visibility 0s;
+	}
+
+	.site-header-panel {
+		padding: var(--space-2) var(--space-6);
+		/* A touch more body than the bar, since it sits over the page's text. */
+		background: light-dark(rgba(255, 255, 255, 0.78), rgba(21, 38, 59, 0.72));
 	}
 
 	.site-header-nav ul {
 		flex-direction: column;
 		gap: 0;
-		padding-bottom: var(--space-2);
+	}
+
+	.site-header-nav li {
+		opacity: 0;
+		transform: translateY(-0.5rem);
+		transition:
+			opacity 0.12s ease-in,
+			transform 0.12s ease-in;
+	}
+
+	.site-header-nav-open li {
+		opacity: 1;
+		transform: none;
+		transition:
+			opacity 0.3s ease-out calc(0.06s + var(--i) * 0.045s),
+			transform 0.5s var(--ease-bounce) calc(0.06s + var(--i) * 0.045s);
+	}
+
+	.site-header-nav li + li {
+		border-top: 1px solid var(--glass-border);
 	}
 
 	.site-header-nav a {
 		width: 100%;
 		padding: var(--space-3) 0;
+	}
+
+	.site-header-toggle:active {
+		transform: scale(0.94);
+	}
+}
+
+/* Reduced motion: the panel only fades, it does not slide, spring or scale. */
+@media (max-width: 40rem) and (prefers-reduced-motion: reduce) {
+	.site-header-nav,
+	.site-header-nav-open,
+	.site-header-nav li,
+	.site-header-nav-open li {
+		transform: none;
+	}
+
+	.site-header-nav,
+	.site-header-nav-open {
+		transition-property: opacity, visibility;
+	}
+
+	.site-header-nav li,
+	.site-header-nav-open li {
+		transition-delay: 0s;
+		transition-property: opacity;
 	}
 }
