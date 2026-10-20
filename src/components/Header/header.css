@@ -118,8 +118,9 @@
 	/* The menu folds out of the bar. The bar's glass grows downwards by the height of
 	   the links, and the links are uncovered at the same pace, as if the bar itself
 	   stretched. Both are laid over the page (absolute), so the page below never
-	   moves. It opens as a soft spring (about a second and a quarter, swinging a little past and
-	   settling) and closes in about half a second without it. Only the glass layer's
+	   moves. It opens as a soft spring (about a second and a half, swinging clearly
+	   past and settling) and closes in about half a second without it. It keeps
+	   running with reduced motion on, by the owner's choice. Only the glass layer's
 	   height and the links' fade change; the blur is not redone for anything else.
 	   `visibility` keeps the closed links out of the tab order once the fold has
 	   finished. */
@@ -136,7 +137,7 @@
 		height: calc(100% + var(--panel-h));
 		background: light-dark(rgba(255, 255, 255, 0.78), rgba(21, 38, 59, 0.72));
 		transition:
-			height 1.3s var(--ease-spring),
+			height 1.4s var(--ease-spring),
 			background-color 0.4s var(--ease);
 	}
 
@@ -160,7 +161,7 @@
 		visibility: visible;
 		pointer-events: auto;
 		transition:
-			height 1.3s var(--ease-spring),
+			height 1.4s var(--ease-spring),
 			visibility 0s;
 	}
 
@@ -194,25 +195,5 @@
 
 	.site-header-toggle:active {
 		transform: scale(0.94);
-	}
-}
-
-/* Reduced motion: the bar does not stretch, spring or slide; the links just fade. */
-@media (max-width: 40rem) and (prefers-reduced-motion: reduce) {
-	.site-header-glass,
-	.site-header-bar-open .site-header-glass {
-		transition: background-color 0.3s var(--ease);
-	}
-
-	.site-header-nav,
-	.site-header-bar-open .site-header-nav {
-		transition: visibility 0s;
-	}
-
-	.site-header-nav li,
-	.site-header-bar-open .site-header-nav li {
-		transform: none;
-		transition-delay: 0s;
-		transition-property: opacity;
 	}
 }
