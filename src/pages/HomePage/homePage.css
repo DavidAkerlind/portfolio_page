@@ -85,6 +85,11 @@
 }
 
 @media (max-width: 40rem) {
+	/* The line above the name is left out on a phone; the title and the lead say it. */
+	.hero-eyebrow {
+		display: none;
+	}
+
 	.projects {
 		contain-intrinsic-size: auto 2590px;
 	}
