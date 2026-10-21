@@ -102,6 +102,23 @@
 	}
 }
 
+/* Where the gooey navigation has loaded it stands in for the plain links. Below
+   this width the links would not fit beside the name, so they stay plain. */
+.site-header-gooey {
+	display: none;
+}
+
+@media (min-width: 56rem) {
+	.site-header-bar-gooey .site-header-nav {
+		display: none;
+	}
+
+	.site-header-bar-gooey .site-header-gooey {
+		order: 1;
+		display: block;
+	}
+}
+
 @media (max-width: 40rem) {
 	.site-header-bar {
 		padding: var(--space-2) var(--space-4);
