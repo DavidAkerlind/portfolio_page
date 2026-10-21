@@ -1,0 +1,85 @@
+.gooey-nav {
+	--gn-x: 0.95rem;
+	--gn-y: 0.55rem;
+	--gn-gap: 0.125rem;
+	/* The pill is the lavender (navy in light mode) of the primary button, with the
+	   page's own colour for the text inside it. */
+	--gn-pill: var(--color-lavender);
+	--gn-active-ink: var(--color-bg);
+	position: relative;
+	display: inline-flex;
+	max-width: 100%;
+}
+
+.gooey-nav-stage {
+	position: relative;
+	max-width: 100%;
+}
+
+/* The liquid is drawn on a canvas a little bigger than the list, so the droplets
+   can fly outside it. It never takes a click. */
+.gooey-nav-canvas {
+	position: absolute;
+	top: 0;
+	left: 0;
+	pointer-events: none;
+}
+
+/* Used only where WebGL is missing: a plain pill that slides under the text. */
+.gooey-nav-fallback {
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: none;
+	border-radius: var(--radius-pill);
+	background: var(--gn-pill);
+	pointer-events: none;
+}
+
+.gooey-nav-list {
+	position: relative;
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--gn-gap);
+}
+
+.gooey-nav-list-active {
+	position: absolute;
+	inset: 0;
+	color: var(--gn-active-ink);
+	visibility: hidden;
+	clip-path: inset(100%);
+	pointer-events: none;
+}
+
+.gooey-nav-item {
+	display: flex;
+}
+
+.gooey-nav-link {
+	display: inline-flex;
+	align-items: center;
+	padding: var(--gn-y) var(--gn-x);
+	border-radius: var(--radius-pill);
+	font-family: var(--font-mono);
+	font-size: var(--text-xs);
+	letter-spacing: var(--tracking-pill);
+	line-height: 1.2;
+	text-transform: uppercase;
+	white-space: nowrap;
+	color: var(--color-muted);
+}
+
+.gooey-nav-list-active .gooey-nav-link {
+	color: inherit;
+}
+
+.gooey-nav-item[data-active] .gooey-nav-link {
+	color: var(--color-text);
+}
+
+@media (hover: hover) {
+	.gooey-nav-link:hover {
+		color: var(--color-text);
+	}
+}
