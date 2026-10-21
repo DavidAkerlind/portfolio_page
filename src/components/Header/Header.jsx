@@ -7,10 +7,15 @@ import './header.css';
 /* Sticky glass bar with the name and the main navigation, and the light and dark
    mode switch. On small screens the links collapse behind a Menu button and the
    bar folds out to hold them: its glass is a separate layer that grows by the
-   height of the links, laid over the page so nothing below moves. */
+   height of the links, laid over the page so nothing below moves. On a wide screen
+   the links become the gooey navigation (HeaderGooey), fetched once the page is up;
+   until then, and without JavaScript, they are the plain links. */
+const WIDE = '(min-width: 56rem)';
+
 export default function Header() {
 	const ui = useUi().header;
 	const [open, setOpen] = useState(false);
+	const [Gooey, setGooey] = useState(null);
 	const barRef = useRef(null);
 	const listRef = useRef(null);
 	const close = () => setOpen(false);
@@ -29,6 +34,21 @@ export default function Header() {
 		return () => observer.disconnect();
 	}, []);
 
+	useEffect(() => {
+		const query = window.matchMedia(WIDE);
+		let gone = false;
+		const load = () => {
+			if (!query.matches) return;
+			import('./HeaderGooey').then((module) => !gone && setGooey(() => module.default));
+		};
+		load();
+		query.addEventListener('change', load);
+		return () => {
+			gone = true;
+			query.removeEventListener('change', load);
+		};
+	}, []);
+
 	/* An open menu closes on Escape and on a tap anywhere outside the bar. */
 	useEffect(() => {
 		if (!open) return undefined;
@@ -44,10 +64,14 @@ export default function Header() {
 		};
 	}, [open]);
 
+	const barClass = ['site-header-bar', open && 'site-header-bar-open', Gooey && 'site-header-bar-gooey']
+		.filter(Boolean)
+		.join(' ');
+
 	return (
 		<header className="site-header">
 			<div className="container">
-				<div className={`site-header-bar${open ? ' site-header-bar-open' : ''}`} ref={barRef}>
+				<div className={barClass} ref={barRef}>
 					<GlassCard padded={false} className="site-header-glass" aria-hidden="true" />
 
 					<a href="#top" className="site-header-brand" onClick={close}>
@@ -78,6 +102,12 @@ export default function Header() {
 							))}
 						</ul>
 					</nav>
+
+					{Gooey && (
+						<div className="site-header-gooey">
+							<Gooey items={ui.nav} label={ui.navLabel} />
+						</div>
+					)}
 				</div>
 			</div>
 		</header>
