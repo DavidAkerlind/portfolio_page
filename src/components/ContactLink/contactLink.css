@@ -49,14 +49,22 @@
 		transform var(--duration) var(--ease);
 }
 
-.contact-link:hover .contact-link-icon {
-	border-color: var(--glass-border-hover);
-	color: var(--color-text);
+/* The whole card is the link, so a press sinks it slightly (less than a button,
+   because it is much bigger). */
+.contact-link:active {
+	transform: scale(0.98);
 }
 
-.contact-link:hover .contact-link-arrow {
-	color: var(--color-text);
-	transform: translate(2px, -2px);
+@media (hover: hover) {
+	.contact-link:hover .contact-link-icon {
+		border-color: var(--glass-border-hover);
+		color: var(--color-text);
+	}
+
+	.contact-link:hover .contact-link-arrow {
+		color: var(--color-text);
+		transform: translate(2px, -2px);
+	}
 }
 
 /* The arrow's nudge is movement, so it stays still when reduced motion is on. Its

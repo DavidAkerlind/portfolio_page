@@ -78,11 +78,18 @@
 		border-color var(--duration) var(--ease);
 }
 
-.photo-frame-zoom:hover .photo-frame-zoom-icon,
 .photo-frame-zoom:focus-visible .photo-frame-zoom-icon {
 	border-color: rgba(191, 181, 206, 0.4);
 	background: rgba(15, 30, 48, 0.8);
 	color: #e8e2f0;
+}
+
+@media (hover: hover) {
+	.photo-frame-zoom:hover .photo-frame-zoom-icon {
+		border-color: rgba(191, 181, 206, 0.4);
+		background: rgba(15, 30, 48, 0.8);
+		color: #e8e2f0;
+	}
 }
 
 /* ==== Enlarged picture ==== */
@@ -104,9 +111,9 @@
 	cursor: zoom-out;
 	opacity: 1;
 	transition:
-		opacity var(--duration) var(--ease),
-		overlay var(--duration) var(--ease) allow-discrete,
-		display var(--duration) var(--ease) allow-discrete;
+		opacity var(--duration) var(--ease-out),
+		overlay var(--duration) var(--ease-out) allow-discrete,
+		display var(--duration) var(--ease-out) allow-discrete;
 }
 
 .lightbox::backdrop {
@@ -132,8 +139,14 @@
 	.lightbox[open]::backdrop {
 		background: transparent;
 	}
+
+	.lightbox[open] .lightbox-image {
+		transform: scale(0.96);
+	}
 }
 
+/* The picture grows out of a slightly smaller size as it fades in, instead of only
+   fading, and shrinks back as it closes. */
 .lightbox-image {
 	max-width: 100%;
 	max-height: 100%;
@@ -141,6 +154,18 @@
 	border-radius: var(--radius-md);
 	box-shadow: var(--glass-shadow);
 	object-fit: contain;
+	transition: transform var(--duration) var(--ease-out);
+}
+
+.lightbox:not([open]) .lightbox-image {
+	transform: scale(0.96);
+}
+
+/* With reduced motion the picture only fades. */
+@media (prefers-reduced-motion: reduce) {
+	.lightbox .lightbox-image {
+		transform: none !important;
+	}
 }
 
 .lightbox-close {
@@ -160,10 +185,16 @@
 	color: var(--color-lavender);
 }
 
-.lightbox-close:hover {
-	border-color: var(--glass-border-hover);
-	background: var(--glass-bg-hover);
-	color: var(--color-text);
+@media (hover: hover) {
+	.lightbox-close:hover {
+		border-color: var(--glass-border-hover);
+		background: var(--glass-bg-hover);
+		color: var(--color-text);
+	}
+}
+
+.lightbox-close:active {
+	transform: scale(0.95);
 }
 
 /* The page behind a modal picture does not scroll. */
