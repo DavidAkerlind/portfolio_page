@@ -27,12 +27,19 @@
 	cursor: pointer;
 	transition:
 		background var(--duration) var(--ease),
-		border-color var(--duration) var(--ease);
+		border-color var(--duration) var(--ease),
+		transform var(--duration-press) var(--ease-out);
 }
 
-.video-frame-toggle:hover {
-	background: rgba(15, 30, 48, 0.8);
-	border-color: #bfb5ce;
+@media (hover: hover) {
+	.video-frame-toggle:hover {
+		background: rgba(15, 30, 48, 0.8);
+		border-color: #bfb5ce;
+	}
+}
+
+.video-frame-toggle:active {
+	transform: scale(0.95);
 }
 
 .video-frame-toggle svg {
