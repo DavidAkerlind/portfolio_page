@@ -29,8 +29,8 @@ const colors = [
 	{ token: '--color-text', role: 'Primary text' },
 	{ token: '--color-white', role: 'Text on dark fills' },
 	{ token: '--color-selection', role: 'Selected text' },
-	{ token: '--glow-blue', role: 'The soft glows behind the page' },
-	{ token: '--glow-lavender', role: 'The soft glows behind the page' },
+	{ token: '--glow-blue', role: 'The accent line at the top of the page' },
+	{ token: '--glow-lavender', role: 'The accent line at the top of the page' },
 	{ token: '--color-timer', role: 'The marathon timer only' },
 	{ token: '--color-success', role: 'The green check on "signed up" only' },
 ];

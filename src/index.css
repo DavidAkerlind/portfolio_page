@@ -19,11 +19,9 @@
 	--color-timer-deep: #a8161f;
 	--color-success: light-dark(#12804a, #6ee7a8);
 
-	/* The soft glows behind the page: paler in light mode. */
+	/* The accent line along the top of the page. */
 	--glow-blue: light-dark(#2f7cf0, #375a88);
 	--glow-lavender: light-dark(#6f8cff, #bfb5ce);
-	--glow-slate: light-dark(#4fb3f5, #334b6d);
-	--glow-opacity: 0.28;
 
 	/* GLASS */
 	--glass-bg: light-dark(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.04));
@@ -121,8 +119,6 @@
 		--color-success: #6ee7a8;
 		--glow-blue: #375a88;
 		--glow-lavender: #bfb5ce;
-		--glow-slate: #334b6d;
-		--glow-opacity: 0.28;
 		--glass-bg: rgba(255, 255, 255, 0.04);
 		--glass-bg-hover: rgba(191, 181, 206, 0.12);
 		--glass-bg-fallback: rgba(21, 38, 59, 0.88);
@@ -171,18 +167,6 @@
 		fill 0.5s var(--ease),
 		stroke 0.5s var(--ease),
 		box-shadow 0.5s var(--ease) !important;
-}
-
-/* In light mode the glows are stronger, since pale colour on a pale page needs it.
-   (A number cannot be a light-dark() pair, so this follows the same two switches.) */
-:root[data-theme='light'] {
-	--glow-opacity: 0.3;
-}
-
-@media (prefers-color-scheme: light) {
-	:root:not([data-theme='dark']) {
-		--glow-opacity: 0.3;
-	}
 }
 
 /*  ==== RESET ==== */
