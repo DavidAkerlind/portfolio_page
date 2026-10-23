@@ -18,18 +18,18 @@
 		color var(--duration) var(--ease),
 		background var(--duration) var(--ease),
 		border-color var(--duration) var(--ease),
-		box-shadow var(--duration) var(--ease);
+		box-shadow var(--duration) var(--ease),
+		transform var(--duration-press) var(--ease-out);
+}
+
+/* A press sinks the button a little, so it feels like it heard you. */
+.button:active {
+	transform: scale(0.97);
 }
 
 .button-primary {
 	background: var(--color-lavender);
 	color: var(--color-bg);
-}
-
-.button-primary:hover {
-	background: var(--color-text);
-	color: var(--color-bg);
-	box-shadow: 0 4px 20px var(--shadow-hover);
 }
 
 .button-secondary {
@@ -40,9 +40,18 @@
 	backdrop-filter: blur(8px);
 }
 
-.button-secondary:hover {
-	background: var(--glass-bg-hover);
-	border-color: var(--glass-border-hover);
-	color: var(--color-text);
-	box-shadow: 0 4px 20px var(--shadow-hover);
+/* Only on a real pointer: a tap on a phone would leave the hover stuck on. */
+@media (hover: hover) {
+	.button-primary:hover {
+		background: var(--color-text);
+		color: var(--color-bg);
+		box-shadow: 0 4px 20px var(--shadow-hover);
+	}
+
+	.button-secondary:hover {
+		background: var(--glass-bg-hover);
+		border-color: var(--glass-border-hover);
+		color: var(--color-text);
+		box-shadow: 0 4px 20px var(--shadow-hover);
+	}
 }

@@ -21,10 +21,14 @@
 .glass-card-interactive {
 	transition:
 		background var(--duration) var(--ease),
-		border-color var(--duration) var(--ease);
+		border-color var(--duration) var(--ease),
+		transform var(--duration-press) var(--ease-out);
 }
 
-.glass-card-interactive:hover {
-	background: var(--glass-bg-hover);
-	border-color: var(--glass-border-hover);
+/* Only on a real pointer: a tap on a phone would leave the card lit. */
+@media (hover: hover) {
+	.glass-card-interactive:hover {
+		background: var(--glass-bg-hover);
+		border-color: var(--glass-border-hover);
+	}
 }

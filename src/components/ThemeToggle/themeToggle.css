@@ -8,9 +8,15 @@
 	color: var(--color-muted);
 }
 
-.theme-toggle:hover {
-	color: var(--color-text);
-	border-color: var(--glass-border-hover);
+@media (hover: hover) {
+	.theme-toggle:hover {
+		color: var(--color-text);
+		border-color: var(--glass-border-hover);
+	}
+}
+
+.theme-toggle:active {
+	transform: scale(0.95);
 }
 
 /* The sun shows in light mode and the moon in dark mode. Light is what a device with

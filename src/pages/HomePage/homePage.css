@@ -118,14 +118,15 @@
 	}
 }
 
+/* Entrances use --ease-out: they start moving at once and settle softly. */
 .hero-text > * {
-	animation: hero-rise 0.6s var(--ease) both;
+	animation: hero-rise 0.6s var(--ease-out) both;
 }
 
 /* The portrait is the biggest thing on the first screen, so it is never hidden (an
    invisible picture does not count as painted): it only rises, the text fades in. */
 .hero-photo {
-	animation: hero-lift 0.6s var(--ease) both;
+	animation: hero-lift 0.6s var(--ease-out) both;
 }
 
 @keyframes hero-lift {
